@@ -14,32 +14,49 @@
   <style>
     /* --- CSS VARIABLES & RESET --- */
     :root {
-      /* Slick Light Theme */
-      --bg-body: #ffffff;
-      --bg-surface: #f9fafb; 
-      --bg-surface-hover: #f3f4f6;
-      --border-light: #e5e7eb;
-      --border-dark: #d1d5db;
+      /* Light Theme */
       
-      --text-main: #111827; 
-      --text-secondary: #4b5563; 
-      --text-muted: #9ca3af; 
+      /* Main Background: Warm off-white */
+      --bg-body: #FDFBF9; 
       
-      --accent-primary: #2563eb; /* Royal Blue */
-      --accent-subtle: #eff6ff; 
+      /* Surface/Cards: Clean white */
+      --bg-surface: #FFFFFF; 
+      
+      /* Hover states */
+      --bg-surface-hover: #F7F5F3;
+      
+      /* Borders: Subtle warm grays */
+      --border-light: #E8E4E0;
+      --border-dark: #D4CFC9;
+      
+      /* Text: Strong contrast dark colors */
+      --text-main: #1A1615; 
+      --text-secondary: #4A4543; 
+      --text-muted: #7A7572; 
+      
+      /* Accents - adjusted for light backgrounds */
+      --accent-primary: #0E7490; /* Deeper teal for better contrast */
+      --accent-subtle: #E0F4F8; /* Light teal background for labels */
+      
+      /* Supporting colors */
+      --sand-warm: #B8956E;
+      --sky-deep: #0891B2;
+      --dusk-coral: #C2533A; 
       
       --font-ui: 'Inter', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
       
+      /* Shadows */
       --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
       
       --max-width: 1000px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    main { background: #F5F2EF; }
     body {
       font-family: var(--font-ui);
       background-color: var(--bg-body);
@@ -65,12 +82,13 @@
       background: var(--accent-subtle);
       padding: 0.25rem 0.5rem;
       border-radius: 4px;
+      border: 1px solid #B8E4EF;
     }
 
     /* --- NAVIGATION --- */
     nav {
       position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(253, 251, 249, 0.95);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);
@@ -82,7 +100,7 @@
       font-weight: 800; 
       font-size: 1.25rem; 
       letter-spacing: -0.03em; 
-      background: linear-gradient(135deg, #111827 0%, #2563eb 100%);
+      background: linear-gradient(135deg, #1A1615 0%, #0E7490 50%, #C2533A 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -96,13 +114,15 @@
     .hero {
       padding: 10rem 0 6rem;
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.03) 0%, transparent 50%),
-        linear-gradient(to bottom, #ffffff 0%, #fafafa 100%);
+        radial-gradient(ellipse at 30% 0%, rgba(14, 116, 144, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 20%, rgba(194, 83, 58, 0.06) 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 80%, rgba(184, 149, 110, 0.04) 0%, transparent 50%),
+        linear-gradient(to bottom, var(--bg-body) 0%, #F5F2EF 100%);
     }
     .hero h1 {
       font-size: 3.75rem; line-height: 1.1; font-weight: 800;
       letter-spacing: -0.04em; margin-bottom: 1.5rem; 
-      background: linear-gradient(90deg, #111827 0%, #2563eb 100%);
+      background: linear-gradient(100deg, #1A1615 0%, #0E7490 45%, #C2533A 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -113,59 +133,75 @@
     }
     .hero-btn {
       display: inline-flex; align-items: center; padding: 0.8rem 1.5rem;
-      background: var(--text-main); color: #ffffff; font-weight: 500;
+      background: var(--text-main); color: #FFFFFF; font-weight: 600;
       border-radius: 6px; transition: all 0.2s ease; font-size: 0.95rem;
     }
     .hero-btn:hover {
       background: var(--accent-primary); transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
+      box-shadow: var(--shadow-md); color: #fff;
     }
 
     /* --- FEATURED WORK --- */
     .section-header { margin-bottom: 2rem; }
-    .section-header h2 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; }
+    .section-header h2 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-main); }
     
     .case-study {
-      background: #ffffff; border: 1px solid var(--border-light);
+      background: linear-gradient(135deg, #FBF7F4 0%, #F0E6DC 100%); 
+      border: 1px solid #C9A48A;
       border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-lg);
       margin-bottom: 6rem;
     }
     .case-header {
-      background: var(--bg-surface); padding: 3rem 3rem 2rem 3rem;
-      border-bottom: 1px solid var(--border-light);
+      background: linear-gradient(135deg, #F5EBE0 0%, #E8D4C4 50%, #D4B8A0 100%); 
+      padding: 3rem 3rem 2rem 3rem;
+      border-bottom: 1px solid #C9A48A;
     }
     .meta-tags {
       display: flex; gap: 1rem; margin-bottom: 1.5rem;
-      font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);
+      font-family: var(--font-mono); font-size: 0.8rem;
     }
-    .meta-tag { display: flex; align-items: center; gap: 0.5rem; }
-    .case-header h3 { font-size: 2.5rem; margin-bottom: 1rem; font-weight: 800; letter-spacing: -0.03em; }
-    .case-header p { font-size: 1.1rem; color: var(--text-secondary); max-width: 700px; }
+    .meta-tag { display: flex; align-items: center; gap: 0.5rem; color: #6B3E26; }
+    
+    .case-header h3 { font-size: 2.5rem; margin-bottom: 1rem; font-weight: 800; letter-spacing: -0.03em; color: #3D2314; }
+    .case-header p { font-size: 1.1rem; color: #5C3D2E; max-width: 700px; }
+    .case-header p strong { color: #3D2314; }
     
     .case-details { display: grid; grid-template-columns: 3fr 2fr; gap: 0; }
-    .case-desc { padding: 3rem; }
-    .case-desc p { margin-bottom: 1.5rem; color: var(--text-secondary); }
-    .case-desc strong { color: var(--text-main); font-weight: 600; }
-    .case-desc li { margin-bottom: 1rem; }
+    .case-desc { 
+      padding: 3rem; 
+      background: linear-gradient(160deg, #6B3E26 0%, #5C3420 40%, #4A2C1A 100%); 
+    }
+    .case-desc p { margin-bottom: 1.5rem; color: #E8D4C4; }
+    .case-desc strong { color: #FBF7F4; font-weight: 600; }
+    .case-desc li { margin-bottom: 1rem; color: #E8D4C4; }
     .case-desc li:last-child { margin-bottom: 0; }
     
     .case-stats {
-      background: var(--bg-surface); border-left: 1px solid var(--border-light);
+      background: linear-gradient(160deg, #FBF7F4 0%, #F5EBE0 50%, #EDE0D4 100%); 
+      border-left: 1px solid #C9A48A;
       padding: 3rem; display: flex; flex-direction: column; justify-content: center; gap: 2rem;
     }
     .stat-box h4 {
-      font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted);
+      font-size: 0.85rem; text-transform: uppercase; color: #8B5E3C;
       letter-spacing: 0.05em; margin-bottom: 0.5rem;
     }
-    .stat-box p { font-size: 1.1rem; font-weight: 600; color: var(--text-main); }
+    .stat-box p { font-size: 1.1rem; font-weight: 600; color: #4A2C1A; }
 
     /* UI Mockup */
     .ui-mockup {
       margin-top: 2rem; border: 1px solid var(--border-light); border-radius: 6px;
       overflow: hidden; font-family: var(--font-mono); font-size: 0.75rem;
     }
-    .ui-header { background: #f3f4f6; padding: 0.5rem 1rem; border-bottom: 1px solid var(--border-light); color: var(--text-secondary); font-weight: 600;}
-    .ui-row { padding: 0.5rem 1rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; background: #fff;}
+    .ui-header { 
+        background: #F0EDEA; 
+        padding: 0.5rem 1rem; border-bottom: 1px solid var(--border-light); 
+        color: var(--text-secondary); font-weight: 600;
+    }
+    .ui-row { 
+        padding: 0.5rem 1rem; border-bottom: 1px solid var(--border-light); 
+        display: flex; justify-content: space-between; 
+        background: var(--bg-surface);
+    }
     .ui-row:last-child { border-bottom: none; }
     .ui-score { color: var(--accent-primary); font-weight: bold; }
 
@@ -179,58 +215,80 @@
     }
     
     .service-card {
-      padding: 2rem; background: var(--bg-surface); border: 1px solid transparent;
+      padding: 2rem; 
+      background: linear-gradient(160deg, #FBF7F4 0%, #F0E6DC 50%, #E8D4C4 100%); 
+      border: 1px solid #C9A48A;
       border-radius: 8px; transition: all 0.2s ease;
     }
     .service-card:hover {
-      background: #ffffff; border-color: var(--border-light);
+      background: linear-gradient(160deg, #F0E6DC 0%, #E8D4C4 50%, #D4B8A0 100%); 
+      border-color: #B8927A;
       box-shadow: var(--shadow-md); transform: translateY(-2px);
     }
-    .service-card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; font-weight: 700; color: var(--text-main); }
-    .service-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+    .service-card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; font-weight: 700; color: #3D2314; }
+    .service-card p { color: #5C3D2E; font-size: 0.95rem; line-height: 1.6; }
+    
     .icon-box {
-      width: 40px; height: 40px; background: #ffffff;
-      border: 1px solid var(--border-light); border-radius: 6px; display: flex;
+      width: 40px; height: 40px; 
+      background: linear-gradient(135deg, #6B3E26 0%, #4A2C1A 100%);
+      border: 1px solid #3D2314; border-radius: 6px; display: flex;
       align-items: center; justify-content: center; margin-bottom: 1.25rem;
-      color: var(--accent-primary); font-weight: bold;
+      color: #FBF7F4; font-weight: bold;
     }
 
     /* --- CONTACT --- */
-    .contact { background: var(--bg-surface); border-top: 1px solid var(--border-light); padding: 6rem 0; }
+    .contact { 
+        background: linear-gradient(180deg, #F5F2EF 0%, #F0E6DC 100%); 
+        border-top: 1px solid #C9A48A; 
+        padding: 6rem 0; 
+    }
     .contact-wrapper { max-width: 600px; margin: 0 auto; text-align: center; }
-    .contact h2 { font-size: 2rem; margin-bottom: 1rem; letter-spacing: -0.03em; }
-    .contact p { color: var(--text-secondary); margin-bottom: 2.5rem; }
+    .contact h2 { font-size: 2rem; margin-bottom: 1rem; letter-spacing: -0.03em; color: #3D2314;}
+    .contact p { color: #5C3D2E; margin-bottom: 2.5rem; }
     
     form {
       text-align: left; display: flex; flex-direction: column; gap: 1rem;
-      background: #ffffff; padding: 2rem; border-radius: 12px;
-      border: 1px solid var(--border-light); box-shadow: var(--shadow-sm);
+      background: linear-gradient(160deg, #F0E6DC 0%, #E8D4C4 50%, #D4B8A0 100%);
+      padding: 2rem; border-radius: 12px;
+      border: 1px solid #C9A48A; box-shadow: var(--shadow-lg);
     }
     input, textarea {
-      width: 100%; background: var(--bg-surface); border: 1px solid var(--border-light);
-      padding: 0.8rem 1rem; color: var(--text-main); font-family: var(--font-ui);
+      width: 100%; 
+      background: #FBF7F4; 
+      border: 1px solid #C9A48A;
+      padding: 0.8rem 1rem; color: #3D2314; font-family: var(--font-ui);
       border-radius: 6px; font-size: 0.95rem; transition: all 0.2s;
     }
     input:focus, textarea:focus {
-      outline: none; border-color: var(--accent-primary); background: #ffffff;
-      box-shadow: 0 0 0 3px var(--accent-subtle);
+      outline: none; border-color: #6B3E26; 
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(107, 62, 38, 0.15);
+    }
+    input::placeholder, textarea::placeholder {
+        color: #8B5E3C;
     }
     textarea { resize: vertical; min-height: 120px; }
     button[type="submit"] {
-      background: var(--text-main); color: white; border: none; padding: 1rem;
+      background: linear-gradient(135deg, #6B3E26 0%, #5C3420 50%, #4A2C1A 100%); 
+      color: #FBF7F4; border: none; padding: 1rem;
       border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem;
       transition: all 0.2s;
     }
-    button[type="submit"]:hover { background: var(--accent-primary); }
+    button[type="submit"]:hover { 
+      background: linear-gradient(135deg, #7A4A30 0%, #6B3E26 50%, #5C3420 100%); 
+      color: #FBF7F4;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
 
     /* --- FOOTER --- */
-    footer { background: #ffffff; border-top: 1px solid var(--border-light); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+    footer { background: linear-gradient(180deg, #E8D4C4 0%, #D4B8A0 100%); border-top: 1px solid #C9A48A; padding: 2rem 0; text-align: center; color: #5C3D2E; font-size: 0.85rem; }
 
     /* --- RESPONSIVE --- */
     @media (max-width: 768px) {
       .hero h1 { font-size: 2.5rem; }
       .case-details { grid-template-columns: 1fr; }
-      .case-stats { border-left: none; border-top: 1px solid var(--border-light); padding: 2rem; }
+      .case-stats { border-left: none; border-top: 1px solid #C9A48A; padding: 2rem; }
       .case-header { padding: 2rem; }
       .case-desc { padding: 2rem; }
       
@@ -280,7 +338,7 @@
             <span class="meta-tag">Product Engineering</span>
             <span class="meta-tag">Data Visualization</span>
           </div>
-          <h3>The ARC Prize</h3>
+          <h3>The ARC Prize Foundation</h3>
           <p>
             Worked with the team and <strong>Mike Knoop</strong> to engineer <strong>visualization and data interfaces</strong> for the $1M+ AGI benchmark.
           </p>
@@ -364,7 +422,7 @@
             <input type="text" name="name" placeholder="Name" required>
             <input type="email" name="email" placeholder="Work Email" required>
             <input type="text" name="subject" placeholder="Project / Product Challenge" required>
-            <textarea name="message" placeholder="What are you trying to build? What's the timeline?" required></textarea>
+            <textarea name="message" placeholder="What are you trying to build?" required></textarea>
             <button type="submit">Send Message</button>
           </form>
         </div>
