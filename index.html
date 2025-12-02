@@ -14,19 +14,24 @@
   <style>
     /* --- CSS VARIABLES & RESET --- */
     :root {
-      /* Slick Light Theme */
-      --bg-body: #ffffff;
-      --bg-surface: #f9fafb; 
-      --bg-surface-hover: #f3f4f6;
-      --border-light: #e5e7eb;
-      --border-dark: #d1d5db;
+      /* Desert Sand & Sky Theme */
+      --bg-body: #FAF6F0;
+      --bg-surface: #F3EDE3; 
+      --bg-surface-hover: #EAE2D5;
+      --border-light: #DDD4C4;
+      --border-dark: #C9BFAB;
       
-      --text-main: #333333; 
-      --text-secondary: #4b5563; 
-      --text-muted: #9ca3af; 
+      --text-main: #3D3428; 
+      --text-secondary: #5E523F; 
+      --text-muted: #8A7D6D; 
       
-      --accent-primary: #2563eb;
-      --accent-subtle: #dbeafe; 
+      --accent-primary: #5E94A0;
+      --accent-subtle: #E5EDE8;
+      
+      /* Psychedelic accents */
+      --sand-warm: #D4B896;
+      --sky-deep: #6B9DAB;
+      --dusk-coral: #C9958A; 
       
       --font-ui: 'Inter', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
@@ -70,7 +75,7 @@
     /* --- NAVIGATION --- */
     nav {
       position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(250, 246, 240, 0.88);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);
@@ -82,7 +87,7 @@
       font-weight: 800; 
       font-size: 1.25rem; 
       letter-spacing: -0.03em; 
-      background: linear-gradient(135deg, #333333 0%, #2563eb 100%);
+      background: linear-gradient(135deg, #3D3428 0%, #5E94A0 50%, #C9958A 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -96,13 +101,15 @@
     .hero {
       padding: 10rem 0 6rem;
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.03) 0%, transparent 50%),
-        linear-gradient(to bottom, #ffffff 0%, #fafafa 100%);
+        radial-gradient(ellipse at 30% 0%, rgba(201, 149, 138, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 20%, rgba(94, 148, 160, 0.1) 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 80%, rgba(212, 184, 150, 0.08) 0%, transparent 50%),
+        linear-gradient(to bottom, #FAF6F0 0%, #F3EDE3 100%);
     }
     .hero h1 {
       font-size: 3.75rem; line-height: 1.1; font-weight: 800;
       letter-spacing: -0.04em; margin-bottom: 1.5rem; 
-      background: linear-gradient(90deg, #333333 0%, #2563eb 100%);
+      background: linear-gradient(100deg, #3D3428 0%, #5E94A0 45%, #C9958A 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -126,7 +133,7 @@
     .section-header h2 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; }
     
     .case-study {
-      background: #ffffff; border: 1px solid var(--border-light);
+      background: #FFFDFB; border: 1px solid var(--border-light);
       border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-lg);
       margin-bottom: 6rem;
     }
@@ -164,8 +171,8 @@
       margin-top: 2rem; border: 1px solid var(--border-light); border-radius: 6px;
       overflow: hidden; font-family: var(--font-mono); font-size: 0.75rem;
     }
-    .ui-header { background: #f3f4f6; padding: 0.5rem 1rem; border-bottom: 1px solid var(--border-light); color: var(--text-secondary); font-weight: 600;}
-    .ui-row { padding: 0.5rem 1rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; background: #fff;}
+    .ui-header { background: #F3EDE3; padding: 0.5rem 1rem; border-bottom: 1px solid var(--border-light); color: var(--text-secondary); font-weight: 600;}
+    .ui-row { padding: 0.5rem 1rem; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; background: #FFFDFB;}
     .ui-row:last-child { border-bottom: none; }
     .ui-score { color: var(--accent-primary); font-weight: bold; }
 
@@ -183,13 +190,13 @@
       border-radius: 8px; transition: all 0.2s ease;
     }
     .service-card:hover {
-      background: #ffffff; border-color: var(--border-light);
+      background: #FFFDFB; border-color: var(--border-light);
       box-shadow: var(--shadow-md); transform: translateY(-2px);
     }
     .service-card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; font-weight: 700; color: var(--text-main); }
     .service-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
     .icon-box {
-      width: 40px; height: 40px; background: #ffffff;
+      width: 40px; height: 40px; background: linear-gradient(135deg, #FFFDFB 0%, #F3EDE3 100%);
       border: 1px solid var(--border-light); border-radius: 6px; display: flex;
       align-items: center; justify-content: center; margin-bottom: 1.25rem;
       color: var(--accent-primary); font-weight: bold;
@@ -203,7 +210,7 @@
     
     form {
       text-align: left; display: flex; flex-direction: column; gap: 1rem;
-      background: #ffffff; padding: 2rem; border-radius: 12px;
+      background: #FFFDFB; padding: 2rem; border-radius: 12px;
       border: 1px solid var(--border-light); box-shadow: var(--shadow-sm);
     }
     input, textarea {
@@ -212,7 +219,7 @@
       border-radius: 6px; font-size: 0.95rem; transition: all 0.2s;
     }
     input:focus, textarea:focus {
-      outline: none; border-color: var(--accent-primary); background: #ffffff;
+      outline: none; border-color: var(--accent-primary); background: #FFFDFB;
       box-shadow: 0 0 0 3px var(--accent-subtle);
     }
     textarea { resize: vertical; min-height: 120px; }
@@ -224,7 +231,7 @@
     button[type="submit"]:hover { background: var(--accent-primary); }
 
     /* --- FOOTER --- */
-    footer { background: #ffffff; border-top: 1px solid var(--border-light); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+    footer { background: #F3EDE3; border-top: 1px solid var(--border-light); padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
 
     /* --- RESPONSIVE --- */
     @media (max-width: 768px) {
