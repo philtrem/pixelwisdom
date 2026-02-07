@@ -378,6 +378,51 @@
           </div>
         </div>
       </div>
+
+      <div class="case-study fade-up">
+        <div class="case-header">
+          <div class="meta-tags">
+            <span class="meta-tag">Product Engineering</span>
+            <span class="meta-tag">Browser Extension</span>
+            <span class="meta-tag">Zotero Plugin</span>
+          </div>
+          <h3>Zotero NotebookLM</h3>
+          <p>
+            Built for <strong><a href="https://juliaturc.com/" target="_blank" rel="noopener">Julia Turc</a></strong> (Founder, <strong><a href="https://www.youtube.com/@juliaturc1" target="_blank" rel="noopener">Storia.ai</a></strong>) — a bidirectional sync engine connecting <strong>Zotero</strong> with <strong>Google NotebookLM</strong>.
+          </p>
+        </div>
+
+        <div class="case-details">
+          <div class="case-desc">
+            <p>
+              Researchers using Zotero had no way to leverage NotebookLM's AI features on their libraries. Since no public API exists for consumer NotebookLM, I reverse-engineered Google's internal Boq/WIZ RPC protocol — mapping undocumented <code>batchexecute</code> endpoints, session token extraction, and the Scotty resumable upload flow for binary files. I then engineered a full bridge system — a Zotero plugin, a Chrome extension, and a local IPC server — to enable seamless two-way sync between the two platforms.
+            </p>
+            <p>
+              <strong>Product Impact:</strong>
+            </p>
+            <ul>
+              <li>• <strong>Polling Bridge Architecture:</strong> Designed a reverse-RPC system where a Zotero-side HTTP server dispatches tasks to a Chrome content script running inside the authenticated NotebookLM session.</li>
+              <li>• <strong>Dual-Mode Strategy:</strong> Implemented both Consumer (Free/Pro) and Enterprise API strategies, auto-detecting the user's environment and routing tasks accordingly.</li>
+              <li>• <strong>Bidirectional Sync:</strong> Forward sync uploads PDFs, URLs, and metadata to NotebookLM; reverse sync imports AI-generated source guides and notes back into Zotero.</li>
+            </ul>
+          </div>
+
+          <div class="case-stats">
+            <div class="stat-box">
+              <h4>Client</h4>
+              <p>Storia AI</p>
+            </div>
+            <div class="stat-box">
+              <h4>Founder</h4>
+              <p>Julia Turc</p>
+            </div>
+            <div class="stat-box">
+              <h4>Outcome</h4>
+              <p>Open-Source Plugin & Chrome Extension</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="services" class="services">
