@@ -27,7 +27,7 @@
 <div class="glow glow-tl" aria-hidden="true"></div>
 <div class="glow glow-br" aria-hidden="true"></div>
 
-<div class="promo-banner" hidden>
+<div class="promo-banner">
   <span class="promo-banner-dot" aria-hidden="true"></span>
   <strong>50% OFF</strong>
   <span>with code</span>
@@ -452,7 +452,7 @@
         <span class="price-amount">29</span>
         <span class="price-once">once</span>
       </div>
-      <p class="price-promo" hidden>
+      <p class="price-promo">
         <span class="promo-dot" aria-hidden="true"></span>
         <strong>50% off at checkout</strong>
         <span>with code <code>LAUNCH50</code> · auto-applied · ends Jun 18, 2026.</span>
@@ -540,21 +540,13 @@
 
 <script src="script.js"></script>
 <script>
-  // Launch promo gate: the discount code is auto-applied only when the
-  // page is loaded from a /launch-promo path. Keeps the main URL at
-  // list price; partners / campaign links point at /launch-promo/ to
-  // unlock 50% off.
-  (function () {
-    if (!/\/launch-promo(\/|$)/.test(location.pathname)) return;
-    document
-      .querySelectorAll(".price-promo[hidden], .promo-banner[hidden]")
-      .forEach((el) => el.removeAttribute("hidden"));
-    document.querySelectorAll('a[href*="buy.stripe.com"]').forEach((a) => {
-      const url = new URL(a.href);
-      url.searchParams.set("prefilled_promo_code", "LAUNCH50");
-      a.href = url.toString();
-    });
-  })();
+  // Launch promo: append the discount code to all Stripe Buy links so it
+  // auto-applies at checkout.
+  document.querySelectorAll('a[href*="buy.stripe.com"]').forEach((a) => {
+    const url = new URL(a.href);
+    url.searchParams.set("prefilled_promo_code", "LAUNCH50");
+    a.href = url.toString();
+  });
 </script>
 </body>
 </html>
