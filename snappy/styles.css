@@ -1395,7 +1395,7 @@ body kbd:not(.app-preview kbd):not(.app-preview-hint kbd) {
   font-weight: 300;
   color: var(--text-dim);
 }
-.price-promo {
+.price-promo:not([hidden]) {
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
@@ -1427,7 +1427,7 @@ body kbd:not(.app-preview kbd):not(.app-preview-hint kbd) {
 /* /launch-promo top banner — revealed by inline script when the path
    matches. Editorial dark band matching the page palette; the code
    pill and "50% OFF" carry the only color. */
-.promo-banner {
+.promo-banner:not([hidden]) {
   display: flex;
   align-items: center;
   justify-content: center;
