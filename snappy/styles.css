@@ -1555,6 +1555,28 @@ body kbd:not(.app-preview kbd):not(.app-preview-hint kbd) {
   font-weight: 500;
 }
 
+/* Platform badge — makes macOS-only unmistakable near each Buy button */
+.price-platform,
+.final-platform {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  letter-spacing: 0.01em;
+}
+.final-platform {
+  justify-content: center;
+  margin-top: 1rem;
+}
+.apple-glyph {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  color: var(--text-dim);
+}
+
 @media (max-width: 860px) {
   .price-card { grid-template-columns: 1fr; }
   .price-right { border-left: none; border-top: 1px solid var(--border); }
