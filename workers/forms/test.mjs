@@ -3,7 +3,7 @@ import worker from "./src/index.js";
 const env = {
   ALLOWED_ORIGINS: "https://pixelwisdom.ca",
   DRY_RUN: "true",
-  TO_EMAIL: "phil@pixelwisdom.ca",
+  TO_EMAIL: "phil@pixelwisdom.ca,p.h.i.l@live.ca",
   FROM_EMAIL: "forms@pixelwisdom.ca",
   SES_REGION: "us-east-1",
   SES_FROM_EMAIL: "forms@pixelwisdom.ca"

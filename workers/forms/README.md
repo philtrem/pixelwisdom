@@ -12,6 +12,7 @@ The Worker accepts `application/json`, `application/x-www-form-urlencoded`, and 
 ## Delivery
 
 The preferred deployment uses Amazon SES over HTTPS from the Worker. Grantlet provisions a narrow IAM user into `.env.ses-forms`, and `deploy.mjs` stores those values as Worker secret bindings.
+Set `TO_EMAIL` to a comma- or semicolon-separated list to send each submission to multiple recipients.
 
 Fallbacks are also supported:
 

@@ -213,7 +213,7 @@ function hasSesConfig(env) {
 async function sendWithCloudflareEmail(env, submission) {
   const { EmailMessage } = await import("cloudflare:email");
   const from = env.FROM_EMAIL || "forms@pixelwisdom.ca";
-  const to = env.TO_EMAIL || "phil@pixelwisdom.ca";
+  const to = recipientEmails(env.TO_EMAIL, "phil@pixelwisdom.ca")[0];
   const raw = buildMimeMessage({ from, to, submission });
 
   await env.FORM_EMAIL.send(new EmailMessage(from, to, raw));
@@ -222,12 +222,12 @@ async function sendWithCloudflareEmail(env, submission) {
 async function sendWithSes(env, submission) {
   const region = env.SES_REGION || env.AWS_REGION || "us-east-1";
   const from = env.SES_FROM_EMAIL || env.FROM_EMAIL || "forms@pixelwisdom.ca";
-  const to = env.TO_EMAIL || "phil@pixelwisdom.ca";
+  const recipients = recipientEmails(env.TO_EMAIL, "phil@pixelwisdom.ca");
   const endpoint = `https://email.${region}.amazonaws.com/v2/email/outbound-emails`;
   const body = JSON.stringify({
     FromEmailAddress: from,
     Destination: {
-      ToAddresses: [to]
+      ToAddresses: recipients
     },
     ReplyToAddresses: [submission.email],
     Content: {
@@ -268,7 +268,7 @@ async function sendWithSes(env, submission) {
 
 async function sendWithResend(env, submission) {
   const from = env.FROM_EMAIL || "Pixel Wisdom Forms <forms@pixelwisdom.ca>";
-  const to = env.TO_EMAIL || "phil@pixelwisdom.ca";
+  const recipients = recipientEmails(env.TO_EMAIL, "phil@pixelwisdom.ca");
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -277,7 +277,7 @@ async function sendWithResend(env, submission) {
     },
     body: JSON.stringify({
       from,
-      to,
+      to: recipients,
       reply_to: submission.email,
       subject: emailSubject(submission),
       text: emailText(submission),
@@ -336,6 +336,15 @@ function emailHtml(submission) {
     <hr>
     <p>${escapeHtml(submission.message).replace(/\n/g, "<br>")}</p>
   `;
+}
+
+function recipientEmails(value, fallback) {
+  const recipients = String(value || fallback)
+    .split(/[;,]/)
+    .map((email) => email.trim())
+    .filter(Boolean);
+
+  return recipients.length ? recipients : [fallback];
 }
 
 function buildMimeMessage({ from, to, submission }) {

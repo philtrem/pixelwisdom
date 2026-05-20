@@ -75,7 +75,7 @@ async function uploadWorker(accountId, apiToken) {
       {
         type: "plain_text",
         name: "TO_EMAIL",
-        text: "phil@pixelwisdom.ca"
+        text: "phil@pixelwisdom.ca,p.h.i.l@live.ca"
       },
       {
         type: "plain_text",
