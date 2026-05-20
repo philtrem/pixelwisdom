@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel Wisdom | Tally Contact Preview</title>
+  <meta name="description" content="Preview of the Pixel Wisdom contact section using an embedded Tally form.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-body: #FDFBF9;
+      --text-main: #1A1615;
+      --text-secondary: #4A4543;
+      --text-muted: #7A7572;
+      --accent-primary: #0E7490;
+      --accent-subtle: #E0F4F8;
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+      --max-width: 1000px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-ui);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.2s ease;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .label {
+      display: inline-block;
+      margin-bottom: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid #B8E4EF;
+      border-radius: 4px;
+      background: var(--accent-subtle);
+      color: var(--accent-primary);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(6px) saturate(180%) contrast(105%) brightness(105%);
+      -webkit-backdrop-filter: blur(6px) saturate(180%) contrast(105%) brightness(105%);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      background: linear-gradient(135deg, #1A1615 0%, #0E7490 50%, #C2533A 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--accent-primary);
+    }
+
+    .hero {
+      padding: 10rem 0 5rem;
+      background-image:
+        radial-gradient(ellipse at 30% 0%, rgba(14, 116, 144, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 20%, rgba(194, 83, 58, 0.06) 0%, transparent 45%),
+        linear-gradient(to bottom, var(--bg-body) 0%, #F5F2EF 100%);
+    }
+
+    .hero h1 {
+      max-width: 720px;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.1em;
+      background: linear-gradient(100deg, #1A1615 0%, #0E7490 45%, #C2533A 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.25));
+      font-size: 3.75rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      max-width: 640px;
+      color: var(--text-secondary);
+      font-size: 1.25rem;
+      font-weight: 400;
+    }
+
+    .contact {
+      min-height: calc(100vh - 120px);
+      padding: 6rem 0;
+      border-top: 1px solid #C9A48A;
+      background: linear-gradient(180deg, #F5F2EF 0%, #F0E6DC 100%);
+    }
+
+    .contact-wrapper {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact h2 {
+      margin-bottom: 1rem;
+      color: #3D2314;
+      font-size: 2rem;
+      letter-spacing: -0.03em;
+    }
+
+    .contact p {
+      margin-bottom: 2.5rem;
+      color: #5C3D2E;
+    }
+
+    .tally-shell {
+      overflow: hidden;
+      padding: 1.25rem;
+      border: 1px solid #C9A48A;
+      border-radius: 12px;
+      background: linear-gradient(160deg, #F0E6DC 0%, #E8D4C4 50%, #D4B8A0 100%);
+      box-shadow: var(--shadow-lg);
+      text-align: left;
+    }
+
+    .tally-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      color: #6B3E26;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .tally-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      min-width: 0;
+    }
+
+    .tally-status::before {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 999px;
+      background: #0E7490;
+      content: "";
+      flex: 0 0 auto;
+    }
+
+    .tally-note {
+      color: #8B5E3C;
+      white-space: nowrap;
+    }
+
+    .tally-frame {
+      display: block;
+      width: 100%;
+      min-height: 470px;
+      border: 1px solid rgba(107, 62, 38, 0.22);
+      border-radius: 8px;
+      background: #FFFFFF;
+      box-shadow: var(--shadow-md);
+    }
+
+    .implementation-note {
+      margin-top: 1rem;
+      color: #6B3E26;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    footer {
+      padding: 2rem 0;
+      border-top: 1px solid #C9A48A;
+      background: linear-gradient(180deg, #E8D4C4 0%, #D4B8A0 100%);
+      color: #5C3D2E;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 1rem;
+      }
+
+      .hero {
+        padding: 8rem 0 4rem;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1.05rem;
+      }
+
+      .contact {
+        padding: 4rem 0;
+      }
+
+      .tally-shell {
+        padding: 1rem;
+      }
+
+      .tally-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+
+      .tally-note {
+        white-space: normal;
+      }
+
+      .tally-frame {
+        min-height: 510px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="container">
+      <div class="logo">Pixel Wisdom</div>
+      <ul>
+        <li><a href="#preview">Preview</a></li>
+        <li><a href="index.html">Current Site</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="label">Contact Form Migration</span>
+        <h1>Tally embedded into the current Pixel Wisdom contact section.</h1>
+        <p>
+          The page shell stays branded, but the form area below is intentionally neutral to reflect what an embedded Tally iframe controls.
+        </p>
+      </div>
+    </section>
+
+    <section id="preview" class="contact">
+      <div class="container">
+        <div class="contact-wrapper">
+          <h2>Let's build together</h2>
+          <p>I partner with AI labs and startups to clear the backlog and ship critical software. If you need an engineer who cares about the product as much as the code, let's talk.</p>
+
+          <div class="tally-shell" aria-label="Tally embedded contact form preview">
+            <div class="tally-toolbar">
+              <span class="tally-status">Tally embed preview</span>
+              <span class="tally-note">hideTitle + dynamicHeight</span>
+            </div>
+
+            <iframe
+              class="tally-frame"
+              title="Pixel Wisdom contact form preview"></iframe>
+
+            <p class="implementation-note">
+              When the real form exists, this iframe becomes <code>https://tally.so/embed/YOUR_FORM_ID</code>. The outer shell can stay branded; the fields inside remain controlled by Tally.
+            </p>
+
+            <template id="tally-form-preview">
+              <style>
+                * { box-sizing: border-box; }
+                body {
+                  margin: 0;
+                  padding: 0;
+                  background: #ffffff;
+                  color: #262627;
+                  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                  line-height: 1.45;
+                }
+                .form {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 18px;
+                  padding: 24px;
+                }
+                .field {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 8px;
+                }
+                label {
+                  color: #2f2f31;
+                  font-size: 15px;
+                  font-weight: 600;
+                }
+                .required {
+                  color: #b45309;
+                }
+                input,
+                textarea {
+                  width: 100%;
+                  border: 1px solid #d9d9de;
+                  border-radius: 6px;
+                  background: #ffffff;
+                  color: #242426;
+                  font: inherit;
+                  font-size: 16px;
+                  outline: none;
+                  padding: 12px 14px;
+                  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+                }
+                textarea {
+                  min-height: 118px;
+                  resize: vertical;
+                }
+                input:focus,
+                textarea:focus {
+                  border-color: #111111;
+                  background: #ffffff;
+                  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.10);
+                }
+                input::placeholder,
+                textarea::placeholder {
+                  color: #9a9aa0;
+                }
+                button {
+                  align-self: flex-start;
+                  border: 0;
+                  border-radius: 6px;
+                  background: #111111;
+                  color: #ffffff;
+                  cursor: pointer;
+                  font: inherit;
+                  font-size: 16px;
+                  font-weight: 700;
+                  padding: 13px 20px;
+                }
+                button:hover {
+                  background: #2b2b2d;
+                }
+                .powered {
+                  margin-top: -4px;
+                  color: #8b8b91;
+                  font-size: 12px;
+                }
+                @media (max-width: 520px) {
+                  .form { padding: 18px; }
+                  button { width: 100%; }
+                }
+              </style>
+              <form class="form">
+                <div class="field">
+                  <label>Name <span class="required">*</span></label>
+                  <input type="text" placeholder="Your name">
+                </div>
+                <div class="field">
+                  <label>Work Email <span class="required">*</span></label>
+                  <input type="email" placeholder="you@company.com">
+                </div>
+                <div class="field">
+                  <label>Project / Product Challenge <span class="required">*</span></label>
+                  <input type="text" placeholder="What should we talk about?">
+                </div>
+                <div class="field">
+                  <label>What are you trying to build? <span class="required">*</span></label>
+                  <textarea placeholder="A short note about the product, team, or project."></textarea>
+                </div>
+                <button type="button">Send Message</button>
+                <div class="powered">Preview only. The real embed will be supplied by Tally after the form is created.</div>
+              </form>
+            </template>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      &copy; 2025 Pixel Wisdom. Engineering the future.
+    </div>
+  </footer>
+
+  <script>
+    const previewFrame = document.querySelector('.tally-frame');
+    const previewTemplate = document.querySelector('#tally-form-preview');
+
+    previewFrame.srcdoc = previewTemplate.innerHTML;
+  </script>
+</body>
+
+</html>

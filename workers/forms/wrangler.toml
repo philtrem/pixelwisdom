@@ -1,0 +1,19 @@
+name = "pixelwisdom-forms"
+main = "src/index.js"
+compatibility_date = "2026-05-20"
+
+routes = [
+  { pattern = "pixelwisdom.ca/api/forms/*", zone_name = "pixelwisdom.ca" },
+  { pattern = "www.pixelwisdom.ca/api/forms/*", zone_name = "pixelwisdom.ca" }
+]
+
+[vars]
+ALLOWED_ORIGINS = "https://pixelwisdom.ca,https://www.pixelwisdom.ca"
+TO_EMAIL = "p.h.i.l@live.ca"
+FROM_EMAIL = "forms@pixelwisdom.ca"
+
+# Native Cloudflare Email Routing delivery. The destination address must be
+# verified in Cloudflare Email Routing before deployment.
+[[send_email]]
+name = "FORM_EMAIL"
+destination_address = "p.h.i.l@live.ca"

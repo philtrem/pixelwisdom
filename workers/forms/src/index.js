@@ -1,0 +1,387 @@
+const DEFAULT_ALLOWED_ORIGINS = [
+  "https://pixelwisdom.ca",
+  "https://www.pixelwisdom.ca"
+];
+
+const MAX_CONTENT_LENGTH = 64 * 1024;
+const MAX_FIELD_LENGTH = 4000;
+const REQUIRED_FIELDS = ["name", "email", "message"];
+const HONEYPOT_FIELDS = ["_gotcha", "fax_number"];
+
+export default {
+  async fetch(request, env, ctx) {
+    return handleRequest(request, env, ctx);
+  }
+};
+
+export async function handleRequest(request, env = {}, ctx = {}) {
+  const url = new URL(request.url);
+
+  if (request.method === "OPTIONS") {
+    return withCors(request, env, new Response(null, { status: 204 }));
+  }
+
+  if (request.method === "GET" && isHealthPath(url.pathname)) {
+    return json(request, env, { ok: true, service: "pixelwisdom-forms" });
+  }
+
+  if (request.method !== "POST" || !isSubmitPath(url.pathname)) {
+    return json(request, env, { ok: false, error: "Not found" }, 404);
+  }
+
+  const originError = validateOrigin(request, env);
+  if (originError) {
+    return json(request, env, { ok: false, error: originError }, 403);
+  }
+
+  const contentLength = Number(request.headers.get("content-length") || 0);
+  if (contentLength > MAX_CONTENT_LENGTH) {
+    return json(request, env, { ok: false, error: "Submission is too large" }, 413);
+  }
+
+  let payload;
+  try {
+    payload = await parsePayload(request);
+  } catch (error) {
+    return json(request, env, { ok: false, error: messageFrom(error) }, 400);
+  }
+
+  const submission = normalizeSubmission(payload, request);
+  const validationError = validateSubmission(submission);
+  if (validationError) {
+    return json(request, env, { ok: false, error: validationError }, 400);
+  }
+
+  if (isSpam(submission)) {
+    return json(request, env, { ok: true });
+  }
+
+  try {
+    const delivery = await deliverSubmission(env, submission, request);
+    if (ctx.waitUntil && delivery.background) {
+      ctx.waitUntil(delivery.background);
+    }
+
+    return wantsHtml(request)
+      ? new Response(successHtml(), { headers: htmlHeaders(request, env) })
+      : json(request, env, { ok: true, delivery: delivery.provider });
+  } catch (error) {
+    const status = error instanceof ConfigurationError ? 500 : 502;
+    const response = { ok: false, error: messageFrom(error) };
+
+    return wantsHtml(request)
+      ? new Response(errorHtml(response.error), { status, headers: htmlHeaders(request, env) })
+      : json(request, env, response, status);
+  }
+}
+
+function isHealthPath(pathname) {
+  return pathname === "/api/forms/health" || pathname === "/health";
+}
+
+function isSubmitPath(pathname) {
+  return pathname === "/api/forms/submit" || pathname === "/submit";
+}
+
+function allowedOrigins(env) {
+  const configured = String(env.ALLOWED_ORIGINS || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+  return configured.length > 0 ? configured : DEFAULT_ALLOWED_ORIGINS;
+}
+
+function validateOrigin(request, env) {
+  const origin = request.headers.get("origin");
+  if (!origin) {
+    return null;
+  }
+
+  return allowedOrigins(env).includes(origin)
+    ? null
+    : "Origin is not allowed";
+}
+
+async function parsePayload(request) {
+  const contentType = request.headers.get("content-type") || "";
+
+  if (contentType.includes("application/json")) {
+    const payload = await request.json();
+    if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+      throw new Error("JSON body must be an object");
+    }
+    return payload;
+  }
+
+  if (
+    contentType.includes("application/x-www-form-urlencoded") ||
+    contentType.includes("multipart/form-data")
+  ) {
+    return Object.fromEntries(await request.formData());
+  }
+
+  throw new Error("Unsupported content type");
+}
+
+function normalizeSubmission(payload, request) {
+  const fields = {};
+  for (const [key, value] of Object.entries(payload)) {
+    if (typeof value === "string") {
+      fields[key] = value.trim();
+    }
+  }
+
+  return {
+    form: cleanValue(fields.form || fields.form_id || "pixelwisdom-contact", 80),
+    name: cleanValue(fields.name, 160),
+    email: cleanValue(fields.email, 320),
+    subject: cleanValue(fields.subject || "New form submission", 200),
+    message: cleanValue(fields.message, MAX_FIELD_LENGTH),
+    page: cleanValue(fields.page || request.headers.get("referer") || "", 500),
+    origin: cleanValue(request.headers.get("origin") || "", 500),
+    userAgent: cleanValue(request.headers.get("user-agent") || "", 500),
+    honeypots: Object.fromEntries(HONEYPOT_FIELDS.map((field) => [field, cleanValue(fields[field], 500)])),
+    fields
+  };
+}
+
+function cleanValue(value, maxLength) {
+  return String(value || "")
+    .replace(/\r/g, "")
+    .slice(0, maxLength);
+}
+
+function validateSubmission(submission) {
+  for (const field of REQUIRED_FIELDS) {
+    if (!submission[field]) {
+      return `${field} is required`;
+    }
+  }
+
+  if (!isValidEmail(submission.email)) {
+    return "email is invalid";
+  }
+
+  if (submission.message.length < 10) {
+    return "message is too short";
+  }
+
+  return null;
+}
+
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function isSpam(submission) {
+  return Object.values(submission.honeypots).some(Boolean);
+}
+
+async function deliverSubmission(env, submission, request) {
+  if (env.FORM_EMAIL && typeof env.FORM_EMAIL.send === "function") {
+    await sendWithCloudflareEmail(env, submission);
+    return { provider: "cloudflare-email" };
+  }
+
+  if (env.RESEND_API_KEY) {
+    await sendWithResend(env, submission);
+    return { provider: "resend" };
+  }
+
+  if (env.FORWARD_WEBHOOK_URL) {
+    await sendWithWebhook(env, submission, request);
+    return { provider: "webhook" };
+  }
+
+  if (env.DRY_RUN === "true") {
+    return { provider: "dry-run" };
+  }
+
+  throw new ConfigurationError("No delivery provider configured");
+}
+
+async function sendWithCloudflareEmail(env, submission) {
+  const { EmailMessage } = await import("cloudflare:email");
+  const from = env.FROM_EMAIL || "forms@pixelwisdom.ca";
+  const to = env.TO_EMAIL || "p.h.i.l@live.ca";
+  const raw = buildMimeMessage({ from, to, submission });
+
+  await env.FORM_EMAIL.send(new EmailMessage(from, to, raw));
+}
+
+async function sendWithResend(env, submission) {
+  const from = env.FROM_EMAIL || "Pixel Wisdom Forms <forms@pixelwisdom.ca>";
+  const to = env.TO_EMAIL || "p.h.i.l@live.ca";
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      "authorization": `Bearer ${env.RESEND_API_KEY}`,
+      "content-type": "application/json"
+    },
+    body: JSON.stringify({
+      from,
+      to,
+      reply_to: submission.email,
+      subject: emailSubject(submission),
+      text: emailText(submission),
+      html: emailHtml(submission)
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error(`Email provider rejected submission (${response.status})`);
+  }
+}
+
+async function sendWithWebhook(env, submission, request) {
+  const response = await fetch(env.FORWARD_WEBHOOK_URL, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "user-agent": "pixelwisdom-forms-worker"
+    },
+    body: JSON.stringify({
+      ...submission,
+      ipCountry: request.cf?.country || null,
+      receivedAt: new Date().toISOString()
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error(`Webhook rejected submission (${response.status})`);
+  }
+}
+
+function emailSubject(submission) {
+  return headerSafe(`[${submission.form}] ${submission.subject}`);
+}
+
+function emailText(submission) {
+  return [
+    `Form: ${submission.form}`,
+    `Name: ${submission.name}`,
+    `Email: ${submission.email}`,
+    `Subject: ${submission.subject}`,
+    `Page: ${submission.page || "n/a"}`,
+    "",
+    submission.message
+  ].join("\n");
+}
+
+function emailHtml(submission) {
+  return `
+    <h2>New form submission</h2>
+    <p><strong>Form:</strong> ${escapeHtml(submission.form)}</p>
+    <p><strong>Name:</strong> ${escapeHtml(submission.name)}</p>
+    <p><strong>Email:</strong> ${escapeHtml(submission.email)}</p>
+    <p><strong>Subject:</strong> ${escapeHtml(submission.subject)}</p>
+    <p><strong>Page:</strong> ${escapeHtml(submission.page || "n/a")}</p>
+    <hr>
+    <p>${escapeHtml(submission.message).replace(/\n/g, "<br>")}</p>
+  `;
+}
+
+function buildMimeMessage({ from, to, submission }) {
+  const boundary = `pixelwisdom-${crypto.randomUUID()}`;
+  const subject = emailSubject(submission);
+
+  return [
+    `From: ${headerSafe(from)}`,
+    `To: ${headerSafe(to)}`,
+    `Reply-To: ${headerSafe(submission.email)}`,
+    `Subject: ${subject}`,
+    "MIME-Version: 1.0",
+    `Content-Type: multipart/alternative; boundary="${boundary}"`,
+    "",
+    `--${boundary}`,
+    "Content-Type: text/plain; charset=UTF-8",
+    "",
+    emailText(submission),
+    "",
+    `--${boundary}`,
+    "Content-Type: text/html; charset=UTF-8",
+    "",
+    emailHtml(submission),
+    "",
+    `--${boundary}--`
+  ].join("\r\n");
+}
+
+function headerSafe(value) {
+  return String(value || "").replace(/[\r\n]/g, " ").trim();
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function json(request, env, payload, status = 200) {
+  return withCors(
+    request,
+    env,
+    new Response(JSON.stringify(payload), {
+      status,
+      headers: {
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "no-store"
+      }
+    })
+  );
+}
+
+function withCors(request, env, response) {
+  const origin = request.headers.get("origin");
+  const headers = new Headers(response.headers);
+
+  if (origin && allowedOrigins(env).includes(origin)) {
+    headers.set("access-control-allow-origin", origin);
+    headers.set("vary", "Origin");
+  }
+
+  headers.set("access-control-allow-methods", "POST, OPTIONS");
+  headers.set("access-control-allow-headers", "content-type, accept");
+  headers.set("access-control-max-age", "86400");
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers
+  });
+}
+
+function wantsHtml(request) {
+  return (request.headers.get("accept") || "").includes("text/html");
+}
+
+function htmlHeaders(request, env) {
+  return withCors(
+    request,
+    env,
+    new Response(null, {
+      headers: {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "no-store"
+      }
+    })
+  ).headers;
+}
+
+function successHtml() {
+  return "<!doctype html><title>Message sent</title><p>Message sent. You can close this tab.</p>";
+}
+
+function errorHtml(message) {
+  return `<!doctype html><title>Message failed</title><p>${escapeHtml(message)}</p>`;
+}
+
+function messageFrom(error) {
+  return error instanceof Error ? error.message : "Unexpected error";
+}
+
+class ConfigurationError extends Error {}
