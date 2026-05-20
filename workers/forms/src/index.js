@@ -163,10 +163,6 @@ function validateSubmission(submission) {
     return "email is invalid";
   }
 
-  if (submission.message.length < 10) {
-    return "message is too short";
-  }
-
   return null;
 }
 
@@ -179,6 +175,11 @@ function isSpam(submission) {
 }
 
 async function deliverSubmission(env, submission, request) {
+  if (hasSesConfig(env)) {
+    await sendWithSes(env, submission);
+    return { provider: "ses" };
+  }
+
   if (env.FORM_EMAIL && typeof env.FORM_EMAIL.send === "function") {
     await sendWithCloudflareEmail(env, submission);
     return { provider: "cloudflare-email" };
@@ -201,18 +202,73 @@ async function deliverSubmission(env, submission, request) {
   throw new ConfigurationError("No delivery provider configured");
 }
 
+function hasSesConfig(env) {
+  return Boolean(
+    env.AWS_ACCESS_KEY_ID &&
+    env.AWS_SECRET_ACCESS_KEY &&
+    (env.SES_FROM_EMAIL || env.FROM_EMAIL)
+  );
+}
+
 async function sendWithCloudflareEmail(env, submission) {
   const { EmailMessage } = await import("cloudflare:email");
   const from = env.FROM_EMAIL || "forms@pixelwisdom.ca";
-  const to = env.TO_EMAIL || "p.h.i.l@live.ca";
+  const to = env.TO_EMAIL || "phil@pixelwisdom.ca";
   const raw = buildMimeMessage({ from, to, submission });
 
   await env.FORM_EMAIL.send(new EmailMessage(from, to, raw));
 }
 
+async function sendWithSes(env, submission) {
+  const region = env.SES_REGION || env.AWS_REGION || "us-east-1";
+  const from = env.SES_FROM_EMAIL || env.FROM_EMAIL || "forms@pixelwisdom.ca";
+  const to = env.TO_EMAIL || "phil@pixelwisdom.ca";
+  const endpoint = `https://email.${region}.amazonaws.com/v2/email/outbound-emails`;
+  const body = JSON.stringify({
+    FromEmailAddress: from,
+    Destination: {
+      ToAddresses: [to]
+    },
+    ReplyToAddresses: [submission.email],
+    Content: {
+      Simple: {
+        Subject: {
+          Data: emailSubject(submission),
+          Charset: "UTF-8"
+        },
+        Body: {
+          Text: {
+            Data: emailText(submission),
+            Charset: "UTF-8"
+          },
+          Html: {
+            Data: emailHtml(submission),
+            Charset: "UTF-8"
+          }
+        }
+      }
+    }
+  });
+
+  const response = await signedAwsFetch(endpoint, {
+    method: "POST",
+    body,
+    region,
+    service: "ses",
+    accessKeyId: env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
+    sessionToken: env.AWS_SESSION_TOKEN
+  });
+
+  if (!response.ok) {
+    const providerMessage = await response.text().catch(() => "");
+    throw new Error(`SES rejected submission (${response.status})${providerMessage ? `: ${providerMessage.slice(0, 200)}` : ""}`);
+  }
+}
+
 async function sendWithResend(env, submission) {
   const from = env.FROM_EMAIL || "Pixel Wisdom Forms <forms@pixelwisdom.ca>";
-  const to = env.TO_EMAIL || "p.h.i.l@live.ca";
+  const to = env.TO_EMAIL || "phil@pixelwisdom.ca";
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -382,6 +438,97 @@ function errorHtml(message) {
 
 function messageFrom(error) {
   return error instanceof Error ? error.message : "Unexpected error";
+}
+
+async function signedAwsFetch(url, options) {
+  const requestUrl = new URL(url);
+  const now = new Date();
+  const amzDate = now.toISOString().replace(/[:-]|\.\d{3}/g, "");
+  const dateStamp = amzDate.slice(0, 8);
+  const payloadHash = await sha256Hex(options.body || "");
+  const headers = {
+    "content-type": "application/json",
+    "host": requestUrl.host,
+    "x-amz-date": amzDate
+  };
+
+  if (options.sessionToken) {
+    headers["x-amz-security-token"] = options.sessionToken;
+  }
+
+  const signedHeaderNames = Object.keys(headers).sort();
+  const canonicalHeaders = signedHeaderNames
+    .map((name) => `${name}:${headers[name]}\n`)
+    .join("");
+  const signedHeaders = signedHeaderNames.join(";");
+  const canonicalRequest = [
+    options.method,
+    requestUrl.pathname,
+    requestUrl.searchParams.toString(),
+    canonicalHeaders,
+    signedHeaders,
+    payloadHash
+  ].join("\n");
+  const credentialScope = `${dateStamp}/${options.region}/${options.service}/aws4_request`;
+  const stringToSign = [
+    "AWS4-HMAC-SHA256",
+    amzDate,
+    credentialScope,
+    await sha256Hex(canonicalRequest)
+  ].join("\n");
+  const signingKey = await awsSigningKey(options.secretAccessKey, dateStamp, options.region, options.service);
+  const signature = await hmacHex(signingKey, stringToSign);
+
+  headers.authorization = [
+    "AWS4-HMAC-SHA256",
+    `Credential=${options.accessKeyId}/${credentialScope}`,
+    `SignedHeaders=${signedHeaders}`,
+    `Signature=${signature}`
+  ].join(", ");
+
+  return fetch(requestUrl, {
+    method: options.method,
+    headers,
+    body: options.body
+  });
+}
+
+async function awsSigningKey(secretAccessKey, dateStamp, region, service) {
+  const dateKey = await hmacBytes(`AWS4${secretAccessKey}`, dateStamp);
+  const regionKey = await hmacBytes(dateKey, region);
+  const serviceKey = await hmacBytes(regionKey, service);
+  return hmacBytes(serviceKey, "aws4_request");
+}
+
+async function sha256Hex(value) {
+  const bytes = typeof value === "string" ? textBytes(value) : value;
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return hex(digest);
+}
+
+async function hmacBytes(key, value) {
+  const cryptoKey = await crypto.subtle.importKey(
+    "raw",
+    typeof key === "string" ? textBytes(key) : key,
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+  return crypto.subtle.sign("HMAC", cryptoKey, textBytes(value));
+}
+
+async function hmacHex(key, value) {
+  return hex(await hmacBytes(key, value));
+}
+
+function textBytes(value) {
+  return new TextEncoder().encode(value);
+}
+
+function hex(buffer) {
+  return [...new Uint8Array(buffer)]
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
 }
 
 class ConfigurationError extends Error {}

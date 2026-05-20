@@ -3,8 +3,10 @@ import worker from "./src/index.js";
 const env = {
   ALLOWED_ORIGINS: "https://pixelwisdom.ca",
   DRY_RUN: "true",
-  TO_EMAIL: "p.h.i.l@live.ca",
-  FROM_EMAIL: "forms@pixelwisdom.ca"
+  TO_EMAIL: "phil@pixelwisdom.ca",
+  FROM_EMAIL: "forms@pixelwisdom.ca",
+  SES_REGION: "us-east-1",
+  SES_FROM_EMAIL: "forms@pixelwisdom.ca"
 };
 
 const request = new Request("https://pixelwisdom.ca/api/forms/submit", {

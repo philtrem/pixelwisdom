@@ -11,10 +11,11 @@ The Worker accepts `application/json`, `application/x-www-form-urlencoded`, and 
 
 ## Delivery
 
-The preferred deployment uses Cloudflare Email Routing via the `FORM_EMAIL` send binding in `wrangler.toml`.
+The preferred deployment uses Amazon SES over HTTPS from the Worker. Grantlet provisions a narrow IAM user into `.env.ses-forms`, and `deploy.mjs` stores those values as Worker secret bindings.
 
 Fallbacks are also supported:
 
+- Cloudflare Email Routing through a `FORM_EMAIL` binding, if configured.
 - `RESEND_API_KEY` secret for Resend delivery.
 - `FORWARD_WEBHOOK_URL` secret for webhook delivery.
 - `DRY_RUN=true` for local testing only.
@@ -42,13 +43,13 @@ With Wrangler, the equivalent commands are:
 npx wrangler deploy --config workers/forms/wrangler.toml
 ```
 
-If using Resend instead of Cloudflare Email Routing:
+If using Resend instead of SES:
 
 ```sh
 npx wrangler secret put RESEND_API_KEY --config workers/forms/wrangler.toml
 ```
 
-This repo also includes a direct API deploy script. Grantlet can provision a narrow Cloudflare token into `.env.cloudflare-forms`, then deploy with:
+This repo also includes a direct API deploy script. Grantlet can provision a narrow Cloudflare token into `.env.cloudflare-forms` and SES credentials into `.env.ses-forms`, then deploy with:
 
 ```sh
 node workers/forms/deploy.mjs

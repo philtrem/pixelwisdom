@@ -12,9 +12,14 @@ const ROUTE_PATTERNS = [
 ];
 
 await loadEnvFile(".env.cloudflare-forms");
+await loadEnvFile(".env.ses-forms");
 
 if (!process.env.CLOUDFLARE_ACCOUNT_ID || !process.env.CLOUDFLARE_API_TOKEN) {
   throw new Error("CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN are required.");
+}
+
+if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
+  throw new Error("AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY are required for SES delivery.");
 }
 
 const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
@@ -70,7 +75,7 @@ async function uploadWorker(accountId, apiToken) {
       {
         type: "plain_text",
         name: "TO_EMAIL",
-        text: "p.h.i.l@live.ca"
+        text: "phil@pixelwisdom.ca"
       },
       {
         type: "plain_text",
@@ -78,9 +83,24 @@ async function uploadWorker(accountId, apiToken) {
         text: "forms@pixelwisdom.ca"
       },
       {
-        type: "send_email",
-        name: "FORM_EMAIL",
-        destination_address: "p.h.i.l@live.ca"
+        type: "plain_text",
+        name: "SES_REGION",
+        text: process.env.SES_REGION || "us-east-1"
+      },
+      {
+        type: "plain_text",
+        name: "SES_FROM_EMAIL",
+        text: "forms@pixelwisdom.ca"
+      },
+      {
+        type: "secret_text",
+        name: "AWS_ACCESS_KEY_ID",
+        text: process.env.AWS_ACCESS_KEY_ID
+      },
+      {
+        type: "secret_text",
+        name: "AWS_SECRET_ACCESS_KEY",
+        text: process.env.AWS_SECRET_ACCESS_KEY
       }
     ]
   };

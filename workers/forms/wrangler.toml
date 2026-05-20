@@ -9,11 +9,9 @@ routes = [
 
 [vars]
 ALLOWED_ORIGINS = "https://pixelwisdom.ca,https://www.pixelwisdom.ca"
-TO_EMAIL = "p.h.i.l@live.ca"
+TO_EMAIL = "phil@pixelwisdom.ca"
 FROM_EMAIL = "forms@pixelwisdom.ca"
+SES_REGION = "us-east-1"
+SES_FROM_EMAIL = "forms@pixelwisdom.ca"
 
-# Native Cloudflare Email Routing delivery. The destination address must be
-# verified in Cloudflare Email Routing before deployment.
-[[send_email]]
-name = "FORM_EMAIL"
-destination_address = "p.h.i.l@live.ca"
+# Set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY as Worker secrets for SES delivery.
