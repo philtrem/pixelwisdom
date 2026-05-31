@@ -493,8 +493,15 @@
           <form action="/api/forms/submit" method="post" data-contact-form>
             <input type="hidden" name="form" value="pixelwisdom-contact">
             <input type="hidden" name="page" value="https://pixelwisdom.ca/">
+            <input type="hidden" name="elapsed_ms" value="" data-form-elapsed>
+            <label class="visually-hidden" for="_gotcha">Leave this field empty</label>
+            <input class="visually-hidden" type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
             <label class="visually-hidden" for="fax_number">Leave this field empty</label>
-            <input class="visually-hidden" type="text" id="fax_number" name="fax_number" tabindex="-1" autocomplete="off">
+            <input class="visually-hidden" type="text" id="fax_number" name="fax_number" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <label class="visually-hidden" for="company_website">Leave this field empty</label>
+            <input class="visually-hidden" type="text" id="company_website" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <label class="visually-hidden" for="website_url">Leave this field empty</label>
+            <input class="visually-hidden" type="url" id="website_url" name="website_url" tabindex="-1" autocomplete="off" aria-hidden="true">
             <input type="text" name="name" placeholder="Name" required>
             <input type="email" name="email" placeholder="Work Email" required>
             <input type="text" name="subject" placeholder="Project / Product Challenge" required>
@@ -531,11 +538,17 @@
     const formStatus = document.querySelector('[data-form-status]');
 
     if (contactForm && formStatus) {
+      const formStartedAt = Date.now();
+
       contactForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         const submitButton = contactForm.querySelector('button[type="submit"]');
+        const elapsedInput = contactForm.querySelector('[data-form-elapsed]');
         const originalLabel = submitButton.textContent;
+        if (elapsedInput) {
+          elapsedInput.value = String(Date.now() - formStartedAt);
+        }
         formStatus.textContent = 'Sending...';
         formStatus.className = 'form-status';
         submitButton.disabled = true;

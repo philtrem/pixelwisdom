@@ -6,28 +6,28 @@ const API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
 const API_BASE_URL = "https://api.cloudflare.com/client/v4";
 const SCRIPT_NAME = "pixelwisdom-forms";
 const ZONE_NAME = "pixelwisdom.ca";
+const SECRETS_STORE_ID = "7e7af90f3ee44eb58624503445876199";
 const ROUTE_PATTERNS = [
   "pixelwisdom.ca/api/forms/*",
   "www.pixelwisdom.ca/api/forms/*"
 ];
 
 await loadEnvFile(".env.cloudflare-forms");
-await loadEnvFile(".env.ses-forms");
-
 if (!process.env.CLOUDFLARE_ACCOUNT_ID || !process.env.CLOUDFLARE_API_TOKEN) {
   throw new Error("CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN are required.");
 }
 
-if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
-  throw new Error("AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY are required for SES delivery.");
-}
 
 const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
 const apiToken = process.env.CLOUDFLARE_API_TOKEN;
 
-const zone = await findZone(accountId, ZONE_NAME, apiToken);
 await uploadWorker(accountId, apiToken);
-await upsertRoutes(zone.id, apiToken);
+try {
+  const zone = await findZone(accountId, ZONE_NAME, apiToken);
+  await upsertRoutes(zone.id, apiToken);
+} catch (error) {
+  console.warn(`Uploaded ${SCRIPT_NAME}; skipped route upsert: ${error.message}`);
+}
 
 console.log(`Deployed ${SCRIPT_NAME} to ${ROUTE_PATTERNS.join(", ")}`);
 
@@ -93,14 +93,36 @@ async function uploadWorker(accountId, apiToken) {
         text: "forms@pixelwisdom.ca"
       },
       {
-        type: "secret_text",
-        name: "AWS_ACCESS_KEY_ID",
-        text: process.env.AWS_ACCESS_KEY_ID
+        type: "plain_text",
+        name: "MIN_FORM_ELAPSED_MS",
+        text: process.env.MIN_FORM_ELAPSED_MS || "1200"
       },
       {
-        type: "secret_text",
+        type: "plain_text",
+        name: "MAX_FORM_ELAPSED_MS",
+        text: process.env.MAX_FORM_ELAPSED_MS || "86400000"
+      },
+      {
+        type: "plain_text",
+        name: "RATE_LIMIT_WINDOW_SECONDS",
+        text: process.env.RATE_LIMIT_WINDOW_SECONDS || "3600"
+      },
+      {
+        type: "plain_text",
+        name: "RATE_LIMIT_MAX",
+        text: process.env.RATE_LIMIT_MAX || "3"
+      },
+      {
+        type: "secrets_store_secret",
+        name: "AWS_ACCESS_KEY_ID",
+        store_id: SECRETS_STORE_ID,
+        secret_name: "PIXELWISDOM_FORMS_AWS_ACCESS_KEY_ID"
+      },
+      {
+        type: "secrets_store_secret",
         name: "AWS_SECRET_ACCESS_KEY",
-        text: process.env.AWS_SECRET_ACCESS_KEY
+        store_id: SECRETS_STORE_ID,
+        secret_name: "PIXELWISDOM_FORMS_AWS_SECRET_ACCESS_KEY"
       }
     ]
   };

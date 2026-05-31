@@ -13,5 +13,19 @@ TO_EMAIL = "phil@pixelwisdom.ca,p.h.i.l@live.ca"
 FROM_EMAIL = "forms@pixelwisdom.ca"
 SES_REGION = "us-east-1"
 SES_FROM_EMAIL = "forms@pixelwisdom.ca"
+MIN_FORM_ELAPSED_MS = "1200"
+MAX_FORM_ELAPSED_MS = "86400000"
+RATE_LIMIT_WINDOW_SECONDS = "3600"
+RATE_LIMIT_MAX = "3"
 
-# Set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY as Worker secrets for SES delivery.
+# AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY are bound from Cloudflare Secrets Store.
+
+[[secrets_store_secrets]]
+binding = "AWS_ACCESS_KEY_ID"
+store_id = "7e7af90f3ee44eb58624503445876199"
+secret_name = "PIXELWISDOM_FORMS_AWS_ACCESS_KEY_ID"
+
+[[secrets_store_secrets]]
+binding = "AWS_SECRET_ACCESS_KEY"
+store_id = "7e7af90f3ee44eb58624503445876199"
+secret_name = "PIXELWISDOM_FORMS_AWS_SECRET_ACCESS_KEY"

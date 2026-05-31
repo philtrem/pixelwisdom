@@ -5,8 +5,13 @@ const DEFAULT_ALLOWED_ORIGINS = [
 
 const MAX_CONTENT_LENGTH = 64 * 1024;
 const MAX_FIELD_LENGTH = 4000;
+const DEFAULT_MIN_FORM_ELAPSED_MS = 1200;
+const DEFAULT_MAX_FORM_ELAPSED_MS = 24 * 60 * 60 * 1000;
+const DEFAULT_RATE_LIMIT_WINDOW_SECONDS = 60 * 60;
+const DEFAULT_RATE_LIMIT_MAX = 3;
+const MAX_URLS_IN_SUBMISSION = 5;
 const REQUIRED_FIELDS = ["name", "email", "message"];
-const HONEYPOT_FIELDS = ["_gotcha", "fax_number"];
+const HONEYPOT_FIELDS = ["_gotcha", "fax_number", "company_website", "website_url"];
 
 export default {
   async fetch(request, env, ctx) {
@@ -53,7 +58,17 @@ export async function handleRequest(request, env = {}, ctx = {}) {
   }
 
   if (isSpam(submission)) {
-    return json(request, env, { ok: true });
+    return accepted(request, env);
+  }
+
+  const browserSignalError = validateBrowserSignal(submission, env);
+  if (browserSignalError) {
+    return json(request, env, { ok: false, error: browserSignalError }, 400);
+  }
+
+  const rateLimitError = await rateLimitSubmission(request, env);
+  if (rateLimitError) {
+    return json(request, env, { ok: false, error: rateLimitError }, 429);
   }
 
   try {
@@ -94,13 +109,32 @@ function allowedOrigins(env) {
 
 function validateOrigin(request, env) {
   const origin = request.headers.get("origin");
-  if (!origin) {
-    return null;
+  if (origin) {
+    return allowedOrigins(env).includes(origin)
+      ? null
+      : "Origin is not allowed";
   }
 
-  return allowedOrigins(env).includes(origin)
+  const referer = request.headers.get("referer");
+  const refererOrigin = originFromUrl(referer);
+  if (refererOrigin) {
+    return allowedOrigins(env).includes(refererOrigin)
+      ? null
+      : "Referer is not allowed";
+  }
+
+  return env.ALLOW_MISSING_ORIGIN === "true"
     ? null
-    : "Origin is not allowed";
+    : "Origin is required";
+}
+
+function originFromUrl(value) {
+  if (!value) return "";
+  try {
+    return new URL(value).origin;
+  } catch {
+    return "";
+  }
 }
 
 async function parsePayload(request) {
@@ -141,6 +175,7 @@ function normalizeSubmission(payload, request) {
     page: cleanValue(fields.page || request.headers.get("referer") || "", 500),
     origin: cleanValue(request.headers.get("origin") || "", 500),
     userAgent: cleanValue(request.headers.get("user-agent") || "", 500),
+    elapsedMs: parseInteger(fields.elapsed_ms),
     honeypots: Object.fromEntries(HONEYPOT_FIELDS.map((field) => [field, cleanValue(fields[field], 500)])),
     fields
   };
@@ -171,12 +206,130 @@ function isValidEmail(value) {
 }
 
 function isSpam(submission) {
+  return hasHoneypotValue(submission) || hasSpamContent(submission);
+}
+
+function hasHoneypotValue(submission) {
   return Object.values(submission.honeypots).some(Boolean);
 }
 
+function hasSpamContent(submission) {
+  const text = [
+    submission.name,
+    submission.email,
+    submission.subject,
+    submission.message
+  ].join("\n");
+  const urls = text.match(/\b(?:https?:\/\/|www\.)\S+/gi) || [];
+
+  if (urls.length > MAX_URLS_IN_SUBMISSION) {
+    return true;
+  }
+
+  if (/(?:<a\s+href=|\[url=)/i.test(text)) {
+    return true;
+  }
+
+  return urls.length > 0 && /\b(?:backlinks?|casino|loan|payday|viagra|whatsapp)\b/i.test(text);
+}
+
+function validateBrowserSignal(submission, env) {
+  if (env.REQUIRE_BROWSER_SIGNAL === "false") {
+    return null;
+  }
+
+  if (!Number.isFinite(submission.elapsedMs)) {
+    return "Please reload the page and try again.";
+  }
+
+  const minElapsed = positiveInteger(env.MIN_FORM_ELAPSED_MS, DEFAULT_MIN_FORM_ELAPSED_MS);
+  const maxElapsed = positiveInteger(env.MAX_FORM_ELAPSED_MS, DEFAULT_MAX_FORM_ELAPSED_MS);
+
+  if (submission.elapsedMs < minElapsed) {
+    return "Please wait a moment before sending.";
+  }
+
+  if (submission.elapsedMs > maxElapsed) {
+    return "Please reload the page and try again.";
+  }
+
+  return null;
+}
+
+async function rateLimitSubmission(request, env) {
+  const limit = nonNegativeInteger(env.RATE_LIMIT_MAX, DEFAULT_RATE_LIMIT_MAX);
+  if (limit <= 0 || !globalThis.caches?.default) {
+    return null;
+  }
+
+  const identifier = clientIdentifier(request);
+  if (!identifier) {
+    return null;
+  }
+
+  const windowSeconds = positiveInteger(env.RATE_LIMIT_WINDOW_SECONDS, DEFAULT_RATE_LIMIT_WINDOW_SECONDS);
+  const now = Date.now();
+  const keyHash = await sha256Hex(identifier);
+  const cacheKey = new Request(`https://pixelwisdom.local/form-rate/${keyHash}`);
+  const cached = await caches.default.match(cacheKey);
+  let state = { count: 0, resetAt: now + windowSeconds * 1000 };
+
+  if (cached) {
+    const cachedState = await cached.json().catch(() => null);
+    if (cachedState && Number(cachedState.resetAt) > now) {
+      state = {
+        count: Number(cachedState.count) || 0,
+        resetAt: Number(cachedState.resetAt)
+      };
+    }
+  }
+
+  state.count += 1;
+  const ttl = Math.max(1, Math.ceil((state.resetAt - now) / 1000));
+  await caches.default.put(
+    cacheKey,
+    new Response(JSON.stringify(state), {
+      headers: { "cache-control": `max-age=${ttl}` }
+    })
+  );
+
+  return state.count > limit
+    ? "Too many submissions. Please try again later."
+    : null;
+}
+
+function clientIdentifier(request) {
+  const ip = request.headers.get("cf-connecting-ip") || "";
+  const country = request.cf?.country || "";
+  const userAgent = request.headers.get("user-agent") || "";
+
+  if (ip) {
+    return `ip:${ip}:${country}`;
+  }
+
+  return userAgent ? `ua:${userAgent}` : "";
+}
+
+function parseInteger(value) {
+  const parsed = Number.parseInt(value, 10);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function positiveInteger(value, fallback) {
+  const parsed = Number.parseInt(value, 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+}
+
+function nonNegativeInteger(value, fallback) {
+  const parsed = Number.parseInt(value, 10);
+  return Number.isFinite(parsed) && parsed >= 0 ? parsed : fallback;
+}
+
 async function deliverSubmission(env, submission, request) {
-  if (hasSesConfig(env)) {
-    await sendWithSes(env, submission);
+  const deliveryEnv = await resolveDeliverySecrets(env);
+
+  if (hasSesConfig(deliveryEnv)) {
+    await sendWithSes(deliveryEnv, submission);
     return { provider: "ses" };
   }
 
@@ -200,6 +353,24 @@ async function deliverSubmission(env, submission, request) {
   }
 
   throw new ConfigurationError("No delivery provider configured");
+}
+
+async function resolveDeliverySecrets(env) {
+  return {
+    ...env,
+    AWS_ACCESS_KEY_ID: await resolveSecretValue(env.AWS_ACCESS_KEY_ID),
+    AWS_SECRET_ACCESS_KEY: await resolveSecretValue(env.AWS_SECRET_ACCESS_KEY),
+    AWS_SESSION_TOKEN: await resolveSecretValue(env.AWS_SESSION_TOKEN),
+    RESEND_API_KEY: await resolveSecretValue(env.RESEND_API_KEY),
+    FORWARD_WEBHOOK_URL: await resolveSecretValue(env.FORWARD_WEBHOOK_URL)
+  };
+}
+
+async function resolveSecretValue(value) {
+  if (value && typeof value === "object" && typeof value.get === "function") {
+    return value.get();
+  }
+  return value;
 }
 
 function hasSesConfig(env) {
@@ -398,6 +569,12 @@ function json(request, env, payload, status = 200) {
       }
     })
   );
+}
+
+function accepted(request, env) {
+  return wantsHtml(request)
+    ? new Response(successHtml(), { headers: htmlHeaders(request, env) })
+    : json(request, env, { ok: true });
 }
 
 function withCors(request, env, response) {

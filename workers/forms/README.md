@@ -7,7 +7,7 @@ Cloudflare Worker endpoint for Pixel Wisdom form submissions.
 - `GET /api/forms/health`
 - `POST /api/forms/submit`
 
-The Worker accepts `application/json`, `application/x-www-form-urlencoded`, and `multipart/form-data` payloads. It validates `name`, `email`, and `message`, ignores honeypot submissions, and sends the submission server-side.
+The Worker accepts `application/json`, `application/x-www-form-urlencoded`, and `multipart/form-data` payloads. It validates `name`, `email`, and `message`, requires a trusted `Origin` or `Referer`, ignores honeypot and obvious link-spam submissions, requires the browser timing field emitted by the site JavaScript, rate-limits repeated submissions, and sends accepted submissions server-side.
 
 ## Delivery
 
@@ -20,6 +20,17 @@ Fallbacks are also supported:
 - `RESEND_API_KEY` secret for Resend delivery.
 - `FORWARD_WEBHOOK_URL` secret for webhook delivery.
 - `DRY_RUN=true` for local testing only.
+
+## Spam Controls
+
+The contact page sends `elapsed_ms` when JavaScript handles the submit. By default, the Worker rejects submissions that skip that browser signal or arrive too quickly. These knobs can be adjusted as Worker vars:
+
+- `MIN_FORM_ELAPSED_MS` defaults to `1200`.
+- `MAX_FORM_ELAPSED_MS` defaults to `86400000`.
+- `RATE_LIMIT_WINDOW_SECONDS` defaults to `3600`.
+- `RATE_LIMIT_MAX` defaults to `3`; set it to `0` to disable the throttle.
+- `ALLOW_MISSING_ORIGIN=true` relaxes the trusted `Origin` or `Referer` requirement, but should not be used in production.
+- `REQUIRE_BROWSER_SIGNAL=false` relaxes the timing requirement, but should not be used in production.
 
 ## Local Checks
 
