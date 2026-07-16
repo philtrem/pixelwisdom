@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Pixel Wisdom</title>
+  <desc id="desc">Open Graph image for Pixel Wisdom, product engineering for AI teams.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0B0D12"/>
+      <stop offset="0.52" stop-color="#10131B"/>
+      <stop offset="1" stop-color="#080A0E"/>
+    </linearGradient>
+    <radialGradient id="blue-glow" cx="18%" cy="12%" r="65%">
+      <stop offset="0" stop-color="#4E7DF7" stop-opacity="0.28"/>
+      <stop offset="0.55" stop-color="#4E7DF7" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#4E7DF7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="purple-glow" cx="86%" cy="82%" r="62%">
+      <stop offset="0" stop-color="#9B6BE8" stop-opacity="0.22"/>
+      <stop offset="0.58" stop-color="#9B6BE8" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#9B6BE8" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#6E9BFF" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+    <filter id="soft-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="22" stdDeviation="28" flood-color="#000000" flood-opacity="0.38"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#blue-glow)"/>
+  <rect width="1200" height="630" fill="url(#purple-glow)"/>
+
+  <g transform="translate(84 72)">
+    <rect x="0" y="0" width="1032" height="486" rx="18" fill="#0E1118" stroke="#1E2430" filter="url(#soft-shadow)"/>
+    <path d="M1 132H1031" stroke="#1E2430"/>
+    <path d="M652 0V486" stroke="#1E2430"/>
+
+    <g transform="translate(52 50)">
+      <g>
+        <rect x="0" y="0" width="22" height="22" fill="#4E7DF7"/>
+        <rect x="30" y="0" width="22" height="22" fill="#2C3545"/>
+        <rect x="60" y="0" width="22" height="22" fill="#F2CB4E"/>
+        <rect x="0" y="30" width="22" height="22" fill="#2C3545"/>
+        <rect x="30" y="30" width="22" height="22" fill="#45C96A"/>
+        <rect x="60" y="30" width="22" height="22" fill="#2C3545"/>
+        <rect x="0" y="60" width="22" height="22" fill="#9B6BE8"/>
+        <rect x="30" y="60" width="22" height="22" fill="#2C3545"/>
+        <rect x="60" y="60" width="22" height="22" fill="#F0533A"/>
+      </g>
+      <text x="112" y="54" fill="#EDEFF4" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="42" font-weight="700" letter-spacing="-0.5">Pixel Wisdom</text>
+    </g>
+
+    <g transform="translate(52 176)">
+      <text fill="#6E9BFF" font-family="JetBrains Mono, SFMono-Regular, Consolas, monospace" font-size="17" font-weight="600" letter-spacing="2.4">PRODUCT ENGINEERING FOR AI COMPANIES</text>
+      <text y="82" fill="#EDEFF4" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="64" font-weight="700" letter-spacing="-2.2">
+        <tspan x="0" dy="0">AI teams shipping</tspan>
+        <tspan x="0" dy="74" fill="#6E9BFF">beyond the demo.</tspan>
+      </text>
+      <text x="0" y="226" fill="#A6AFBF" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="500">
+        <tspan x="0" dy="0">Model interfaces, eval tools, data workflows,</tspan>
+        <tspan x="0" dy="36">internal systems, and full-stack products.</tspan>
+      </text>
+    </g>
+
+    <g transform="translate(724 166)">
+      <rect x="0" y="0" width="254" height="254" rx="14" fill="#080A0E" stroke="#2C3545"/>
+      <g transform="translate(34 34)">
+        <g fill="#10131B" stroke="#1E2430" stroke-width="2">
+          <rect x="0" y="0" width="34" height="34"/><rect x="38" y="0" width="34" height="34"/><rect x="76" y="0" width="34" height="34"/><rect x="114" y="0" width="34" height="34"/><rect x="152" y="0" width="34" height="34"/>
+          <rect x="0" y="38" width="34" height="34"/><rect x="38" y="38" width="34" height="34" fill="#4E7DF7"/><rect x="76" y="38" width="34" height="34" fill="#4E7DF7"/><rect x="114" y="38" width="34" height="34"/><rect x="152" y="38" width="34" height="34"/>
+          <rect x="0" y="76" width="34" height="34"/><rect x="38" y="76" width="34" height="34" fill="#4E7DF7"/><rect x="76" y="76" width="34" height="34"/><rect x="114" y="76" width="34" height="34"/><rect x="152" y="76" width="34" height="34"/>
+          <rect x="0" y="114" width="34" height="34"/><rect x="38" y="114" width="34" height="34"/><rect x="76" y="114" width="34" height="34"/><rect x="114" y="114" width="34" height="34" fill="#F2CB4E"/><rect x="152" y="114" width="34" height="34"/>
+          <rect x="0" y="152" width="34" height="34"/><rect x="38" y="152" width="34" height="34"/><rect x="76" y="152" width="34" height="34"/><rect x="114" y="152" width="34" height="34"/><rect x="152" y="152" width="34" height="34"/>
+        </g>
+      </g>
+      <text x="127" y="292" text-anchor="middle" fill="#667082" font-family="JetBrains Mono, SFMono-Regular, Consolas, monospace" font-size="13" letter-spacing="1.2">INTERFACES FOR REASONING SYSTEMS</text>
+    </g>
+  </g>
+</svg>
