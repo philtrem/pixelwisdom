@@ -143,16 +143,6 @@
     return valid;
   };
 
-  fields.forEach((field) => {
-    field.addEventListener("blur", () => renderFieldState(field, true));
-    field.addEventListener("input", () => {
-      if (field.getAttribute("aria-invalid") === "true") renderFieldState(field, true);
-    });
-    field.addEventListener("change", () => {
-      if (field.getAttribute("aria-invalid") === "true") renderFieldState(field, true);
-    });
-  });
-
   const setStatus = (message, state = "") => {
     formStatus.textContent = message;
     formStatus.className = `form-status${state ? ` ${state}` : ""}`;
