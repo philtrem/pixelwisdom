@@ -1,906 +1,539 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pixel Wisdom | Product Engineering for AI Teams</title>
-  <meta name="description" content="Product engineering for AI founders and research teams shipping beyond the demo: model interfaces, eval tools, data workflows, internal systems, and full-stack product development.">
-  <meta name="theme-color" content="#0B0D12">
-  <link rel="canonical" href="https://pixelwisdom.ca/">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Pixel Wisdom">
-  <meta property="og:title" content="Pixel Wisdom | Product Engineering for AI Teams">
-  <meta property="og:description" content="Product engineering for AI founders and research teams shipping beyond the demo: model interfaces, eval tools, data workflows, internal systems, and full-stack product development.">
-  <meta property="og:url" content="https://pixelwisdom.ca/">
-  <meta property="og:image" content="https://pixelwisdom.ca/og-image.png">
-  <meta property="og:image:secure_url" content="https://pixelwisdom.ca/og-image.png">
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Pixel Wisdom - AI teams shipping beyond the demo.">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pixel Wisdom | Product Engineering for AI Teams">
-  <meta name="twitter:description" content="Product engineering for AI founders and research teams shipping beyond the demo: model interfaces, eval tools, data workflows, internal systems, and full-stack product development.">
-  <meta name="twitter:image" content="https://pixelwisdom.ca/og-image.png">
-  <meta name="twitter:image:alt" content="Pixel Wisdom - AI teams shipping beyond the demo.">
+    <title>Pixel Wisdom | Product Engineering for Critical Builds</title>
+    <meta
+      name="description"
+      content="Philippe Tremblay designs and delivers critical web, desktop, data, integration, and AI products for technical teams—end to end."
+    >
+    <meta name="theme-color" content="#F6F8FC">
+    <link rel="canonical" href="https://pixelwisdom.ca/">
+    <link rel="icon" href="./favicon.svg?v=20260716j" type="image/svg+xml">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Pixel Wisdom">
+    <meta property="og:title" content="Pixel Wisdom | Product Engineering for Critical Builds">
+    <meta
+      property="og:description"
+      content="Critical software, taken from hard problem to shipped product. An independent product-engineering practice led by Philippe Tremblay."
+    >
+    <meta property="og:url" content="https://pixelwisdom.ca/">
+    <meta property="og:image" content="https://pixelwisdom.ca/og-image.png">
+    <meta property="og:image:secure_url" content="https://pixelwisdom.ca/og-image.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta
+      property="og:image:alt"
+      content="Pixel Wisdom — critical software, taken from hard problem to shipped product."
+    >
 
-  <script>document.documentElement.classList.add('js');</script>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pixel Wisdom | Product Engineering for Critical Builds">
+    <meta
+      name="twitter:description"
+      content="Critical software, taken from hard problem to shipped product."
+    >
+    <meta name="twitter:image" content="https://pixelwisdom.ca/og-image.png">
+    <meta
+      name="twitter:image:alt"
+      content="Pixel Wisdom — critical software, taken from hard problem to shipped product."
+    >
 
-  <style>
-    /* ============================================================
-       PIXEL WISDOM — Design System
-       Dark research-lab aesthetic. Pixel-grid identity inspired
-       by the ARC-AGI work. Mono metadata, editorial type.
-       ============================================================ */
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Onest:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="./assets/site.css?v=20260716i">
 
-    :root {
-      /* Surfaces */
-      --bg:           #0B0D12;
-      --bg-elev:      #10131B;
-      --bg-card:      #0E1118;
-      --bg-inset:     #080A0E;
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <script src="./assets/site.js?v=20260716f" defer></script>
 
-      /* Lines */
-      --border:        #1E2430;
-      --border-strong: #2C3545;
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Pixel Wisdom",
+        "url": "https://pixelwisdom.ca/",
+        "description": "Independent product engineering for technical teams with critical software to ship.",
+        "founder": {
+          "@type": "Person",
+          "name": "Philippe Tremblay",
+          "url": "https://github.com/philtrem",
+          "sameAs": [
+            "https://github.com/philtrem"
+          ]
+        },
+        "serviceType": [
+          "Product engineering",
+          "Full-stack software development",
+          "Data and AI interfaces",
+          "Systems integration"
+        ]
+      }
+    </script>
+  </head>
 
-      /* Type */
-      --text:    #EDEFF4;
-      --text-2:  #A6AFBF;
-      --text-3:  #667082;
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
 
-      /* Accent + ARC pixel palette */
-      --accent:    #6E9BFF;
-      --accent-dim: rgba(110, 155, 255, 0.14);
-      --px-blue:   #4E7DF7;
-      --px-red:    #F0533A;
-      --px-green:  #45C96A;
-      --px-yellow: #F2CB4E;
-      --px-purple: #9B6BE8;
-      --px-orange: #F79A3E;
+    <header class="site-header" data-site-header>
+      <div class="container nav-row">
+        <a class="brand" href="#top" aria-label="Pixel Wisdom — home">
+          <img
+            class="brand-mark"
+            src="./assets/brand/pixel-wisdom-mark.svg?v=20260716j"
+            width="80"
+            height="80"
+            alt=""
+          >
+          <span class="brand-name">Pixel Wisdom</span>
+        </a>
 
-      --font-display: 'Space Grotesk', sans-serif;
-      --font-ui:      'Inter', sans-serif;
-      --font-mono:    'JetBrains Mono', monospace;
+        <nav class="desktop-nav" aria-label="Primary navigation">
+          <a href="#work">Work</a>
+          <a href="#offer">Offer</a>
+          <a href="#about">About</a>
+        </nav>
 
-      --max-width: 1060px;
-      --radius: 10px;
-    }
+        <a class="button button--compact nav-action" href="#contact">Start a project</a>
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-ui);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      font-size: 16px;
-    }
-
-    ::selection { background: var(--px-blue); color: #fff; }
-
-    a { text-decoration: none; color: inherit; transition: color 0.18s ease; }
-    ul { list-style: none; }
-    code {
-      font-family: var(--font-mono);
-      font-size: 0.85em;
-      background: var(--bg-inset);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 0.1em 0.35em;
-    }
-
-    :focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-      border-radius: 2px;
-    }
-
-    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
-
-    /* ---------- Pixel grid texture (whole page, very faint) ---------- */
-    .grid-bg {
-      background-image:
-        linear-gradient(rgba(110, 155, 255, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(110, 155, 255, 0.035) 1px, transparent 1px);
-      background-size: 36px 36px;
-    }
-
-    /* ---------- Mono kicker labels ---------- */
-    .kicker {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .kicker::before {
-      content: '';
-      width: 8px; height: 8px;
-      background: var(--accent);
-      display: inline-block;
-    }
-
-    /* ============ NAVIGATION ============ */
-    nav {
-      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-      background: rgba(11, 13, 18, 0.78);
-      backdrop-filter: blur(12px) saturate(140%);
-      -webkit-backdrop-filter: blur(12px) saturate(140%);
-      border-bottom: 1px solid var(--border);
-      padding: 0.9rem 0;
-    }
-    nav .container { display: flex; justify-content: space-between; align-items: center; }
-
-    .logo {
-      display: inline-flex; align-items: center; gap: 0.65rem;
-      font-family: var(--font-display);
-      font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em;
-      color: var(--text);
-    }
-    .logo svg { display: block; }
-
-    nav ul { display: flex; gap: 1.75rem; align-items: center; }
-    nav ul a {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text-2);
-    }
-    nav ul a:hover { color: var(--text); }
-    nav ul a::before { content: '/ '; color: var(--text-3); }
-
-    .nav-cta {
-      border: 1px solid var(--border-strong);
-      padding: 0.4rem 0.85rem;
-      border-radius: 6px;
-      color: var(--text) !important;
-      transition: border-color 0.18s ease, background 0.18s ease;
-    }
-    .nav-cta::before { content: '' !important; }
-    .nav-cta:hover { border-color: var(--accent); background: var(--accent-dim); }
-
-    /* ============ HERO ============ */
-    .hero {
-      padding: 9.5rem 0 5rem;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::after {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 15% 0%, rgba(78, 125, 247, 0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 85% 100%, rgba(155, 107, 232, 0.07) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .hero .container { position: relative; z-index: 1; }
-
-    .hero-top {
-      display: grid;
-      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.4rem, 5.4vw, 3.9rem);
-      line-height: 1.06;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      margin: 1.4rem 0 1.5rem;
-    }
-    .hero h1 em {
-      font-style: normal;
-      color: var(--accent);
-    }
-    .hero p.lede {
-      font-size: 1.15rem;
-      color: var(--text-2);
-      max-width: 540px;
-      margin-bottom: 2.25rem;
-    }
-
-    .hero-actions { display: flex; gap: 0.9rem; flex-wrap: wrap; }
-
-    .btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-family: var(--font-display);
-      font-weight: 600; font-size: 0.95rem;
-      padding: 0.8rem 1.5rem;
-      border-radius: 7px;
-      transition: transform 0.15s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
-    }
-    .btn-primary { background: var(--text); color: var(--bg); }
-    .btn-primary:hover {
-      background: var(--accent); color: #fff;
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px -8px rgba(110, 155, 255, 0.5);
-    }
-    .btn-ghost { border: 1px solid var(--border-strong); color: var(--text-2); }
-    .btn-ghost:hover { border-color: var(--accent); color: var(--text); background: var(--accent-dim); }
-
-    /* --- ARC-style puzzle vignette --- */
-    .arc-demo {
-      display: flex; align-items: center; justify-content: center; gap: 1.1rem;
-      padding: 2rem 1.5rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      position: relative;
-    }
-    .arc-demo::after {
-      content: 'fig. 01 — abstraction & reasoning';
-      position: absolute; bottom: 0.7rem; left: 0; right: 0;
-      text-align: center;
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-      color: var(--text-3);
-    }
-    .arc-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 18px);
-      grid-auto-rows: 18px;
-      gap: 2px;
-      background: var(--border);
-      border: 2px solid var(--border-strong);
-      padding: 2px;
-    }
-    .arc-grid i { background: var(--bg-inset); display: block; }
-    .arc-grid i.b { background: var(--px-blue); }
-    .arc-grid i.g { background: var(--px-green); }
-    .arc-grid i.y { background: var(--px-yellow); }
-    .arc-grid i.r { background: var(--px-red); }
-    .arc-grid i.p { background: var(--px-purple); }
-    .arc-arrow {
-      font-family: var(--font-mono);
-      color: var(--text-3);
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    /* --- Proof strip --- */
-    .hero-proof {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      margin-top: 3.5rem;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--bg-card);
-      overflow: hidden;
-    }
-    .hero-proof > div {
-      padding: 1.4rem 1.5rem;
-      border-left: 1px solid var(--border);
-    }
-    .hero-proof > div:first-child { border-left: none; }
-    .hero-proof strong {
-      display: flex; align-items: center; gap: 0.5rem;
-      font-family: var(--font-mono);
-      font-size: 0.8rem; font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--text);
-      margin-bottom: 0.4rem;
-    }
-    .hero-proof strong::before {
-      content: '';
-      width: 7px; height: 7px; flex-shrink: 0;
-    }
-    .hero-proof > div:nth-child(1) strong::before { background: var(--px-blue); }
-    .hero-proof > div:nth-child(2) strong::before { background: var(--px-green); }
-    .hero-proof > div:nth-child(3) strong::before { background: var(--px-yellow); }
-    .hero-proof span { color: var(--text-3); font-size: 0.87rem; line-height: 1.55; }
-
-    /* ============ SECTION HEADERS ============ */
-    section.block { padding: 5.5rem 0; }
-    .section-header {
-      display: flex; align-items: baseline; gap: 1.25rem;
-      margin-bottom: 3rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 1.25rem;
-    }
-    .section-header .index {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--accent);
-    }
-    .section-header h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-    .section-header .count {
-      margin-left: auto;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--text-3);
-    }
-
-    /* ============ CASE STUDIES ============ */
-    .case-study {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      margin-bottom: 3.5rem;
-      transition: border-color 0.25s ease;
-    }
-    .case-study:hover { border-color: var(--border-strong); }
-    .case-study:last-child { margin-bottom: 0; }
-
-    .case-header {
-      padding: 2.5rem 2.75rem 2.25rem;
-      border-bottom: 1px solid var(--border);
-      background:
-        radial-gradient(ellipse 70% 110% at 0% 0%, rgba(78, 125, 247, 0.08) 0%, transparent 55%),
-        var(--bg-elev);
-    }
-    .meta-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
-    .meta-tag {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--text-2);
-      border: 1px solid var(--border-strong);
-      border-radius: 99px;
-      padding: 0.2rem 0.7rem;
-      background: var(--bg-inset);
-    }
-    .case-header h3 {
-      font-family: var(--font-display);
-      font-size: clamp(1.7rem, 3.6vw, 2.4rem);
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      margin-bottom: 0.75rem;
-    }
-    .case-header > p { font-size: 1.05rem; color: var(--text-2); max-width: 700px; }
-    .case-header strong { color: var(--text); font-weight: 600; }
-    .case-header a { color: var(--accent); border-bottom: 1px solid transparent; }
-    .case-header a:hover { border-bottom-color: var(--accent); }
-
-    .case-details { display: grid; grid-template-columns: 3fr 2fr; }
-
-    .case-desc { padding: 2.5rem 2.75rem; }
-    .case-desc p { margin-bottom: 1.5rem; color: var(--text-2); }
-    .case-desc strong { color: var(--text); font-weight: 600; }
-    .case-desc ul { display: flex; flex-direction: column; gap: 1rem; }
-    .case-desc li {
-      color: var(--text-2);
-      padding-left: 1.4rem;
-      position: relative;
-    }
-    .case-desc li::before {
-      content: '';
-      position: absolute; left: 0; top: 0.55em;
-      width: 8px; height: 8px;
-      background: var(--px-blue);
-    }
-    .case-desc li:nth-child(2)::before { background: var(--px-green); }
-    .case-desc li:nth-child(3)::before { background: var(--px-yellow); }
-
-    .case-stats {
-      border-left: 1px solid var(--border);
-      background: var(--bg-inset);
-      padding: 2.5rem;
-      display: flex; flex-direction: column; justify-content: center; gap: 1.75rem;
-    }
-    .stat-box h4 {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-3);
-      margin-bottom: 0.35rem;
-    }
-    .stat-box h4::before { content: '// '; }
-    .stat-box p {
-      font-family: var(--font-display);
-      font-size: 1.05rem; font-weight: 600;
-      color: var(--text);
-    }
-
-    /* ============ SERVICES ============ */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.25rem;
-    }
-    .service-card {
-      padding: 1.9rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .service-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--card-color, var(--px-blue)), transparent 70%);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-    .service-card:hover {
-      border-color: var(--border-strong);
-      background: var(--bg-elev);
-      transform: translateY(-2px);
-    }
-    .service-card:hover::before { opacity: 1; }
-    .service-card:nth-child(1) { --card-color: var(--px-blue); }
-    .service-card:nth-child(2) { --card-color: var(--px-green); }
-    .service-card:nth-child(3) { --card-color: var(--px-yellow); }
-    .service-card:nth-child(4) { --card-color: var(--px-purple); }
-
-    .service-num {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--card-color, var(--accent));
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      margin-bottom: 1.1rem;
-    }
-    .service-num::before {
-      content: '';
-      width: 8px; height: 8px;
-      background: var(--card-color, var(--accent));
-    }
-    .service-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.12rem; font-weight: 600;
-      margin-bottom: 0.6rem;
-    }
-    .service-card p { color: var(--text-2); font-size: 0.93rem; line-height: 1.65; }
-
-    /* ============ CONTACT ============ */
-    .contact {
-      border-top: 1px solid var(--border);
-      background:
-        radial-gradient(ellipse 55% 70% at 50% 110%, rgba(78, 125, 247, 0.10) 0%, transparent 60%),
-        var(--bg-elev);
-      padding: 6rem 0;
-    }
-    .contact-wrapper { max-width: 620px; margin: 0 auto; text-align: center; }
-    .contact h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 4vw, 2.4rem);
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      margin: 1.25rem 0 1rem;
-    }
-    .contact .contact-sub { color: var(--text-2); margin-bottom: 2.5rem; }
-
-    form {
-      text-align: left;
-      display: flex; flex-direction: column; gap: 0.9rem;
-      background: var(--bg-card);
-      padding: 2rem;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-    }
-    input, textarea {
-      width: 100%;
-      background: var(--bg-inset);
-      border: 1px solid var(--border-strong);
-      padding: 0.8rem 1rem;
-      color: var(--text);
-      font-family: var(--font-ui);
-      border-radius: 7px;
-      font-size: 0.95rem;
-      transition: border-color 0.18s, box-shadow 0.18s;
-    }
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-dim);
-    }
-    input::placeholder, textarea::placeholder { color: var(--text-3); }
-    textarea { resize: vertical; min-height: 130px; }
-
-    button[type="submit"] {
-      background: var(--text);
-      color: var(--bg);
-      border: none;
-      padding: 0.95rem;
-      border-radius: 7px;
-      font-family: var(--font-display);
-      font-weight: 600; font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
-    }
-    button[type="submit"]:hover {
-      background: var(--accent); color: #fff;
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px -8px rgba(110, 155, 255, 0.5);
-    }
-    button[type="submit"]:disabled { cursor: wait; opacity: 0.7; transform: none; }
-
-    .form-status {
-      min-height: 1.4rem;
-      color: var(--text-2);
-      font-size: 0.9rem;
-      text-align: center;
-      font-family: var(--font-mono);
-    }
-    .form-status.error { color: var(--px-red); }
-    .form-status.success { color: var(--px-green); }
-
-    .visually-hidden {
-      position: absolute;
-      width: 1px; height: 1px;
-      margin: -1px; padding: 0;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    /* ============ FOOTER ============ */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2.25rem 0;
-      background: var(--bg);
-    }
-    footer .container {
-      display: flex; justify-content: space-between; align-items: center;
-      gap: 1rem; flex-wrap: wrap;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--text-3);
-    }
-    .footer-pixels { display: flex; gap: 3px; }
-    .footer-pixels i { width: 8px; height: 8px; display: block; }
-
-    /* ============ ANIMATION ============ */
-    .js .fade-up {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .js .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .js .fade-up { opacity: 1; transform: none; transition: none; }
-      .btn, .service-card, button[type="submit"] { transition: none; }
-    }
-
-    /* ============ RESPONSIVE ============ */
-    @media (max-width: 880px) {
-      .hero-top { grid-template-columns: 1fr; }
-      .arc-demo { max-width: 420px; }
-    }
-    @media (max-width: 768px) {
-      .hero { padding: 7.5rem 0 3.5rem; }
-      .hero-proof { grid-template-columns: 1fr; }
-      .hero-proof > div { border-left: none; border-top: 1px solid var(--border); }
-      .hero-proof > div:first-child { border-top: none; }
-      .case-details { grid-template-columns: 1fr; }
-      .case-stats { border-left: none; border-top: 1px solid var(--border); padding: 2rem; }
-      .case-header, .case-desc { padding: 2rem 1.5rem; }
-      .services-grid { grid-template-columns: 1fr; }
-      nav ul { gap: 1rem; }
-      nav ul a:not(.nav-cta) { display: none; }
-      footer .container { justify-content: center; text-align: center; }
-    }
-  </style>
-</head>
-
-<body>
-
-  <nav>
-    <div class="container">
-      <a href="#" class="logo" aria-label="Pixel Wisdom — home">
-        <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
-          <rect x="0"  y="0"  width="6" height="6" fill="#4E7DF7"/>
-          <rect x="8"  y="0"  width="6" height="6" fill="#2C3545"/>
-          <rect x="16" y="0"  width="6" height="6" fill="#F2CB4E"/>
-          <rect x="0"  y="8"  width="6" height="6" fill="#2C3545"/>
-          <rect x="8"  y="8"  width="6" height="6" fill="#45C96A"/>
-          <rect x="16" y="8"  width="6" height="6" fill="#2C3545"/>
-          <rect x="0"  y="16" width="6" height="6" fill="#9B6BE8"/>
-          <rect x="8"  y="16" width="6" height="6" fill="#2C3545"/>
-          <rect x="16" y="16" width="6" height="6" fill="#F0533A"/>
-        </svg>
-        Pixel Wisdom
-      </a>
-      <ul>
-        <li><a href="#work">work</a></li>
-        <li><a href="#services">services</a></li>
-        <li><a href="#contact" class="nav-cta">Start a project</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <main>
-
-    <section class="hero grid-bg">
-      <div class="container fade-up">
-        <div class="hero-top">
-          <div>
-            <span class="kicker">Product Engineer for AI Companies</span>
-            <h1>Product engineering for AI teams shipping <em>beyond the demo</em>.</h1>
-            <p class="lede">
-              I help AI founders and research teams turn models, evals, datasets, and complex workflows into reliable products users can understand, trust, and use.
-            </p>
-            <div class="hero-actions">
-              <a href="#contact" class="btn btn-primary">Discuss Your Product →</a>
-              <a href="#work" class="btn btn-ghost">View Work</a>
-            </div>
-          </div>
-
-          <div class="arc-demo" aria-hidden="true">
-            <div class="arc-grid">
-              <i></i><i></i><i></i><i></i><i></i>
-              <i></i><i class="b"></i><i class="b"></i><i></i><i></i>
-              <i></i><i class="b"></i><i></i><i></i><i></i>
-              <i></i><i></i><i></i><i class="y"></i><i></i>
-              <i></i><i></i><i></i><i></i><i></i>
-            </div>
-            <span class="arc-arrow">→</span>
-            <div class="arc-grid">
-              <i></i><i></i><i></i><i></i><i></i>
-              <i></i><i></i><i class="g"></i><i class="g"></i><i></i>
-              <i></i><i></i><i></i><i class="g"></i><i></i>
-              <i></i><i class="y"></i><i></i><i></i><i></i>
-              <i></i><i></i><i></i><i></i><i></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-proof" aria-label="Proof points">
-          <div><strong>ARC Prize Foundation</strong><span>Interactive benchmark and data interfaces for ARC-AGI.</span></div>
-          <div><strong>Research tooling</strong><span>Browser extensions, Zotero/NotebookLM sync, and workflow bridges.</span></div>
-          <div><strong>Full-stack execution</strong><span>From ambiguous product surface to deployed software.</span></div>
-        </div>
+        <button
+          class="mobile-menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          data-menu-toggle
+        >
+          <span class="visually-hidden">Open navigation</span>
+          <span class="mobile-menu-toggle__lines" aria-hidden="true"></span>
+        </button>
       </div>
-    </section>
 
-    <section id="work" class="block">
-      <div class="container">
-        <div class="section-header fade-up">
-          <span class="index">01</span>
-          <h2>Featured Work</h2>
-          <span class="count">2 case studies</span>
-        </div>
+      <nav
+        class="mobile-panel"
+        id="mobile-menu"
+        aria-label="Mobile navigation"
+        aria-hidden="true"
+        inert
+        data-mobile-menu
+      >
+        <a href="#work">Work</a>
+        <a href="#offer">Offer</a>
+        <a href="#about">About</a>
+        <a href="#contact">Start a project</a>
+      </nav>
+    </header>
 
-        <div class="case-study fade-up">
-          <div class="case-header">
-            <div class="meta-tags">
-              <span class="meta-tag">product engineering</span>
-              <span class="meta-tag">data visualization</span>
+    <main id="main-content">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow" data-load style="--delay: 40ms">
+              Independent product engineering
+            </p>
+            <h1 id="hero-title" data-load style="--delay: 100ms">
+              Critical software, taken from hard problem to
+              <span class="hero-title__accent">shipped product.</span>
+            </h1>
+            <p class="hero-lede" data-load style="--delay: 180ms">
+              <strong>Philippe Tremblay</strong> designs and delivers complex web, desktop,
+              data, integration, and AI products for technical teams—end to end.
+            </p>
+            <div class="hero-actions" data-load style="--delay: 240ms">
+              <a class="button" href="#contact">Tell me what needs to ship</a>
+              <a class="button button--ghost" href="#work">See the work</a>
             </div>
-            <h3>The ARC Prize Foundation</h3>
-            <p>
-              Worked with the team and <strong>Mike Knoop</strong> to engineer <strong>visualization and data interfaces</strong> for the <strong>ARC-AGI</strong> benchmark.
+            <ul class="hero-meta" data-load style="--delay: 280ms" aria-label="Engagement qualities">
+              <li>Direct collaboration</li>
+              <li>End-to-end delivery</li>
+              <li>Québec, Canada</li>
+            </ul>
+          </div>
+
+          <aside class="hero-proof" aria-label="Selected clients and products" data-load style="--delay: 300ms">
+            <div class="hero-proof__chrome">
+              <div class="window-dots" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
+              <span>Delivery overview</span>
+              <span class="hero-proof__badge">End-to-end</span>
+            </div>
+            <div class="hero-proof__summary">
+              <p>Outcome model</p>
+              <strong>One owner across the critical path.</strong>
+              <div class="delivery-track" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <ol class="delivery-steps" aria-label="Delivery stages">
+                <li>Frame</li>
+                <li>Design</li>
+                <li>Build</li>
+                <li>Ship</li>
+              </ol>
+            </div>
+            <p class="hero-proof__label">Selected work</p>
+            <ul class="hero-proof__list">
+              <li>
+                <strong>ARC Prize Foundation</strong>
+                <span>Benchmark &amp; data interfaces</span>
+              </li>
+              <li>
+                <strong>Snappy for macOS</strong>
+                <span>Native search product</span>
+              </li>
+              <li>
+                <strong>Julia Turc / Storia AI</strong>
+                <span>Research workflow integration</span>
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section work" id="work" aria-labelledby="work-title">
+        <div class="container">
+          <div class="section-head" data-reveal>
+            <p class="eyebrow">Proof</p>
+            <h2 id="work-title">Work that shipped.</h2>
+            <p class="section-lede">
+              Named clients, first-person ownership, and concrete product surfaces—
+              not pitch-deck filler.
             </p>
           </div>
 
-          <div class="case-details">
-            <div class="case-desc">
+          <div class="project-list">
+            <article class="project-card" data-reveal>
+              <div class="project-card__meta">
+                <span class="project-card__index">01</span>
+                <span class="project-card__type">Product engineering · Data interfaces</span>
+              </div>
+              <h3>ARC Prize Foundation</h3>
               <p>
-                The challenge was not just "displaying data," but defining how researchers interact with a new form of intelligence testing. I owned the end-to-end implementation of the visualization layer.
+                Owned end-to-end implementation of visualization and data interfaces for the
+                <strong>ARC-AGI benchmark</strong>, working with the team and Mike Knoop.
               </p>
-              <p><strong>Product Impact:</strong></p>
-              <ul>
-                <li><strong>Visual Task Explorer:</strong> Engineered a complex SVG/Canvas based explorer allowing users to navigate hundreds of abstract reasoning puzzles.</li>
-                <li><strong>Evaluation Infrastructure:</strong> Built the "stadium" for model performance, creating high-density comparison matrices that organize results across dozens of models and the full evaluation dataset.</li>
-                <li><strong>Metadata Architecture:</strong> Designed the schema and frontend logic to organize disparate task metadata into a coherent browsing experience.</li>
+              <dl class="fact-row">
+                <div>
+                  <dt>Founders</dt>
+                  <dd>François Chollet &amp; Mike Knoop</dd>
+                </div>
+                <div>
+                  <dt>Output</dt>
+                  <dd>Interactive benchmark UI</dd>
+                </div>
+              </dl>
+              <ul class="bullet-proof">
+                <li>Visual task explorer for abstract benchmark puzzles</li>
+                <li>High-density comparison matrices and metadata architecture</li>
+                <li>Research surface for navigating tasks and model performance</li>
               </ul>
-            </div>
+            </article>
 
-            <div class="case-stats">
-              <div class="stat-box">
-                <h4>Client</h4>
-                <p>ARC Prize Foundation</p>
+            <article class="project-card project-card--featured" data-reveal>
+              <div class="project-card__meta">
+                <span class="project-card__index">02</span>
+                <span class="project-card__type">Independent product · Native macOS</span>
               </div>
-              <div class="stat-box">
-                <h4>Founders</h4>
-                <p>François Chollet & Mike Knoop</p>
+              <div class="project-card__split">
+                <div class="project-card__body">
+                  <h3>Snappy</h3>
+                  <p>
+                    Designed, engineered, and launched a native file and app search product built
+                    to stay sharp on <strong>million-file home directories.</strong>
+                  </p>
+                  <dl class="fact-row">
+                    <div>
+                      <dt>Role</dt>
+                      <dd>Creator, designer &amp; engineer</dd>
+                    </div>
+                    <div>
+                      <dt>Stack</dt>
+                      <dd>Rust, React, Tauri, SQLite</dd>
+                    </div>
+                    <div>
+                      <dt>Output</dt>
+                      <dd>Signed &amp; notarized macOS app</dd>
+                    </div>
+                  </dl>
+                  <div class="metric-strip" aria-label="Snappy first-party performance measurements">
+                    <div>
+                      <strong>200&nbsp;ms</strong>
+                      <span>Snapshot load to first search</span>
+                    </div>
+                    <div>
+                      <strong>3–5&nbsp;s</strong>
+                      <span>Full walk of ~1M entries</span>
+                    </div>
+                    <div>
+                      <strong>&lt;250&nbsp;ms</strong>
+                      <span>Filesystem change to result</span>
+                    </div>
+                  </div>
+                  <p class="metric-note">
+                    First-party measurements on a roughly one-million-entry test corpus.
+                  </p>
+                  <a class="text-link" href="https://pixlstudio.dev/snappy/" target="_blank" rel="noopener">
+                    View live product
+                  </a>
+                </div>
+                <figure class="project-card__media">
+                  <a href="https://pixlstudio.dev/snappy/" target="_blank" rel="noopener">
+                    <img
+                      src="./assets/projects/snappy.jpg"
+                      width="1280"
+                      height="800"
+                      loading="lazy"
+                      decoding="async"
+                      alt="Snappy macOS search interface showing files and applications in a compact launcher window"
+                    >
+                  </a>
+                </figure>
               </div>
-              <div class="stat-box">
-                <h4>Outcome</h4>
-                <p>Interactive Benchmark UI</p>
+            </article>
+
+            <article class="project-card" data-reveal>
+              <div class="project-card__meta">
+                <span class="project-card__index">03</span>
+                <span class="project-card__type">Systems integration · Research workflow</span>
               </div>
+              <h3>Zotero ↔ NotebookLM</h3>
+              <p>
+                Built for <strong>Julia Turc</strong>, founder of Storia AI: a bidirectional
+                workflow connecting a research library in Zotero with Google NotebookLM.
+              </p>
+              <dl class="fact-row">
+                <div>
+                  <dt>System</dt>
+                  <dd>Zotero plugin, browser extension, local bridge</dd>
+                </div>
+                <div>
+                  <dt>Output</dt>
+                  <dd>Bidirectional research workflow</dd>
+                </div>
+              </dl>
+              <ul class="bullet-proof">
+                <li>Three-part bridge: plugin, authenticated browser context, local IPC</li>
+                <li>Forward sync of source files and metadata into NotebookLM</li>
+                <li>Reverse sync of generated notes back into the research library</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section offer" id="offer" aria-labelledby="offer-title">
+        <div class="container offer-grid">
+          <div class="offer-copy" data-reveal>
+            <p class="eyebrow">Offer</p>
+            <h2 id="offer-title">One critical product outcome. Full ownership.</h2>
+            <p>
+              For technical teams that need a senior product engineer to hold product intent,
+              architecture, and delivery—without another chain of handoffs.
+            </p>
+          </div>
+          <ul class="offer-list" data-reveal>
+            <li>
+              <strong>Product framing</strong>
+              <span>Clarify the user, constraints, and smallest complete outcome.</span>
+            </li>
+            <li>
+              <strong>Interface design</strong>
+              <span>Make complex states, data, and AI behavior understandable in use.</span>
+            </li>
+            <li>
+              <strong>Full-stack delivery</strong>
+              <span>Own the surface from data model and APIs to the final UI.</span>
+            </li>
+            <li>
+              <strong>Integrations &amp; ship</strong>
+              <span>Join difficult systems, tune the critical path, deploy, and hand off.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section about" id="about" aria-labelledby="about-title">
+        <div class="container about-grid">
+          <div data-reveal>
+            <p class="eyebrow">About</p>
+            <h2 id="about-title">Philippe Tremblay</h2>
+          </div>
+          <div class="about-body" data-reveal>
+            <p>
+              Pixel Wisdom is my independent practice. I work where product decisions,
+              architecture, and implementation meet—especially when a small team needs someone
+              to hold the whole problem.
+            </p>
+            <p>
+              Public work spans research interfaces, browser and desktop software, data-heavy
+              applications, local systems, and the details that make ambitious products usable
+              by people who did not build them.
+            </p>
+            <div class="about-links">
+              <a class="text-link" href="https://github.com/philtrem" target="_blank" rel="me noopener">GitHub</a>
+              <a class="text-link" href="https://pixlstudio.dev/" target="_blank" rel="noopener">Pixl Studio</a>
             </div>
           </div>
         </div>
+      </section>
 
-        <div class="case-study fade-up">
-          <div class="case-header">
-            <div class="meta-tags">
-              <span class="meta-tag">product engineering</span>
-              <span class="meta-tag">browser extension</span>
-              <span class="meta-tag">zotero plugin</span>
-            </div>
-            <h3>Zotero NotebookLM</h3>
+      <section class="section contact" id="contact" aria-labelledby="contact-title">
+        <div class="container contact-grid">
+          <div class="contact-copy" data-reveal>
+            <p class="eyebrow">Inquiry</p>
+            <h2 id="contact-title">What needs to ship?</h2>
             <p>
-              Built for <strong><a href="https://juliaturc.com/" target="_blank" rel="noopener">Julia Turc</a></strong> (Founder, <strong><a href="https://www.youtube.com/@juliaturc1" target="_blank" rel="noopener">Storia.ai</a></strong>) — a bidirectional sync engine connecting <strong>Zotero</strong> with <strong>Google NotebookLM</strong>.
+              Share the product, the hard part, and where things stand. Philippe will review
+              the brief and reply directly if the engagement looks like a good fit.
             </p>
           </div>
 
-          <div class="case-details">
-            <div class="case-desc">
-              <p>
-                Researchers using Zotero had no way to leverage NotebookLM's AI features on their libraries. Since no public API exists for consumer NotebookLM, I reverse-engineered Google's internal Boq/WIZ RPC protocol — mapping undocumented <code>batchexecute</code> endpoints, session token extraction, and the Scotty resumable upload flow for binary files. I then engineered a full bridge system — a Zotero plugin, a Chrome extension, and a local IPC server — to enable seamless two-way sync between the two platforms.
+          <form
+            class="contact-form"
+            action="/api/forms/submit"
+            method="post"
+            novalidate
+            data-contact-form
+            data-reveal
+          >
+            <noscript>
+              <p class="form-noscript">
+                This secure inquiry form needs JavaScript. Enable JavaScript, reload the page,
+                and the form will be ready to send.
               </p>
-              <p><strong>Product Impact:</strong></p>
-              <ul>
-                <li><strong>Polling Bridge Architecture:</strong> Designed a reverse-RPC system where a Zotero-side HTTP server dispatches tasks to a Chrome content script running inside the authenticated NotebookLM session.</li>
-                <li><strong>Dual-Mode Strategy:</strong> Implemented both Consumer (Free/Pro) and Enterprise API strategies, auto-detecting the user's environment and routing tasks accordingly.</li>
-                <li><strong>Bidirectional Sync:</strong> Forward sync uploads PDFs, URLs, and metadata to NotebookLM; reverse sync imports AI-generated source guides and notes back into Zotero.</li>
-              </ul>
-            </div>
-
-            <div class="case-stats">
-              <div class="stat-box">
-                <h4>Client</h4>
-                <p>Storia AI</p>
-              </div>
-              <div class="stat-box">
-                <h4>Founder</h4>
-                <p>Julia Turc</p>
-              </div>
-              <div class="stat-box">
-                <h4>Outcome</h4>
-                <p>Open-Source Plugin & Chrome Extension</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="block grid-bg" style="border-top: 1px solid var(--border);">
-      <div class="container fade-up">
-        <div class="section-header">
-          <span class="index">02</span>
-          <h2>AI Product Engineering</h2>
-          <span class="count">4 capabilities</span>
-        </div>
-        <div class="services-grid">
-
-          <div class="service-card">
-            <span class="service-num">001</span>
-            <h3>Research-to-Product Prototypes</h3>
-            <p>I turn model capabilities, notebooks, and internal demos into usable web applications with real state, workflows, authentication, deployment, and product polish.</p>
-          </div>
-
-          <div class="service-card">
-            <span class="service-num">002</span>
-            <h3>AI Interaction & UX</h3>
-            <p>I design the middle layer that makes AI systems legible: streaming states, review loops, prompt/context controls, trust cues, fallbacks, and human-in-the-loop workflows.</p>
-          </div>
-
-          <div class="service-card">
-            <span class="service-num">003</span>
-            <h3>Evaluation Tools & Data Interfaces</h3>
-            <p>Leaderboards, eval dashboards, task explorers, annotation tools, and high-density comparison interfaces that help teams see what their models are actually doing.</p>
-          </div>
-
-          <div class="service-card">
-            <span class="service-num">004</span>
-            <h3>Internal Tools & Research Automation</h3>
-            <p>Browser extensions, API bridges, data pipelines, and custom operations tooling for teams whose valuable workflows are still trapped in spreadsheets, notebooks, or manual steps.</p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="contact">
-      <div class="container">
-        <div class="contact-wrapper fade-up">
-          <span class="kicker">03 / Contact</span>
-          <h2>Let's build together</h2>
-          <p class="contact-sub">I partner with AI labs, technical founders, and research-heavy product teams to ship the interfaces, eval tools, and internal systems that make model work usable.</p>
-
-          <form action="/api/forms/submit" method="post" data-contact-form>
-            <input type="hidden" name="form" value="pixelwisdom-contact">
+            </noscript>
+            <input type="hidden" name="form" value="pixelwisdom-project-inquiry">
             <input type="hidden" name="page" value="https://pixelwisdom.ca/">
+            <input type="hidden" name="subject" value="New project inquiry">
             <input type="hidden" name="elapsed_ms" value="" data-form-elapsed>
-            <label class="visually-hidden" for="_gotcha">Leave this field empty</label>
-            <input class="visually-hidden" type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <label class="visually-hidden" for="fax_number">Leave this field empty</label>
-            <input class="visually-hidden" type="text" id="fax_number" name="fax_number" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <label class="visually-hidden" for="company_website">Leave this field empty</label>
-            <input class="visually-hidden" type="text" id="company_website" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <label class="visually-hidden" for="website_url">Leave this field empty</label>
-            <input class="visually-hidden" type="url" id="website_url" name="website_url" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <input type="text" name="name" placeholder="Name" required>
-            <input type="email" name="email" placeholder="Work Email" required>
-            <input type="text" name="subject" placeholder="Project / Product Challenge" required>
-            <textarea name="message" placeholder="What are you trying to build?" required></textarea>
-            <button type="submit">Send Message</button>
-            <p class="form-status" data-form-status aria-live="polite"></p>
+
+            <div class="visually-hidden honeypot-fields" aria-hidden="true" inert>
+              <label for="_gotcha">Leave this field empty</label>
+              <input type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+              <label for="fax_number">Leave this field empty</label>
+              <input type="text" id="fax_number" name="fax_number" tabindex="-1" autocomplete="off">
+              <label for="company_website">Leave this field empty</label>
+              <input type="text" id="company_website" name="company_website" tabindex="-1" autocomplete="off">
+              <label for="website_url">Leave this field empty</label>
+              <input type="url" id="website_url" name="website_url" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="name">Name <span>Required</span></label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
+                  placeholder="Your name"
+                  required
+                  aria-describedby="name-error"
+                >
+                <p class="field-error" id="name-error" data-error-for="name"></p>
+              </div>
+
+              <div class="form-field">
+                <label for="email">Work email <span>Required</span></label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  inputmode="email"
+                  placeholder="you@company.com"
+                  required
+                  aria-describedby="email-error"
+                >
+                <p class="field-error" id="email-error" data-error-for="email"></p>
+              </div>
+
+              <div class="form-field">
+                <label for="company">Company / role <span>Required</span></label>
+                <input
+                  id="company"
+                  name="company"
+                  type="text"
+                  autocomplete="organization"
+                  placeholder="Team, company, or your role"
+                  required
+                  aria-describedby="company-error"
+                >
+                <p class="field-error" id="company-error" data-error-for="company"></p>
+              </div>
+
+              <div class="form-field">
+                <label for="timeline">Desired timing <span>Required</span></label>
+                <select
+                  id="timeline"
+                  name="timeline"
+                  required
+                  aria-describedby="timeline-error"
+                >
+                  <option value="">Choose the closest fit</option>
+                  <option value="Ready to start">Ready to start</option>
+                  <option value="Within 1–3 months">Within 1–3 months</option>
+                  <option value="3+ months">3+ months</option>
+                  <option value="Still exploring">Still exploring</option>
+                </select>
+                <p class="field-error" id="timeline-error" data-error-for="timeline"></p>
+              </div>
+
+              <div class="form-field form-field--full">
+                <label for="message">What needs to ship? <span>Required</span></label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="The product, the hard part, the current state, and what a useful outcome looks like."
+                  required
+                  aria-describedby="message-hint message-error"
+                ></textarea>
+                <p class="visually-hidden" id="message-hint">
+                  Describe the product, technical challenge, current state, and desired outcome.
+                </p>
+                <p class="field-error" id="message-error" data-error-for="message"></p>
+              </div>
+
+              <div class="form-field form-field--full form-footer">
+                <button class="button submit-button" type="submit">Send project brief</button>
+                <p class="form-status" data-form-status aria-live="polite" role="status"></p>
+              </div>
+            </div>
           </form>
         </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-row">
+        <a class="brand" href="#top" aria-label="Pixel Wisdom — back to top">
+          <img
+            class="brand-mark"
+            src="./assets/brand/pixel-wisdom-mark-inverse.svg?v=20260716j"
+            width="80"
+            height="80"
+            alt=""
+          >
+          <span class="brand-name">Pixel Wisdom</span>
+        </a>
+
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="#work">Work</a>
+          <a href="#offer">Offer</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <p class="footer-meta">© 2026 Philippe Tremblay · Québec, Canada</p>
       </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="container">
-      <span>&copy; 2026 Pixel Wisdom</span>
-      <div class="footer-pixels" aria-hidden="true">
-        <i style="background:#4E7DF7"></i><i style="background:#45C96A"></i><i style="background:#F2CB4E"></i><i style="background:#9B6BE8"></i><i style="background:#F0533A"></i>
-      </div>
-      <span>Engineering the future.</span>
-    </div>
-  </footer>
-
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-up').forEach((el) => {
-      observer.observe(el);
-    });
-
-    const contactForm = document.querySelector('[data-contact-form]');
-    const formStatus = document.querySelector('[data-form-status]');
-
-    if (contactForm && formStatus) {
-      const formStartedAt = Date.now();
-
-      contactForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const submitButton = contactForm.querySelector('button[type="submit"]');
-        const elapsedInput = contactForm.querySelector('[data-form-elapsed]');
-        const originalLabel = submitButton.textContent;
-        if (elapsedInput) {
-          elapsedInput.value = String(Date.now() - formStartedAt);
-        }
-        formStatus.textContent = 'Sending...';
-        formStatus.className = 'form-status';
-        submitButton.disabled = true;
-        submitButton.textContent = 'Sending';
-
-        try {
-          const response = await fetch(contactForm.action, {
-            method: 'POST',
-            headers: { accept: 'application/json' },
-            body: new FormData(contactForm)
-          });
-          const payload = await response.json().catch(() => ({}));
-
-          if (!response.ok || !payload.ok) {
-            throw new Error(payload.error || 'Message could not be sent.');
-          }
-
-          contactForm.reset();
-          formStatus.textContent = 'Message sent. I will get back to you soon.';
-          formStatus.className = 'form-status success';
-        } catch (error) {
-          formStatus.textContent = error instanceof Error ? error.message : 'Message could not be sent.';
-          formStatus.className = 'form-status error';
-        } finally {
-          submitButton.disabled = false;
-          submitButton.textContent = originalLabel;
-        }
-      });
-    }
-  </script>
-</body>
+    </footer>
+  </body>
 </html>

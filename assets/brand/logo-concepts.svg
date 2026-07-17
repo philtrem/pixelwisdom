@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1040" viewBox="0 0 1400 1040" role="img" aria-labelledby="board-title board-desc">
+  <title id="board-title">Pixel Wisdom logo concepts</title>
+  <desc id="board-desc">Three modern SaaS logo directions named Resolve, Wisdom W, and Cascade.</desc>
+
+  <defs>
+    <linearGradient id="board-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FBFCFF"/>
+      <stop offset="1" stop-color="#EEF4FF"/>
+    </linearGradient>
+    <radialGradient id="board-glow" cx="0" cy="0" r="1" gradientTransform="translate(1260 50) rotate(135) scale(500 380)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#84ADFF" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#84ADFF" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="board-dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.8" fill="#667085" fill-opacity="0.13"/>
+    </pattern>
+    <filter id="soft-shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#101828" flood-opacity="0.07"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#101828" flood-opacity="0.04"/>
+    </filter>
+
+    <g id="resolve">
+      <path d="M14 8h34a6 6 0 0 1 6 6v12H28v26H14a6 6 0 0 1-6-6V14a6 6 0 0 1 6-6Z" fill="#155EEF"/>
+      <path d="M58 28h8a6 6 0 0 1 6 6v32a6 6 0 0 1-6 6H32a6 6 0 0 1-6-6V54h26V34a6 6 0 0 1 6-6Z" fill="#101828"/>
+      <rect x="34" y="34" width="12" height="12" rx="3" fill="#47CD89"/>
+    </g>
+    <g id="resolve-mono" fill="#101828">
+      <path d="M14 8h34a6 6 0 0 1 6 6v12H28v26H14a6 6 0 0 1-6-6V14a6 6 0 0 1 6-6Z"/>
+      <path d="M58 28h8a6 6 0 0 1 6 6v32a6 6 0 0 1-6 6H32a6 6 0 0 1-6-6V54h26V34a6 6 0 0 1 6-6Z"/>
+      <rect x="34" y="34" width="12" height="12" rx="3" fill="#FFFFFF"/>
+    </g>
+    <g id="wisdom-w">
+      <rect x="6" y="6" width="68" height="68" rx="20" fill="#101828"/>
+      <path d="M15 22h12l6 28 7-20h10l7 20 5-28h12l-8 40H55L45 43 36 62H24L15 22Z" fill="#F9FAFB"/>
+      <rect x="35" y="11" width="10" height="10" rx="3" fill="#53B1FD"/>
+    </g>
+    <g id="wisdom-w-mono">
+      <rect x="6" y="6" width="68" height="68" rx="20" fill="#101828"/>
+      <path d="M15 22h12l6 28 7-20h10l7 20 5-28h12l-8 40H55L45 43 36 62H24L15 22Z" fill="#FFFFFF"/>
+    </g>
+    <g id="cascade">
+      <rect x="7" y="43" width="30" height="30" rx="9" fill="#101828"/>
+      <rect x="25" y="25" width="30" height="30" rx="9" fill="#155EEF" stroke="#F9FAFB" stroke-width="4"/>
+      <rect x="43" y="7" width="30" height="30" rx="9" fill="#B2DDFF" stroke="#F9FAFB" stroke-width="4"/>
+      <rect x="34" y="34" width="12" height="12" rx="3" fill="#47CD89"/>
+    </g>
+    <g id="cascade-mono">
+      <rect x="7" y="43" width="30" height="30" rx="9" fill="#101828"/>
+      <rect x="25" y="25" width="30" height="30" rx="9" fill="#101828" stroke="#FFFFFF" stroke-width="4"/>
+      <rect x="43" y="7" width="30" height="30" rx="9" fill="#101828" stroke="#FFFFFF" stroke-width="4"/>
+    </g>
+  </defs>
+
+  <rect width="1400" height="1040" fill="url(#board-bg)"/>
+  <rect width="1400" height="1040" fill="url(#board-glow)"/>
+  <rect width="1400" height="1040" fill="url(#board-dots)"/>
+
+  <g font-family="Onest, Avenir Next, Helvetica, sans-serif">
+    <text x="72" y="70" fill="#155EEF" font-family="IBM Plex Mono, Menlo, monospace" font-size="13" font-weight="600" letter-spacing="1.6">PIXEL WISDOM / BRAND EXPLORATION 01</text>
+    <text x="72" y="120" fill="#101828" font-size="42" font-weight="650" letter-spacing="-1.9">Three directions for a sharper mark.</text>
+    <text x="72" y="151" fill="#667085" font-size="17">Built to feel technical, calm, and recognizable at favicon scale.</text>
+  </g>
+
+  <!-- Concept 01 -->
+  <g filter="url(#soft-shadow)">
+    <rect x="60" y="190" width="1280" height="240" rx="28" fill="#FFFFFF" stroke="#D6E4FF"/>
+  </g>
+  <rect x="84" y="214" width="192" height="192" rx="24" fill="#EFF4FF"/>
+  <g transform="translate(124 254) scale(1.4)">
+    <use href="#resolve"/>
+  </g>
+  <g font-family="Onest, Avenir Next, Helvetica, sans-serif">
+    <rect x="308" y="225" width="150" height="30" rx="15" fill="#ECFDF3"/>
+    <circle cx="326" cy="240" r="4" fill="#12B76A"/>
+    <text x="339" y="245" fill="#027A48" font-family="IBM Plex Mono, Menlo, monospace" font-size="10" font-weight="600" letter-spacing="0.7">RECOMMENDED</text>
+    <text x="308" y="292" fill="#101828" font-size="46" font-weight="650" letter-spacing="-2.2">
+      <tspan>Pixel</tspan><tspan font-weight="500"> Wisdom</tspan>
+    </text>
+    <text x="308" y="330" fill="#1849A9" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" font-weight="600" letter-spacing="1.2">01 — RESOLVE</text>
+    <text x="308" y="362" fill="#344054" font-size="17" font-weight="550">Opposing paths lock around one decisive pixel.</text>
+    <text x="308" y="390" fill="#667085" font-size="15">Strategic · technical · ownable</text>
+  </g>
+  <g font-family="IBM Plex Mono, Menlo, monospace" font-size="10" fill="#98A2B3">
+    <text x="1124" y="236">SMALL</text>
+    <rect x="1112" y="252" width="76" height="76" rx="18" fill="#F9FAFB" stroke="#E4E7EC"/>
+    <g transform="translate(1126 266) scale(0.6)"><use href="#resolve"/></g>
+    <text x="1228" y="236">MONO</text>
+    <rect x="1216" y="252" width="76" height="76" rx="18" fill="#F9FAFB" stroke="#E4E7EC"/>
+    <g transform="translate(1230 266) scale(0.6)"><use href="#resolve-mono"/></g>
+  </g>
+
+  <!-- Concept 02 -->
+  <g filter="url(#soft-shadow)">
+    <rect x="60" y="458" width="1280" height="240" rx="28" fill="#FFFFFF" stroke="#E4E7EC"/>
+  </g>
+  <rect x="84" y="482" width="192" height="192" rx="24" fill="#F2F4F7"/>
+  <g transform="translate(124 522) scale(1.4)">
+    <use href="#wisdom-w"/>
+  </g>
+  <g font-family="Onest, Avenir Next, Helvetica, sans-serif">
+    <text x="308" y="559" fill="#101828" font-size="46" font-weight="650" letter-spacing="-2.2">
+      <tspan>Pixel</tspan><tspan font-weight="500"> Wisdom</tspan>
+    </text>
+    <text x="308" y="599" fill="#344054" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" font-weight="600" letter-spacing="1.2">02 — WISDOM W</text>
+    <text x="308" y="631" fill="#344054" font-size="17" font-weight="550">A direct monogram, punctuated by one signal pixel.</text>
+    <text x="308" y="659" fill="#667085" font-size="15">Confident · premium · literal</text>
+  </g>
+  <g font-family="IBM Plex Mono, Menlo, monospace" font-size="10" fill="#98A2B3">
+    <text x="1124" y="504">SMALL</text>
+    <rect x="1112" y="520" width="76" height="76" rx="18" fill="#F9FAFB" stroke="#E4E7EC"/>
+    <g transform="translate(1126 534) scale(0.6)"><use href="#wisdom-w"/></g>
+    <text x="1228" y="504">MONO</text>
+    <rect x="1216" y="520" width="76" height="76" rx="18" fill="#F9FAFB" stroke="#E4E7EC"/>
+    <g transform="translate(1230 534) scale(0.6)"><use href="#wisdom-w-mono"/></g>
+  </g>
+
+  <!-- Concept 03 -->
+  <g filter="url(#soft-shadow)">
+    <rect x="60" y="726" width="1280" height="240" rx="28" fill="#FFFFFF" stroke="#E4E7EC"/>
+  </g>
+  <rect x="84" y="750" width="192" height="192" rx="24" fill="#F2F4F7"/>
+  <g transform="translate(124 790) scale(1.4)">
+    <use href="#cascade"/>
+  </g>
+  <g font-family="Onest, Avenir Next, Helvetica, sans-serif">
+    <text x="308" y="827" fill="#101828" font-size="46" font-weight="650" letter-spacing="-2.2">
+      <tspan>Pixel</tspan><tspan font-weight="500"> Wisdom</tspan>
+    </text>
+    <text x="308" y="867" fill="#344054" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" font-weight="600" letter-spacing="1.2">03 — CASCADE</text>
+    <text x="308" y="899" fill="#344054" font-size="17" font-weight="550">Three product layers move from foundation to outcome.</text>
+    <text x="308" y="927" fill="#667085" font-size="15">Dynamic · product-led · approachable</text>
+  </g>
+  <g font-family="IBM Plex Mono, Menlo, monospace" font-size="10" fill="#98A2B3">
+    <text x="1124" y="772">SMALL</text>
+    <rect x="1112" y="788" width="76" height="76" rx="18" fill="#F9FAFB" stroke="#E4E7EC"/>
+    <g transform="translate(1126 802) scale(0.6)"><use href="#cascade"/></g>
+    <text x="1228" y="772">MONO</text>
+    <rect x="1216" y="788" width="76" height="76" rx="18" fill="#F9FAFB" stroke="#E4E7EC"/>
+    <g transform="translate(1230 802) scale(0.6)"><use href="#cascade-mono"/></g>
+  </g>
+
+  <text x="72" y="1012" fill="#98A2B3" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" letter-spacing="0.8">COLOR SYSTEM: INK #101828 · COBALT #155EEF · SIGNAL #47CD89 · SKY #B2DDFF</text>
+</svg>

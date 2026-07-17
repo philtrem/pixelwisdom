@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-labelledby="cascade-title cascade-desc">
+  <title id="cascade-title">Pixel Wisdom Cascade logo concept</title>
+  <desc id="cascade-desc">Three offset rounded pixels rise diagonally from dark ink to bright blue.</desc>
+  <rect x="7" y="43" width="30" height="30" rx="9" fill="#101828"/>
+  <rect x="25" y="25" width="30" height="30" rx="9" fill="#155EEF" stroke="#F9FAFB" stroke-width="4"/>
+  <rect x="43" y="7" width="30" height="30" rx="9" fill="#B2DDFF" stroke="#F9FAFB" stroke-width="4"/>
+  <rect x="34" y="34" width="12" height="12" rx="3" fill="#47CD89"/>
+</svg>

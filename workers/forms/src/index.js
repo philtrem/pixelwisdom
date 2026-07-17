@@ -5,6 +5,8 @@ const DEFAULT_ALLOWED_ORIGINS = [
 
 const MAX_CONTENT_LENGTH = 64 * 1024;
 const MAX_FIELD_LENGTH = 4000;
+const MAX_COMPANY_LENGTH = 240;
+const MAX_TIMELINE_LENGTH = 80;
 const DEFAULT_MIN_FORM_ELAPSED_MS = 1200;
 const DEFAULT_MAX_FORM_ELAPSED_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_RATE_LIMIT_WINDOW_SECONDS = 60 * 60;
@@ -170,6 +172,8 @@ function normalizeSubmission(payload, request) {
     form: cleanValue(fields.form || fields.form_id || "pixelwisdom-contact", 80),
     name: cleanValue(fields.name, 160),
     email: cleanValue(fields.email, 320),
+    company: cleanValue(fields.company, MAX_COMPANY_LENGTH),
+    timeline: cleanValue(fields.timeline, MAX_TIMELINE_LENGTH),
     subject: cleanValue(fields.subject || "New form submission", 200),
     message: cleanValue(fields.message, MAX_FIELD_LENGTH),
     page: cleanValue(fields.page || request.headers.get("referer") || "", 500),
@@ -489,6 +493,8 @@ function emailText(submission) {
     `Form: ${submission.form}`,
     `Name: ${submission.name}`,
     `Email: ${submission.email}`,
+    `Company / role: ${submission.company || "n/a"}`,
+    `Timeline: ${submission.timeline || "n/a"}`,
     `Subject: ${submission.subject}`,
     `Page: ${submission.page || "n/a"}`,
     "",
@@ -502,6 +508,8 @@ function emailHtml(submission) {
     <p><strong>Form:</strong> ${escapeHtml(submission.form)}</p>
     <p><strong>Name:</strong> ${escapeHtml(submission.name)}</p>
     <p><strong>Email:</strong> ${escapeHtml(submission.email)}</p>
+    <p><strong>Company / role:</strong> ${escapeHtml(submission.company || "n/a")}</p>
+    <p><strong>Timeline:</strong> ${escapeHtml(submission.timeline || "n/a")}</p>
     <p><strong>Subject:</strong> ${escapeHtml(submission.subject)}</p>
     <p><strong>Page:</strong> ${escapeHtml(submission.page || "n/a")}</p>
     <hr>

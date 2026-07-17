@@ -110,6 +110,68 @@ if (honeypot.status !== 200 || honeypotBody.ok !== true || honeypotBody.delivery
   process.exit(1);
 }
 
+const originalFetch = globalThis.fetch;
+let resendNotification;
+globalThis.fetch = async (input, init = {}) => {
+  if (String(input) === "https://api.resend.com/emails") {
+    resendNotification = JSON.parse(init.body);
+    return new Response(JSON.stringify({ id: "test-email" }), {
+      status: 200,
+      headers: { "content-type": "application/json" }
+    });
+  }
+
+  return originalFetch(input, init);
+};
+
+try {
+  const qualifiedSubmission = await worker.fetch(new Request("https://pixelwisdom.ca/api/forms/submit", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "origin": "https://pixelwisdom.ca"
+    },
+    body: JSON.stringify({
+      name: "Qualified User",
+      email: "qualified@example.com",
+      company: "Pixel & Systems — R&D",
+      timeline: "Within 1–3 months",
+      message: "A critical product needs to ship.",
+      elapsed_ms: "5000"
+    })
+  }), {
+    ...env,
+    RATE_LIMIT_MAX: "0",
+    RESEND_API_KEY: "re_test_key"
+  }, {});
+  const qualifiedBody = await qualifiedSubmission.json();
+
+  if (qualifiedSubmission.status !== 200 || qualifiedBody.delivery !== "resend") {
+    console.error({ status: qualifiedSubmission.status, body: qualifiedBody });
+    process.exit(1);
+  }
+
+  const expectedTextFields = [
+    "Company / role: Pixel & Systems — R&D",
+    "Timeline: Within 1–3 months"
+  ];
+  const expectedHtmlFields = [
+    "<strong>Company / role:</strong> Pixel &amp; Systems — R&amp;D",
+    "<strong>Timeline:</strong> Within 1–3 months"
+  ];
+
+  if (
+    !resendNotification ||
+    !expectedTextFields.every((field) => resendNotification.text.includes(field)) ||
+    !expectedHtmlFields.every((field) => resendNotification.html.includes(field))
+  ) {
+    console.error({ resendNotification });
+    process.exit(1);
+  }
+} finally {
+  globalThis.fetch = originalFetch;
+}
+
 const originalCachesDescriptor = Object.getOwnPropertyDescriptor(globalThis, "caches");
 const cacheStore = new Map();
 Object.defineProperty(globalThis, "caches", {

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-labelledby="wisdom-title wisdom-desc">
+  <title id="wisdom-title">Pixel Wisdom W logo concept</title>
+  <desc id="wisdom-desc">A compact W monogram with a single blue pixel above it.</desc>
+  <rect x="6" y="6" width="68" height="68" rx="20" fill="#101828"/>
+  <path d="M15 22h12l6 28 7-20h10l7 20 5-28h12l-8 40H55L45 43 36 62H24L15 22Z" fill="#F9FAFB"/>
+  <rect x="35" y="11" width="10" height="10" rx="3" fill="#53B1FD"/>
+</svg>

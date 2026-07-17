@@ -1,79 +1,129 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">Pixel Wisdom</title>
-  <desc id="desc">Open Graph image for Pixel Wisdom, product engineering for AI teams.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="og-title og-desc">
+  <title id="og-title">Pixel Wisdom — critical software, shipped</title>
+  <desc id="og-desc">Critical software, taken from hard problem to shipped product. Independent product engineering by Philippe Tremblay.</desc>
+
   <defs>
-    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0" stop-color="#0B0D12"/>
-      <stop offset="0.52" stop-color="#10131B"/>
-      <stop offset="1" stop-color="#080A0E"/>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FBFCFF"/>
+      <stop offset="0.55" stop-color="#F6F8FC"/>
+      <stop offset="1" stop-color="#EEF4FF"/>
     </linearGradient>
-    <radialGradient id="blue-glow" cx="18%" cy="12%" r="65%">
-      <stop offset="0" stop-color="#4E7DF7" stop-opacity="0.28"/>
-      <stop offset="0.55" stop-color="#4E7DF7" stop-opacity="0.08"/>
-      <stop offset="1" stop-color="#4E7DF7" stop-opacity="0"/>
+    <radialGradient id="blue-glow" cx="0" cy="0" r="1" gradientTransform="translate(1010 60) rotate(135) scale(430 360)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#84ADFF" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#84ADFF" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="purple-glow" cx="86%" cy="82%" r="62%">
-      <stop offset="0" stop-color="#9B6BE8" stop-opacity="0.22"/>
-      <stop offset="0.58" stop-color="#9B6BE8" stop-opacity="0.06"/>
-      <stop offset="1" stop-color="#9B6BE8" stop-opacity="0"/>
+    <radialGradient id="mint-glow" cx="0" cy="0" r="1" gradientTransform="translate(90 600) rotate(-45) scale(360 300)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#47CD89" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#47CD89" stop-opacity="0"/>
     </radialGradient>
-    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
-      <path d="M36 0H0V36" fill="none" stroke="#6E9BFF" stroke-opacity="0.07" stroke-width="1"/>
+    <linearGradient id="console-surface" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#17243B"/>
+      <stop offset="1" stop-color="#101828"/>
+    </linearGradient>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.8" fill="#667085" fill-opacity="0.18"/>
     </pattern>
-    <filter id="soft-shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="22" stdDeviation="28" flood-color="#000000" flood-opacity="0.38"/>
+    <filter id="card-shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#0B1220" flood-opacity="0.23"/>
+      <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#0B1220" flood-opacity="0.12"/>
     </filter>
   </defs>
 
-  <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#background)"/>
   <rect width="1200" height="630" fill="url(#blue-glow)"/>
-  <rect width="1200" height="630" fill="url(#purple-glow)"/>
+  <rect width="1200" height="630" fill="url(#mint-glow)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
 
-  <g transform="translate(84 72)">
-    <rect x="0" y="0" width="1032" height="486" rx="18" fill="#0E1118" stroke="#1E2430" filter="url(#soft-shadow)"/>
-    <path d="M1 132H1031" stroke="#1E2430"/>
-    <path d="M652 0V486" stroke="#1E2430"/>
-
-    <g transform="translate(52 50)">
-      <g>
-        <rect x="0" y="0" width="22" height="22" fill="#4E7DF7"/>
-        <rect x="30" y="0" width="22" height="22" fill="#2C3545"/>
-        <rect x="60" y="0" width="22" height="22" fill="#F2CB4E"/>
-        <rect x="0" y="30" width="22" height="22" fill="#2C3545"/>
-        <rect x="30" y="30" width="22" height="22" fill="#45C96A"/>
-        <rect x="60" y="30" width="22" height="22" fill="#2C3545"/>
-        <rect x="0" y="60" width="22" height="22" fill="#9B6BE8"/>
-        <rect x="30" y="60" width="22" height="22" fill="#2C3545"/>
-        <rect x="60" y="60" width="22" height="22" fill="#F0533A"/>
-      </g>
-      <text x="112" y="54" fill="#EDEFF4" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="42" font-weight="700" letter-spacing="-0.5">Pixel Wisdom</text>
-    </g>
-
-    <g transform="translate(52 176)">
-      <text fill="#6E9BFF" font-family="JetBrains Mono, SFMono-Regular, Consolas, monospace" font-size="17" font-weight="600" letter-spacing="2.4">PRODUCT ENGINEERING FOR AI COMPANIES</text>
-      <text y="82" fill="#EDEFF4" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="64" font-weight="700" letter-spacing="-2.2">
-        <tspan x="0" dy="0">AI teams shipping</tspan>
-        <tspan x="0" dy="74" fill="#6E9BFF">beyond the demo.</tspan>
-      </text>
-      <text x="0" y="226" fill="#A6AFBF" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="500">
-        <tspan x="0" dy="0">Model interfaces, eval tools, data workflows,</tspan>
-        <tspan x="0" dy="36">internal systems, and full-stack products.</tspan>
-      </text>
-    </g>
-
-    <g transform="translate(724 166)">
-      <rect x="0" y="0" width="254" height="254" rx="14" fill="#080A0E" stroke="#2C3545"/>
-      <g transform="translate(34 34)">
-        <g fill="#10131B" stroke="#1E2430" stroke-width="2">
-          <rect x="0" y="0" width="34" height="34"/><rect x="38" y="0" width="34" height="34"/><rect x="76" y="0" width="34" height="34"/><rect x="114" y="0" width="34" height="34"/><rect x="152" y="0" width="34" height="34"/>
-          <rect x="0" y="38" width="34" height="34"/><rect x="38" y="38" width="34" height="34" fill="#4E7DF7"/><rect x="76" y="38" width="34" height="34" fill="#4E7DF7"/><rect x="114" y="38" width="34" height="34"/><rect x="152" y="38" width="34" height="34"/>
-          <rect x="0" y="76" width="34" height="34"/><rect x="38" y="76" width="34" height="34" fill="#4E7DF7"/><rect x="76" y="76" width="34" height="34"/><rect x="114" y="76" width="34" height="34"/><rect x="152" y="76" width="34" height="34"/>
-          <rect x="0" y="114" width="34" height="34"/><rect x="38" y="114" width="34" height="34"/><rect x="76" y="114" width="34" height="34"/><rect x="114" y="114" width="34" height="34" fill="#F2CB4E"/><rect x="152" y="114" width="34" height="34"/>
-          <rect x="0" y="152" width="34" height="34"/><rect x="38" y="152" width="34" height="34"/><rect x="76" y="152" width="34" height="34"/><rect x="114" y="152" width="34" height="34"/><rect x="152" y="152" width="34" height="34"/>
-        </g>
-      </g>
-      <text x="127" y="292" text-anchor="middle" fill="#667082" font-family="JetBrains Mono, SFMono-Regular, Consolas, monospace" font-size="13" letter-spacing="1.2">INTERFACES FOR REASONING SYSTEMS</text>
-    </g>
+  <!-- Brand -->
+  <g transform="translate(64 46) scale(.9)">
+    <path d="M14 8h34a6 6 0 0 1 6 6v12H28v26H14a6 6 0 0 1-6-6V14a6 6 0 0 1 6-6Z" fill="#155EEF"/>
+    <path d="M58 28h8a6 6 0 0 1 6 6v32a6 6 0 0 1-6 6H32a6 6 0 0 1-6-6V54h26V34a6 6 0 0 1 6-6Z" fill="#101828"/>
+    <rect x="34" y="34" width="12" height="12" rx="3" fill="#47CD89"/>
   </g>
+
+  <g font-family="Onest, Avenir Next, Helvetica, sans-serif">
+    <text x="158" y="78" fill="#101828" font-size="29" font-weight="650" letter-spacing="-0.8">Pixel Wisdom</text>
+    <text x="158" y="108" fill="#667085" font-size="16" font-weight="500">Philippe Tremblay · Product engineer</text>
+  </g>
+
+  <!-- Positioning badge -->
+  <g transform="translate(68 150)">
+    <rect width="314" height="36" rx="18" fill="#FFFFFF" fill-opacity="0.78" stroke="#B2CCFF"/>
+    <circle cx="18" cy="18" r="4" fill="#155EEF"/>
+    <circle cx="18" cy="18" r="8" fill="#155EEF" fill-opacity="0.1"/>
+    <text x="34" y="23" fill="#1849A9" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" font-weight="600" letter-spacing="1.2">INDEPENDENT PRODUCT ENGINEERING</text>
+  </g>
+
+  <!-- Headline -->
+  <g font-family="Onest, Avenir Next, Helvetica, sans-serif" font-size="61" font-weight="650" letter-spacing="-3.5">
+    <text x="68" y="262" fill="#101828">Critical software,</text>
+    <text x="68" y="334" fill="#101828">taken from hard problem</text>
+    <text x="68" y="406" fill="#101828">to</text>
+    <text x="132" y="406" fill="#155EEF">shipped product.</text>
+  </g>
+  <rect x="130" y="418" width="428" height="6" rx="3" fill="#53B1FD" fill-opacity="0.48" transform="rotate(-0.6 130 418)"/>
+
+  <text x="68" y="466" fill="#344054" font-family="Onest, Avenir Next, Helvetica, sans-serif" font-size="20" font-weight="500">
+    Complex web, desktop, data, integration, and AI products—end to end.
+  </text>
+
+  <g transform="translate(68 520)">
+    <rect width="188" height="50" rx="13" fill="#155EEF"/>
+    <text x="94" y="31" text-anchor="middle" fill="#FFFFFF" font-family="Onest, Avenir Next, Helvetica, sans-serif" font-size="16" font-weight="650">
+      pixelwisdom.ca
+    </text>
+    <circle cx="222" cy="25" r="8" fill="#DCFAE6"/>
+    <path d="M218.5 25.2L221.1 27.8L225.8 22.8" fill="none" stroke="#027A48" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="244" y="31" fill="#667085" font-family="Onest, Avenir Next, Helvetica, sans-serif" font-size="15" font-weight="500">
+      Direct collaboration · Full ownership
+    </text>
+  </g>
+
+  <!-- Delivery console -->
+  <g filter="url(#card-shadow)">
+    <rect x="792" y="60" width="348" height="510" rx="27" fill="#0B1220" stroke="#344054"/>
+  </g>
+  <circle cx="818" cy="91" r="4" fill="#F97066"/>
+  <circle cx="831" cy="91" r="4" fill="#FDB022"/>
+  <circle cx="844" cy="91" r="4" fill="#32D583"/>
+  <text x="860" y="95" fill="#98A2B3" font-family="IBM Plex Mono, Menlo, monospace" font-size="10" letter-spacing="0.4">DELIVERY OVERVIEW</text>
+  <rect x="1050" y="78" width="68" height="26" rx="13" fill="#155EEF" fill-opacity="0.16" stroke="#84ADFF" stroke-opacity="0.2"/>
+  <text x="1084" y="95" text-anchor="middle" fill="#B2CCFF" font-family="IBM Plex Mono, Menlo, monospace" font-size="8">END-TO-END</text>
+
+  <rect x="812" y="122" width="308" height="184" rx="19" fill="url(#console-surface)" stroke="#344054"/>
+  <text x="834" y="154" fill="#84ADFF" font-family="IBM Plex Mono, Menlo, monospace" font-size="10" font-weight="600" letter-spacing="1.1">OUTCOME MODEL</text>
+  <g fill="#FFFFFF" font-family="Onest, Avenir Next, Helvetica, sans-serif" font-size="29" font-weight="600" letter-spacing="-1.2">
+    <text x="834" y="198">One owner across</text>
+    <text x="834" y="232">the critical path.</text>
+  </g>
+  <rect x="834" y="259" width="61" height="5" rx="2.5" fill="#84ADFF"/>
+  <rect x="903" y="259" width="61" height="5" rx="2.5" fill="#53B1FD"/>
+  <rect x="972" y="259" width="61" height="5" rx="2.5" fill="#2ED3B7"/>
+  <rect x="1041" y="259" width="57" height="5" rx="2.5" fill="#32D583"/>
+  <g fill="#98A2B3" font-family="IBM Plex Mono, Menlo, monospace" font-size="8">
+    <text x="834" y="283">Frame</text>
+    <text x="903" y="283">Design</text>
+    <text x="972" y="283">Build</text>
+    <text x="1041" y="283">Ship</text>
+  </g>
+
+  <text x="814" y="344" fill="#98A2B3" font-family="IBM Plex Mono, Menlo, monospace" font-size="10" font-weight="600" letter-spacing="1.1">SELECTED WORK</text>
+
+  <line x1="812" y1="360" x2="1120" y2="360" stroke="#344054"/>
+  <rect x="814" y="375" width="34" height="34" rx="10" fill="#155EEF" fill-opacity="0.13" stroke="#84ADFF" stroke-opacity="0.16"/>
+  <text x="831" y="396" text-anchor="middle" fill="#B2CCFF" font-family="IBM Plex Mono, Menlo, monospace" font-size="8">01</text>
+  <text x="862" y="389" fill="#F9FAFB" font-family="Onest, Avenir Next, Helvetica, sans-serif" font-size="14" font-weight="600">ARC Prize Foundation</text>
+  <text x="862" y="407" fill="#98A2B3" font-family="Onest, Avenir Next, Helvetica, sans-serif" font-size="10">Benchmark &amp; data interfaces</text>
+
+  <line x1="812" y1="424" x2="1120" y2="424" stroke="#344054"/>
+  <rect x="814" y="439" width="34" height="34" rx="10" fill="#0E9384" fill-opacity="0.12" stroke="#5FE9D0" stroke-opacity="0.14"/>
+  <text x="831" y="460" text-anchor="middle" fill="#5FE9D0" font-family="IBM Plex Mono, Menlo, monospace" font-size="8">02</text>
+  <text x="862" y="453" fill="#F9FAFB" font-family="Onest, Avenir Next, Helvetica, sans-serif" font-size="14" font-weight="600">Snappy for macOS</text>
+  <text x="862" y="471" fill="#98A2B3" font-family="Onest, Avenir Next, Helvetica, sans-serif" font-size="10">Native search product</text>
+
+  <line x1="812" y1="488" x2="1120" y2="488" stroke="#344054"/>
+  <rect x="814" y="503" width="34" height="34" rx="10" fill="#53B1FD" fill-opacity="0.1" stroke="#84CAFF" stroke-opacity="0.14"/>
+  <text x="831" y="524" text-anchor="middle" fill="#84CAFF" font-family="IBM Plex Mono, Menlo, monospace" font-size="8">03</text>
+  <text x="862" y="517" fill="#F9FAFB" font-family="Onest, Avenir Next, Helvetica, sans-serif" font-size="14" font-weight="600">Storia AI workflow</text>
+  <text x="862" y="535" fill="#98A2B3" font-family="Onest, Avenir Next, Helvetica, sans-serif" font-size="10">Research systems integration</text>
 </svg>
