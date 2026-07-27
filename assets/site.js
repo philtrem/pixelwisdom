@@ -102,6 +102,141 @@
     revealItems.forEach((item) => item.classList.add("is-visible"));
   }
 
+  const arcDialog = document.querySelector("[data-arc-dialog]");
+  const arcGalleryOpeners = [...document.querySelectorAll("[data-arc-gallery-open]")];
+
+  if (arcDialog && arcGalleryOpeners.length > 0) {
+    const arcSlides = [...arcDialog.querySelectorAll("[data-arc-slide]")];
+    const arcImage = arcDialog.querySelector("[data-arc-dialog-image]");
+    const arcTitle = arcDialog.querySelector("[data-arc-dialog-title]");
+    const arcDescription = arcDialog.querySelector("[data-arc-dialog-description]");
+    const arcPosition = arcDialog.querySelector("[data-arc-dialog-position]");
+    const previousButton = arcDialog.querySelector("[data-arc-dialog-previous]");
+    const nextButton = arcDialog.querySelector("[data-arc-dialog-next]");
+    const closeButton = arcDialog.querySelector("[data-arc-dialog-close]");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let activeArcSlide = 0;
+    let lastArcGalleryTrigger = null;
+
+    const normalizedArcIndex = (index) =>
+      ((index % arcSlides.length) + arcSlides.length) % arcSlides.length;
+
+    const renderArcSlide = (index, { moveThumbnail = false } = {}) => {
+      activeArcSlide = normalizedArcIndex(index);
+      const slide = arcSlides[activeArcSlide];
+      const previousSlide = arcSlides[normalizedArcIndex(activeArcSlide - 1)];
+      const nextSlide = arcSlides[normalizedArcIndex(activeArcSlide + 1)];
+
+      arcImage.src = slide.dataset.src;
+      arcImage.alt = slide.dataset.alt;
+      arcTitle.textContent = slide.dataset.title;
+      arcDescription.textContent = slide.dataset.description;
+      arcPosition.textContent = `${String(activeArcSlide + 1).padStart(2, "0")} / ${String(
+        arcSlides.length
+      ).padStart(2, "0")}`;
+      previousButton.setAttribute(
+        "aria-label",
+        `Show previous screenshot: ${previousSlide.dataset.title}`
+      );
+      nextButton.setAttribute("aria-label", `Show next screenshot: ${nextSlide.dataset.title}`);
+
+      arcSlides.forEach((item, slideIndex) => {
+        if (slideIndex === activeArcSlide) {
+          item.setAttribute("aria-current", "true");
+        } else {
+          item.removeAttribute("aria-current");
+        }
+      });
+
+      if (moveThumbnail) {
+        slide.scrollIntoView({
+          behavior: reduceMotion.matches ? "auto" : "smooth",
+          block: "nearest",
+          inline: "nearest"
+        });
+      }
+    };
+
+    const openArcGallery = (trigger) => {
+      const requestedIndex = Number.parseInt(trigger.dataset.galleryIndex || "0", 10);
+      lastArcGalleryTrigger = trigger;
+      renderArcSlide(Number.isNaN(requestedIndex) ? 0 : requestedIndex);
+      body.classList.add("dialog-open");
+
+      if (typeof arcDialog.showModal === "function") {
+        arcDialog.showModal();
+      } else {
+        arcDialog.setAttribute("open", "");
+      }
+
+      closeButton.focus({ preventScroll: true });
+    };
+
+    const closeArcGallery = () => {
+      if (typeof arcDialog.close === "function") {
+        arcDialog.close();
+      } else {
+        arcDialog.removeAttribute("open");
+        body.classList.remove("dialog-open");
+        lastArcGalleryTrigger?.focus({ preventScroll: true });
+      }
+    };
+
+    arcGalleryOpeners.forEach((trigger) => {
+      trigger.addEventListener("click", () => openArcGallery(trigger));
+    });
+
+    arcSlides.forEach((slide, index) => {
+      slide.addEventListener("click", () => renderArcSlide(index, { moveThumbnail: true }));
+    });
+
+    previousButton.addEventListener("click", () =>
+      renderArcSlide(activeArcSlide - 1, { moveThumbnail: true })
+    );
+    nextButton.addEventListener("click", () =>
+      renderArcSlide(activeArcSlide + 1, { moveThumbnail: true })
+    );
+    closeButton.addEventListener("click", closeArcGallery);
+
+    arcDialog.addEventListener("click", (event) => {
+      if (event.target === arcDialog) closeArcGallery();
+    });
+
+    arcDialog.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeArcGallery();
+        return;
+      }
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        renderArcSlide(activeArcSlide - 1, { moveThumbnail: true });
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        renderArcSlide(activeArcSlide + 1, { moveThumbnail: true });
+      }
+      if (event.key === "Home") {
+        event.preventDefault();
+        renderArcSlide(0, { moveThumbnail: true });
+      }
+      if (event.key === "End") {
+        event.preventDefault();
+        renderArcSlide(arcSlides.length - 1, { moveThumbnail: true });
+      }
+    });
+
+    arcDialog.addEventListener("cancel", (event) => {
+      event.preventDefault();
+      closeArcGallery();
+    });
+
+    arcDialog.addEventListener("close", () => {
+      body.classList.remove("dialog-open");
+      lastArcGalleryTrigger?.focus({ preventScroll: true });
+    });
+  }
+
   const contactForm = document.querySelector("[data-contact-form]");
   const formStatus = document.querySelector("[data-form-status]");
 

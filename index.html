@@ -49,12 +49,12 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Onest:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="./assets/site.css?v=20260727e">
+    <link rel="stylesheet" href="./assets/site.css?v=20260727i">
 
     <script>
       document.documentElement.classList.add("js");
     </script>
-    <script src="./assets/site.js?v=20260716f" defer></script>
+    <script src="./assets/site.js?v=20260727g" defer></script>
 
     <script type="application/ld+json">
       {
@@ -210,31 +210,117 @@
           </div>
 
           <div class="project-list">
-            <article class="project-card project-card--arc" data-reveal>
+            <article class="project-card project-card--arc project-card--featured" data-reveal>
               <div class="project-card__meta">
                 <span class="project-card__index">01</span>
                 <span class="project-card__type">Product engineering · Data interfaces</span>
               </div>
-              <h3>ARC Prize Foundation</h3>
-              <p>
-                Owned end-to-end implementation of visualization and data interfaces for the
-                <strong>ARC-AGI benchmark</strong>, working with the team and Mike Knoop.
-              </p>
-              <dl class="fact-row">
-                <div>
-                  <dt>Founders</dt>
-                  <dd>François Chollet &amp; Mike Knoop</dd>
+              <div class="project-card__split project-card__split--arc">
+                <div class="project-card__body">
+                  <h3>ARC Prize Foundation</h3>
+                  <p>
+                    Owned end-to-end implementation of visualization and data interfaces for the
+                    <strong>ARC-AGI benchmark</strong>, working with the team and Mike Knoop.
+                  </p>
+                  <dl class="fact-row">
+                    <div>
+                      <dt>Role</dt>
+                      <dd>End-to-end product engineering</dd>
+                    </div>
+                    <div>
+                      <dt>Scope</dt>
+                      <dd>Task exploration &amp; model evaluation</dd>
+                    </div>
+                    <div>
+                      <dt>Output</dt>
+                      <dd>Interactive benchmark UI</dd>
+                    </div>
+                  </dl>
+                  <ul class="bullet-proof">
+                    <li>Visual task explorer for abstract benchmark puzzles</li>
+                    <li>High-density comparison matrices and metadata architecture</li>
+                    <li>Research surface for navigating tasks and model performance</li>
+                  </ul>
+                  <button
+                    class="arc-gallery-cta"
+                    type="button"
+                    data-arc-gallery-open
+                    data-gallery-index="0"
+                    aria-haspopup="dialog"
+                  >
+                    <span>
+                      <strong>Explore the interface</strong>
+                      <small>Task browsing, details, and model results</small>
+                    </span>
+                    <span class="arc-gallery-cta__count">6 screens <span aria-hidden="true">↗</span></span>
+                  </button>
                 </div>
-                <div>
-                  <dt>Output</dt>
-                  <dd>Interactive benchmark UI</dd>
+
+                <div class="arc-showcase" aria-label="Selected ARC Prize interface screens">
+                  <button
+                    class="arc-showcase__shot arc-showcase__shot--hero"
+                    type="button"
+                    data-arc-gallery-open
+                    data-gallery-index="0"
+                    aria-label="Open ARC Prize gallery at the task results explorer"
+                  >
+                    <img
+                      src="./assets/projects/arc-prize/task-results-explorer.jpg"
+                      width="1505"
+                      height="844"
+                      loading="lazy"
+                      decoding="async"
+                      alt="ARC-AGI task results explorer with dataset and model filters above a dense evaluation table"
+                    >
+                    <span class="arc-showcase__label">
+                      <small>01</small>
+                      Task results explorer
+                    </span>
+                  </button>
+                  <div class="arc-showcase__rail">
+                    <button
+                      class="arc-showcase__shot"
+                      type="button"
+                      data-arc-gallery-open
+                      data-gallery-index="1"
+                      aria-label="Open ARC Prize gallery at the visual task browser"
+                    >
+                      <img
+                        src="./assets/projects/arc-prize/task-browser.jpg"
+                        width="907"
+                        height="744"
+                        loading="lazy"
+                        decoding="async"
+                        alt="ARC-AGI visual task browser showing a grid of colorful abstract reasoning puzzles"
+                      >
+                      <span class="arc-showcase__label">
+                        <small>02</small>
+                        Visual task browser
+                      </span>
+                    </button>
+                    <button
+                      class="arc-showcase__shot"
+                      type="button"
+                      data-arc-gallery-open
+                      data-gallery-index="2"
+                      aria-label="Open ARC Prize gallery at the task detail interface"
+                    >
+                      <img
+                        src="./assets/projects/arc-prize/task-detail.jpg"
+                        width="1503"
+                        height="848"
+                        loading="lazy"
+                        decoding="async"
+                        alt="ARC-AGI task detail interface with dataset metadata, color mapping, and test item analysis"
+                      >
+                      <span class="arc-showcase__label">
+                        <small>03</small>
+                        Task detail
+                      </span>
+                    </button>
+                  </div>
                 </div>
-              </dl>
-              <ul class="bullet-proof">
-                <li>Visual task explorer for abstract benchmark puzzles</li>
-                <li>High-density comparison matrices and metadata architecture</li>
-                <li>Research surface for navigating tasks and model performance</li>
-              </ul>
+              </div>
             </article>
 
             <article class="project-card project-card--zotero" data-reveal>
@@ -242,26 +328,30 @@
                 <span class="project-card__index">02</span>
                 <span class="project-card__type">Systems integration · Research workflow</span>
               </div>
-              <h3>Zotero ↔ NotebookLM</h3>
-              <p>
-                Built for <strong>Julia Turc</strong>, founder of Storia AI: a bidirectional
-                workflow connecting a research library in Zotero with Google NotebookLM.
-              </p>
-              <dl class="fact-row">
-                <div>
-                  <dt>System</dt>
-                  <dd>Zotero plugin, browser extension, local bridge</dd>
+              <div class="project-card__split project-card__split--zotero">
+                <div class="project-card__body">
+                  <h3>Zotero ↔ NotebookLM</h3>
+                  <p>
+                    Built for <strong>Julia Turc</strong>, founder of Storia AI: a bidirectional
+                    workflow connecting a research library in Zotero with Google NotebookLM.
+                  </p>
+                  <dl class="fact-row">
+                    <div>
+                      <dt>System</dt>
+                      <dd>Zotero plugin, browser extension, local bridge</dd>
+                    </div>
+                    <div>
+                      <dt>Output</dt>
+                      <dd>Bidirectional research workflow</dd>
+                    </div>
+                  </dl>
                 </div>
-                <div>
-                  <dt>Output</dt>
-                  <dd>Bidirectional research workflow</dd>
-                </div>
-              </dl>
-              <ul class="bullet-proof">
-                <li>Three-part bridge: plugin, authenticated browser context, local IPC</li>
-                <li>Forward sync of source files and metadata into NotebookLM</li>
-                <li>Reverse sync of generated notes back into the research library</li>
-              </ul>
+                <ul class="bullet-proof">
+                  <li>Three-part bridge: plugin, authenticated browser context, local IPC</li>
+                  <li>Forward sync of source files and metadata into NotebookLM</li>
+                  <li>Reverse sync of generated notes back into the research library</li>
+                </ul>
+              </div>
             </article>
 
             <article class="project-card project-card--featured project-card--phraselang" data-reveal>
@@ -603,5 +693,189 @@
         <p class="footer-meta">© 2026 Philippe Tremblay · Québec, Canada</p>
       </div>
     </footer>
+
+    <dialog
+      class="arc-dialog"
+      aria-labelledby="arc-gallery-title"
+      aria-describedby="arc-gallery-caption"
+      data-arc-dialog
+    >
+      <div class="arc-dialog__shell">
+        <header class="arc-dialog__header">
+          <div>
+            <p class="arc-dialog__eyebrow">Selected interface work</p>
+            <h2 id="arc-gallery-title">ARC Prize Foundation</h2>
+          </div>
+          <button class="arc-dialog__close" type="button" data-arc-dialog-close>
+            Close <span aria-hidden="true">×</span>
+          </button>
+        </header>
+
+        <div class="arc-dialog__stage">
+          <button
+            class="arc-dialog__arrow arc-dialog__arrow--previous"
+            type="button"
+            data-arc-dialog-previous
+            aria-label="Show previous screenshot"
+          >
+            <span aria-hidden="true">←</span>
+          </button>
+
+          <figure class="arc-dialog__figure">
+            <div class="arc-dialog__image-frame">
+              <img
+                src="./assets/projects/arc-prize/task-results-explorer.jpg"
+                width="1505"
+                height="844"
+                alt="ARC-AGI task results explorer with dataset and model filters above a dense evaluation table"
+                data-arc-dialog-image
+              >
+            </div>
+            <figcaption class="arc-dialog__caption" id="arc-gallery-caption">
+              <span class="arc-dialog__position" data-arc-dialog-position aria-live="polite">01 / 06</span>
+              <span class="arc-dialog__caption-copy">
+                <strong data-arc-dialog-title>Task results explorer</strong>
+                <span data-arc-dialog-description>
+                  A filterable research surface for inspecting task-level model evaluations.
+                </span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <button
+            class="arc-dialog__arrow arc-dialog__arrow--next"
+            type="button"
+            data-arc-dialog-next
+            aria-label="Show next screenshot"
+          >
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+
+        <div class="arc-dialog__thumbs" aria-label="Choose an ARC Prize screenshot">
+          <button
+            class="arc-dialog__thumb"
+            type="button"
+            data-arc-slide
+            data-src="./assets/projects/arc-prize/task-results-explorer.jpg"
+            data-alt="ARC-AGI task results explorer with dataset and model filters above a dense evaluation table"
+            data-title="Task results explorer"
+            data-description="A filterable research surface for inspecting task-level model evaluations."
+            aria-label="Show screenshot 1: Task results explorer"
+            aria-current="true"
+          >
+            <span>01</span>
+            <img
+              src="./assets/projects/arc-prize/task-results-explorer.jpg"
+              width="1505"
+              height="844"
+              loading="lazy"
+              decoding="async"
+              alt=""
+            >
+          </button>
+          <button
+            class="arc-dialog__thumb"
+            type="button"
+            data-arc-slide
+            data-src="./assets/projects/arc-prize/task-browser.jpg"
+            data-alt="ARC-AGI visual task browser showing a grid of colorful abstract reasoning puzzles"
+            data-title="Visual task browser"
+            data-description="A fast visual index for moving through more than a thousand abstract reasoning tasks."
+            aria-label="Show screenshot 2: Visual task browser"
+          >
+            <span>02</span>
+            <img
+              src="./assets/projects/arc-prize/task-browser.jpg"
+              width="907"
+              height="744"
+              loading="lazy"
+              decoding="async"
+              alt=""
+            >
+          </button>
+          <button
+            class="arc-dialog__thumb"
+            type="button"
+            data-arc-slide
+            data-src="./assets/projects/arc-prize/task-detail.jpg"
+            data-alt="ARC-AGI task detail interface with dataset metadata, color mapping, and test item analysis"
+            data-title="Task detail"
+            data-description="Task metadata, train mappings, and test analysis organized into one inspectable view."
+            aria-label="Show screenshot 3: Task detail"
+          >
+            <span>03</span>
+            <img
+              src="./assets/projects/arc-prize/task-detail.jpg"
+              width="1503"
+              height="848"
+              loading="lazy"
+              decoding="async"
+              alt=""
+            >
+          </button>
+          <button
+            class="arc-dialog__thumb"
+            type="button"
+            data-arc-slide
+            data-src="./assets/projects/arc-prize/model-performance.jpg"
+            data-alt="ARC-AGI model performance table comparing providers, model configurations, pass status, and cost"
+            data-title="Model performance matrix"
+            data-description="A dense comparison of providers, model variants, pass status, and evaluation cost."
+            aria-label="Show screenshot 4: Model performance matrix"
+          >
+            <span>04</span>
+            <img
+              src="./assets/projects/arc-prize/model-performance.jpg"
+              width="1505"
+              height="847"
+              loading="lazy"
+              decoding="async"
+              alt=""
+            >
+          </button>
+          <button
+            class="arc-dialog__thumb"
+            type="button"
+            data-arc-slide
+            data-src="./assets/projects/arc-prize/evaluation-results.jpg"
+            data-alt="ARC-AGI evaluation results table with puzzle thumbnails, pass and fail states, cost, and pagination"
+            data-title="Evaluation results"
+            data-description="Task-by-task outcomes, attempt counts, costs, and pagination built for high-density review."
+            aria-label="Show screenshot 5: Evaluation results"
+          >
+            <span>05</span>
+            <img
+              src="./assets/projects/arc-prize/evaluation-results.jpg"
+              width="1502"
+              height="850"
+              loading="lazy"
+              decoding="async"
+              alt=""
+            >
+          </button>
+          <button
+            class="arc-dialog__thumb"
+            type="button"
+            data-arc-slide
+            data-src="./assets/projects/arc-prize/test-item.jpg"
+            data-alt="ARC-AGI test item analysis showing grid size, colors, background, fill ratio, and output reveal control"
+            data-title="Test item analysis"
+            data-description="Compact computed metadata and a deliberate output-reveal interaction for individual tests."
+            aria-label="Show screenshot 6: Test item analysis"
+          >
+            <span>06</span>
+            <img
+              src="./assets/projects/arc-prize/test-item.jpg"
+              width="1503"
+              height="847"
+              loading="lazy"
+              decoding="async"
+              alt=""
+            >
+          </button>
+        </div>
+      </div>
+    </dialog>
   </body>
 </html>
