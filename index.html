@@ -49,7 +49,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Onest:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="./assets/site.css?v=20260716o">
+    <link rel="stylesheet" href="./assets/site.css?v=20260727e">
 
     <script>
       document.documentElement.classList.add("js");
@@ -186,12 +186,12 @@
                 <span>Benchmark &amp; data interfaces</span>
               </li>
               <li>
-                <strong>Snappy for macOS</strong>
-                <span>Native search product</span>
-              </li>
-              <li>
                 <strong>Julia Turc / Storia AI</strong>
                 <span>Research workflow integration</span>
+              </li>
+              <li>
+                <strong>PhraseLang</strong>
+                <span>Language-learning product</span>
               </li>
             </ul>
           </aside>
@@ -204,13 +204,13 @@
             <p class="eyebrow">Proof</p>
             <h2 id="work-title">Work that shipped.</h2>
             <p class="section-lede">
-              Selected engagements across research interfaces, native software, and
-              systems integration—owned from problem framing through delivery.
+              Selected products and engagements across learning, research interfaces,
+              native software, and systems integration—owned from problem framing through delivery.
             </p>
           </div>
 
           <div class="project-list">
-            <article class="project-card" data-reveal>
+            <article class="project-card project-card--arc" data-reveal>
               <div class="project-card__meta">
                 <span class="project-card__index">01</span>
                 <span class="project-card__type">Product engineering · Data interfaces</span>
@@ -237,9 +237,103 @@
               </ul>
             </article>
 
-            <article class="project-card project-card--featured" data-reveal>
+            <article class="project-card project-card--zotero" data-reveal>
               <div class="project-card__meta">
                 <span class="project-card__index">02</span>
+                <span class="project-card__type">Systems integration · Research workflow</span>
+              </div>
+              <h3>Zotero ↔ NotebookLM</h3>
+              <p>
+                Built for <strong>Julia Turc</strong>, founder of Storia AI: a bidirectional
+                workflow connecting a research library in Zotero with Google NotebookLM.
+              </p>
+              <dl class="fact-row">
+                <div>
+                  <dt>System</dt>
+                  <dd>Zotero plugin, browser extension, local bridge</dd>
+                </div>
+                <div>
+                  <dt>Output</dt>
+                  <dd>Bidirectional research workflow</dd>
+                </div>
+              </dl>
+              <ul class="bullet-proof">
+                <li>Three-part bridge: plugin, authenticated browser context, local IPC</li>
+                <li>Forward sync of source files and metadata into NotebookLM</li>
+                <li>Reverse sync of generated notes back into the research library</li>
+              </ul>
+            </article>
+
+            <article class="project-card project-card--featured project-card--phraselang" data-reveal>
+              <div class="project-card__meta">
+                <span class="project-card__index">03</span>
+                <span class="project-card__type">Independent product · Language learning</span>
+              </div>
+              <div class="project-card__split">
+                <div class="project-card__body">
+                  <h3>PhraseLang</h3>
+                  <p>
+                    Designed and built a sentence-first language-learning product that combines
+                    <strong>listening, recall, speaking, and spaced repetition</strong> in one
+                    responsive practice loop.
+                  </p>
+                  <dl class="fact-row">
+                    <div>
+                      <dt>Role</dt>
+                      <dd>Creator, designer &amp; engineer</dd>
+                    </div>
+                    <div>
+                      <dt>Stack</dt>
+                      <dd>React, TypeScript, SpacetimeDB</dd>
+                    </div>
+                    <div>
+                      <dt>Output</dt>
+                      <dd>Responsive practice &amp; reading app</dd>
+                    </div>
+                  </dl>
+                  <div class="metric-strip metric-strip--features" aria-label="PhraseLang product capabilities">
+                    <div>
+                      <strong>Sentence practice</strong>
+                      <span>Focused repetitions built around real language</span>
+                    </div>
+                    <div>
+                      <strong>Speech systems</strong>
+                      <span>Recorded and on-device voices across languages</span>
+                    </div>
+                    <div>
+                      <strong>Synced progress</strong>
+                      <span>Settings, level, and review history across sessions</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="project-card__gallery" aria-label="PhraseLang product screens">
+                  <figure class="project-card__media project-card__media--phraselang">
+                    <img
+                      src="./assets/projects/phraselang-app.jpg?v=20260727c"
+                      width="724"
+                      height="796"
+                      loading="lazy"
+                      decoding="async"
+                      alt="PhraseLang signed-in practice dashboard with new-sentence and review sessions"
+                    >
+                  </figure>
+                  <figure class="project-card__media project-card__media--phraselang-session">
+                    <img
+                      src="./assets/projects/phraselang-session.jpg?v=20260727c"
+                      width="724"
+                      height="796"
+                      loading="lazy"
+                      decoding="async"
+                      alt="PhraseLang active English-to-German sentence repetition session"
+                    >
+                  </figure>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card project-card--featured project-card--snappy" data-reveal>
+              <div class="project-card__meta">
+                <span class="project-card__index">04</span>
                 <span class="project-card__type">Independent product · Native macOS</span>
               </div>
               <div class="project-card__split">
@@ -298,33 +392,6 @@
                   </a>
                 </figure>
               </div>
-            </article>
-
-            <article class="project-card" data-reveal>
-              <div class="project-card__meta">
-                <span class="project-card__index">03</span>
-                <span class="project-card__type">Systems integration · Research workflow</span>
-              </div>
-              <h3>Zotero ↔ NotebookLM</h3>
-              <p>
-                Built for <strong>Julia Turc</strong>, founder of Storia AI: a bidirectional
-                workflow connecting a research library in Zotero with Google NotebookLM.
-              </p>
-              <dl class="fact-row">
-                <div>
-                  <dt>System</dt>
-                  <dd>Zotero plugin, browser extension, local bridge</dd>
-                </div>
-                <div>
-                  <dt>Output</dt>
-                  <dd>Bidirectional research workflow</dd>
-                </div>
-              </dl>
-              <ul class="bullet-proof">
-                <li>Three-part bridge: plugin, authenticated browser context, local IPC</li>
-                <li>Forward sync of source files and metadata into NotebookLM</li>
-                <li>Reverse sync of generated notes back into the research library</li>
-              </ul>
             </article>
           </div>
         </div>
