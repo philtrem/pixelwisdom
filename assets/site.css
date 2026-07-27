@@ -954,6 +954,20 @@ h3 {
   border-color: #7bd7c9;
 }
 
+.project-card--zotero.project-card--featured {
+  border-color: #b8e4dd;
+  background:
+    radial-gradient(circle at 102% -8%, rgba(14, 147, 132, 0.14), transparent 27rem),
+    radial-gradient(circle at 0% 112%, rgba(21, 94, 239, 0.05), transparent 30rem),
+    linear-gradient(135deg, #ffffff 0%, #f5fbfa 48%, #edf9f7 100%);
+  box-shadow: var(--shadow-md);
+}
+
+.project-card--zotero.project-card--featured:hover {
+  border-color: #7bd7c9;
+  box-shadow: var(--shadow-lg);
+}
+
 .project-card--arc.project-card--featured {
   --card-accent: var(--accent);
   border-color: #b2ccff;
@@ -1271,6 +1285,19 @@ h3 {
   transform: translate(2px, -2px);
 }
 
+.arc-gallery-cta--zotero {
+  border-color: #b8e4dd;
+}
+
+.arc-gallery-cta--zotero:hover {
+  border-color: #7bd7c9;
+  background: #f0fdf9;
+}
+
+.arc-gallery-cta--zotero .arc-gallery-cta__count {
+  color: #107569;
+}
+
 .arc-showcase {
   position: relative;
   z-index: 1;
@@ -1360,6 +1387,19 @@ h3 {
   font-family: var(--font-mono);
   font-size: 0.56rem;
   letter-spacing: 0.05em;
+}
+
+.zotero-showcase {
+  border-color: rgba(94, 234, 212, 0.22);
+  background: #202128;
+}
+
+.zotero-showcase .arc-showcase__shot:hover::after {
+  border-color: rgba(94, 234, 212, 0.78);
+}
+
+.zotero-showcase .arc-showcase__label small {
+  color: #5eead4;
 }
 
 .fact-row {
@@ -1513,17 +1553,9 @@ h3 {
   }
 
   .project-card__split--zotero {
-    grid-template-columns: minmax(0, 1.05fr) minmax(19rem, 0.95fr);
+    grid-template-columns: minmax(19rem, 0.78fr) minmax(0, 1.22fr);
     align-items: center;
-    gap: clamp(2.5rem, 7vw, 5.5rem);
-  }
-
-  .project-card__split--zotero > .bullet-proof {
-    margin-top: 0;
-    padding: 1.25rem;
-    border: 1px solid #ccece7;
-    border-radius: 1rem;
-    background: #f5fcfb;
+    gap: clamp(2.25rem, 4.5vw, 4rem);
   }
 
   .project-card--phraselang .project-card__split {
@@ -1820,6 +1852,51 @@ h3 {
   height: 100%;
   object-fit: cover;
   object-position: center top;
+}
+
+.arc-dialog--zotero {
+  border-color: #b8e4dd;
+}
+
+.arc-dialog--zotero :focus-visible {
+  outline-color: rgba(14, 147, 132, 0.7);
+}
+
+.arc-dialog--zotero .arc-dialog__eyebrow,
+.arc-dialog--zotero .arc-dialog__position {
+  color: #107569;
+}
+
+.arc-dialog--zotero .arc-dialog__stage {
+  background:
+    radial-gradient(circle at 50% 20%, rgba(14, 147, 132, 0.11), transparent 34rem),
+    linear-gradient(180deg, #f0f9f7, #f8fafc);
+}
+
+.arc-dialog--zotero .arc-dialog__image-frame {
+  border-color: #b7c9c6;
+  background: #202128;
+}
+
+.arc-dialog--zotero .arc-dialog__arrow {
+  border-color: #99e6dc;
+  color: #107569;
+}
+
+.arc-dialog--zotero .arc-dialog__arrow:hover,
+.arc-dialog--zotero .arc-dialog__close:hover {
+  border-color: #5bc8b8;
+  background: #f0fdf9;
+  color: #107569;
+}
+
+.arc-dialog--zotero .arc-dialog__thumb:hover,
+.arc-dialog--zotero .arc-dialog__thumb[aria-current="true"] {
+  border-color: #5bc8b8;
+}
+
+.arc-dialog--zotero .arc-dialog__thumb[aria-current="true"] {
+  box-shadow: 0 0 0 1px rgba(14, 147, 132, 0.28);
 }
 
 /* Offer */
@@ -2428,6 +2505,10 @@ h3 {
 
   .arc-dialog__thumbs {
     padding: 0.65rem 0.75rem 0.8rem;
+  }
+
+  .arc-dialog--zotero .arc-dialog__arrow {
+    border-color: #99e6dc;
   }
 }
 

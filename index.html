@@ -49,12 +49,12 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Onest:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     >
-    <link rel="stylesheet" href="./assets/site.css?v=20260727i">
+    <link rel="stylesheet" href="./assets/site.css?v=20260727k">
 
     <script>
       document.documentElement.classList.add("js");
     </script>
-    <script src="./assets/site.js?v=20260727g" defer></script>
+    <script src="./assets/site.js?v=20260727k" defer></script>
 
     <script type="application/ld+json">
       {
@@ -244,7 +244,7 @@
                   <button
                     class="arc-gallery-cta"
                     type="button"
-                    data-arc-gallery-open
+                    data-gallery-open="arc"
                     data-gallery-index="0"
                     aria-haspopup="dialog"
                   >
@@ -260,7 +260,7 @@
                   <button
                     class="arc-showcase__shot arc-showcase__shot--hero"
                     type="button"
-                    data-arc-gallery-open
+                    data-gallery-open="arc"
                     data-gallery-index="0"
                     aria-label="Open ARC Prize gallery at the task results explorer"
                   >
@@ -281,7 +281,7 @@
                     <button
                       class="arc-showcase__shot"
                       type="button"
-                      data-arc-gallery-open
+                      data-gallery-open="arc"
                       data-gallery-index="1"
                       aria-label="Open ARC Prize gallery at the visual task browser"
                     >
@@ -301,7 +301,7 @@
                     <button
                       class="arc-showcase__shot"
                       type="button"
-                      data-arc-gallery-open
+                      data-gallery-open="arc"
                       data-gallery-index="2"
                       aria-label="Open ARC Prize gallery at the task detail interface"
                     >
@@ -323,7 +323,7 @@
               </div>
             </article>
 
-            <article class="project-card project-card--zotero" data-reveal>
+            <article class="project-card project-card--zotero project-card--featured" data-reveal>
               <div class="project-card__meta">
                 <span class="project-card__index">02</span>
                 <span class="project-card__type">Systems integration · Research workflow</span>
@@ -332,25 +332,112 @@
                 <div class="project-card__body">
                   <h3>Zotero ↔ NotebookLM</h3>
                   <p>
-                    Built for <strong>Julia Turc</strong>, founder of Storia AI: a bidirectional
-                    workflow connecting a research library in Zotero with Google NotebookLM.
+                    Built for <strong>Julia Turc</strong>, founder of Storia AI: a cross-app sync
+                    system that sends Zotero collections to NotebookLM and brings source guides,
+                    source content, and notes back into Zotero.
                   </p>
                   <dl class="fact-row">
                     <div>
-                      <dt>System</dt>
-                      <dd>Zotero plugin, browser extension, local bridge</dd>
+                      <dt>Architecture</dt>
+                      <dd>Stateless polling bridge</dd>
+                    </div>
+                    <div>
+                      <dt>Modes</dt>
+                      <dd>Consumer bridge &amp; Enterprise API</dd>
                     </div>
                     <div>
                       <dt>Output</dt>
                       <dd>Bidirectional research workflow</dd>
                     </div>
                   </dl>
+                  <ul class="bullet-proof">
+                    <li>Collection sync with remote-first duplicate detection and binary PDF uploads</li>
+                    <li>Reverse import of source guides, source content, and NotebookLM notes</li>
+                    <li>Reverse-engineered NotebookLM’s undocumented RPC endpoints and payload formats</li>
+                    <li>Authenticated browser bridge over a localhost task queue—without storing credentials</li>
+                  </ul>
+                  <button
+                    class="arc-gallery-cta arc-gallery-cta--zotero"
+                    type="button"
+                    data-gallery-open="zotero"
+                    data-gallery-index="0"
+                    aria-haspopup="dialog"
+                  >
+                    <span>
+                      <strong>Explore the workflow</strong>
+                      <small>Configuration, forward sync, and reverse import</small>
+                    </span>
+                    <span class="arc-gallery-cta__count">6 screens <span aria-hidden="true">↗</span></span>
+                  </button>
                 </div>
-                <ul class="bullet-proof">
-                  <li>Three-part bridge: plugin, authenticated browser context, local IPC</li>
-                  <li>Forward sync of source files and metadata into NotebookLM</li>
-                  <li>Reverse sync of generated notes back into the research library</li>
-                </ul>
+
+                <div
+                  class="arc-showcase zotero-showcase"
+                  aria-label="Selected Zotero NotebookLM workflow screens"
+                >
+                  <button
+                    class="arc-showcase__shot arc-showcase__shot--hero"
+                    type="button"
+                    data-gallery-open="zotero"
+                    data-gallery-index="0"
+                    aria-label="Open Zotero NotebookLM gallery at the integration settings"
+                  >
+                    <img
+                      src="./assets/projects/zotero-notebooklm/settings.png"
+                      width="803"
+                      height="631"
+                      loading="lazy"
+                      decoding="async"
+                      alt="Zotero NotebookLM settings showing automatic consumer bridge setup and sync options"
+                    >
+                    <span class="arc-showcase__label">
+                      <small>01</small>
+                      Integration settings
+                    </span>
+                  </button>
+                  <div class="arc-showcase__rail">
+                    <button
+                      class="arc-showcase__shot"
+                      type="button"
+                      data-gallery-open="zotero"
+                      data-gallery-index="1"
+                      aria-label="Open Zotero NotebookLM gallery at the collection sync dialog"
+                    >
+                      <img
+                        src="./assets/projects/zotero-notebooklm/send-collections.png"
+                        width="605"
+                        height="534"
+                        loading="lazy"
+                        decoding="async"
+                        alt="Zotero dialog for selecting collections and subcollections to sync to NotebookLM"
+                      >
+                      <span class="arc-showcase__label">
+                        <small>02</small>
+                        Forward sync
+                      </span>
+                    </button>
+                    <button
+                      class="arc-showcase__shot"
+                      type="button"
+                      data-gallery-open="zotero"
+                      data-gallery-index="2"
+                      aria-label="Open Zotero NotebookLM gallery at the notebook import dialog"
+                    >
+                      <img
+                        src="./assets/projects/zotero-notebooklm/import-notebooks.png"
+                        width="426"
+                        height="587"
+                        loading="lazy"
+                        decoding="async"
+                        alt="Zotero dialog for importing selected NotebookLM notebooks, source content, and notes"
+                      >
+                      <span class="arc-showcase__label">
+                        <small>03</small>
+                        Reverse import
+                      </span>
+                    </button>
+                  </div>
+                </div>
               </div>
             </article>
 
@@ -698,7 +785,8 @@
       class="arc-dialog"
       aria-labelledby="arc-gallery-title"
       aria-describedby="arc-gallery-caption"
-      data-arc-dialog
+      data-gallery-dialog
+      data-gallery-id="arc"
     >
       <div class="arc-dialog__shell">
         <header class="arc-dialog__header">
@@ -706,7 +794,7 @@
             <p class="arc-dialog__eyebrow">Selected interface work</p>
             <h2 id="arc-gallery-title">ARC Prize Foundation</h2>
           </div>
-          <button class="arc-dialog__close" type="button" data-arc-dialog-close>
+          <button class="arc-dialog__close" type="button" data-gallery-close>
             Close <span aria-hidden="true">×</span>
           </button>
         </header>
@@ -715,7 +803,7 @@
           <button
             class="arc-dialog__arrow arc-dialog__arrow--previous"
             type="button"
-            data-arc-dialog-previous
+            data-gallery-previous
             aria-label="Show previous screenshot"
           >
             <span aria-hidden="true">←</span>
@@ -728,14 +816,14 @@
                 width="1505"
                 height="844"
                 alt="ARC-AGI task results explorer with dataset and model filters above a dense evaluation table"
-                data-arc-dialog-image
+                data-gallery-image
               >
             </div>
             <figcaption class="arc-dialog__caption" id="arc-gallery-caption">
-              <span class="arc-dialog__position" data-arc-dialog-position aria-live="polite">01 / 06</span>
+              <span class="arc-dialog__position" data-gallery-position aria-live="polite">01 / 06</span>
               <span class="arc-dialog__caption-copy">
-                <strong data-arc-dialog-title>Task results explorer</strong>
-                <span data-arc-dialog-description>
+                <strong data-gallery-title>Task results explorer</strong>
+                <span data-gallery-description>
                   A filterable research surface for inspecting task-level model evaluations.
                 </span>
               </span>
@@ -745,7 +833,7 @@
           <button
             class="arc-dialog__arrow arc-dialog__arrow--next"
             type="button"
-            data-arc-dialog-next
+            data-gallery-next
             aria-label="Show next screenshot"
           >
             <span aria-hidden="true">→</span>
@@ -756,7 +844,7 @@
           <button
             class="arc-dialog__thumb"
             type="button"
-            data-arc-slide
+            data-gallery-slide
             data-src="./assets/projects/arc-prize/task-results-explorer.jpg"
             data-alt="ARC-AGI task results explorer with dataset and model filters above a dense evaluation table"
             data-title="Task results explorer"
@@ -777,7 +865,7 @@
           <button
             class="arc-dialog__thumb"
             type="button"
-            data-arc-slide
+            data-gallery-slide
             data-src="./assets/projects/arc-prize/task-browser.jpg"
             data-alt="ARC-AGI visual task browser showing a grid of colorful abstract reasoning puzzles"
             data-title="Visual task browser"
@@ -797,7 +885,7 @@
           <button
             class="arc-dialog__thumb"
             type="button"
-            data-arc-slide
+            data-gallery-slide
             data-src="./assets/projects/arc-prize/task-detail.jpg"
             data-alt="ARC-AGI task detail interface with dataset metadata, color mapping, and test item analysis"
             data-title="Task detail"
@@ -817,7 +905,7 @@
           <button
             class="arc-dialog__thumb"
             type="button"
-            data-arc-slide
+            data-gallery-slide
             data-src="./assets/projects/arc-prize/model-performance.jpg"
             data-alt="ARC-AGI model performance table comparing providers, model configurations, pass status, and cost"
             data-title="Model performance matrix"
@@ -837,7 +925,7 @@
           <button
             class="arc-dialog__thumb"
             type="button"
-            data-arc-slide
+            data-gallery-slide
             data-src="./assets/projects/arc-prize/evaluation-results.jpg"
             data-alt="ARC-AGI evaluation results table with puzzle thumbnails, pass and fail states, cost, and pagination"
             data-title="Evaluation results"
@@ -857,7 +945,7 @@
           <button
             class="arc-dialog__thumb"
             type="button"
-            data-arc-slide
+            data-gallery-slide
             data-src="./assets/projects/arc-prize/test-item.jpg"
             data-alt="ARC-AGI test item analysis showing grid size, colors, background, fill ratio, and output reveal control"
             data-title="Test item analysis"
@@ -869,6 +957,191 @@
               src="./assets/projects/arc-prize/test-item.jpg"
               width="1503"
               height="847"
+              loading="lazy"
+              decoding="async"
+              alt=""
+            >
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog
+      class="arc-dialog arc-dialog--zotero"
+      aria-labelledby="zotero-gallery-title"
+      aria-describedby="zotero-gallery-caption"
+      data-gallery-dialog
+      data-gallery-id="zotero"
+    >
+      <div class="arc-dialog__shell">
+        <header class="arc-dialog__header">
+          <div>
+            <p class="arc-dialog__eyebrow">Selected workflow</p>
+            <h2 id="zotero-gallery-title">Zotero ↔ NotebookLM</h2>
+          </div>
+          <button class="arc-dialog__close" type="button" data-gallery-close>
+            Close <span aria-hidden="true">×</span>
+          </button>
+        </header>
+
+        <div class="arc-dialog__stage">
+          <button
+            class="arc-dialog__arrow arc-dialog__arrow--previous"
+            type="button"
+            data-gallery-previous
+            aria-label="Show previous screenshot"
+          >
+            <span aria-hidden="true">←</span>
+          </button>
+
+          <figure class="arc-dialog__figure">
+            <div class="arc-dialog__image-frame">
+              <img
+                src="./assets/projects/zotero-notebooklm/settings.png"
+                width="803"
+                height="631"
+                alt="Zotero NotebookLM settings showing automatic consumer bridge setup and sync options"
+                data-gallery-image
+              >
+            </div>
+            <figcaption class="arc-dialog__caption" id="zotero-gallery-caption">
+              <span class="arc-dialog__position" data-gallery-position aria-live="polite">01 / 06</span>
+              <span class="arc-dialog__caption-copy">
+                <strong data-gallery-title>Integration configuration</strong>
+                <span data-gallery-description>
+                  Consumer bridge setup, health checks, and sync behavior in one Zotero preferences surface.
+                </span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <button
+            class="arc-dialog__arrow arc-dialog__arrow--next"
+            type="button"
+            data-gallery-next
+            aria-label="Show next screenshot"
+          >
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+
+        <div class="arc-dialog__thumbs" aria-label="Choose a Zotero NotebookLM screenshot">
+          <button
+            class="arc-dialog__thumb"
+            type="button"
+            data-gallery-slide
+            data-src="./assets/projects/zotero-notebooklm/settings.png"
+            data-alt="Zotero NotebookLM settings showing automatic consumer bridge setup and sync options"
+            data-title="Integration configuration"
+            data-description="Consumer bridge setup, health checks, and sync behavior in one Zotero preferences surface."
+            aria-label="Show screenshot 1: Integration configuration"
+            aria-current="true"
+          >
+            <span>01</span>
+            <img
+              src="./assets/projects/zotero-notebooklm/settings.png"
+              width="803"
+              height="631"
+              loading="lazy"
+              decoding="async"
+              alt=""
+            >
+          </button>
+          <button
+            class="arc-dialog__thumb"
+            type="button"
+            data-gallery-slide
+            data-src="./assets/projects/zotero-notebooklm/send-collections.png"
+            data-alt="Zotero dialog for selecting collections and subcollections to sync to NotebookLM"
+            data-title="Collection sync"
+            data-description="Select collections and subcollections, inspect sync state, and choose flat or hierarchical notebook output."
+            aria-label="Show screenshot 2: Collection sync"
+          >
+            <span>02</span>
+            <img
+              src="./assets/projects/zotero-notebooklm/send-collections.png"
+              width="605"
+              height="534"
+              loading="lazy"
+              decoding="async"
+              alt=""
+            >
+          </button>
+          <button
+            class="arc-dialog__thumb"
+            type="button"
+            data-gallery-slide
+            data-src="./assets/projects/zotero-notebooklm/import-notebooks.png"
+            data-alt="Zotero dialog for importing selected NotebookLM notebooks, source content, and notes"
+            data-title="Reverse import"
+            data-description="Select NotebookLM notebooks and bring source guides, original content, and notes back into Zotero."
+            aria-label="Show screenshot 3: Reverse import"
+          >
+            <span>03</span>
+            <img
+              src="./assets/projects/zotero-notebooklm/import-notebooks.png"
+              width="426"
+              height="587"
+              loading="lazy"
+              decoding="async"
+              alt=""
+            >
+          </button>
+          <button
+            class="arc-dialog__thumb"
+            type="button"
+            data-gallery-slide
+            data-src="./assets/projects/zotero-notebooklm/browser-bridge.png"
+            data-alt="Zotero NotebookLM Chrome extension popup confirming the authenticated browser bridge is ready"
+            data-title="Authenticated browser bridge"
+            data-description="A compact extension status surface confirms the active NotebookLM session before sync begins."
+            aria-label="Show screenshot 4: Authenticated browser bridge"
+          >
+            <span>04</span>
+            <img
+              src="./assets/projects/zotero-notebooklm/browser-bridge.png"
+              width="323"
+              height="375"
+              loading="lazy"
+              decoding="async"
+              alt=""
+            >
+          </button>
+          <button
+            class="arc-dialog__thumb"
+            type="button"
+            data-gallery-slide
+            data-src="./assets/projects/zotero-notebooklm/sending-progress.png"
+            data-alt="Zotero progress dialog while sending a collection and source to NotebookLM"
+            data-title="Forward sync progress"
+            data-description="Live notebook, source, skipped-item, and error counts make long-running uploads inspectable."
+            aria-label="Show screenshot 5: Forward sync progress"
+          >
+            <span>05</span>
+            <img
+              src="./assets/projects/zotero-notebooklm/sending-progress.png"
+              width="461"
+              height="238"
+              loading="lazy"
+              decoding="async"
+              alt=""
+            >
+          </button>
+          <button
+            class="arc-dialog__thumb"
+            type="button"
+            data-gallery-slide
+            data-src="./assets/projects/zotero-notebooklm/importing-progress.png"
+            data-alt="Zotero progress dialog while importing notebook sources from NotebookLM"
+            data-title="Reverse import progress"
+            data-description="Per-notebook source processing and outcome counts keep reverse sync transparent."
+            aria-label="Show screenshot 6: Reverse import progress"
+          >
+            <span>06</span>
+            <img
+              src="./assets/projects/zotero-notebooklm/importing-progress.png"
+              width="456"
+              height="232"
               loading="lazy"
               decoding="async"
               alt=""
