@@ -897,7 +897,7 @@ h3 {
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.94);
+  background: var(--surface-subtle);
   box-shadow: var(--shadow-sm);
   transition:
     border-color 0.22s ease,
@@ -916,7 +916,8 @@ h3 {
   width: 17rem;
   height: 17rem;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(21, 94, 239, 0.075), transparent 70%);
+  display: none;
+  background: none;
   content: "";
   pointer-events: none;
 }
@@ -933,9 +934,7 @@ h3 {
 
 .project-card--featured {
   border-color: #c7d7fe;
-  background:
-    radial-gradient(circle at 92% 4%, rgba(132, 173, 255, 0.2), transparent 23rem),
-    var(--surface-blue);
+  background: var(--surface-subtle);
 }
 
 .project-card--featured:hover {
@@ -945,9 +944,7 @@ h3 {
 .project-card--phraselang {
   --card-accent: var(--cyan);
   border-color: #b8e4dd;
-  background:
-    radial-gradient(circle at 91% 5%, rgba(46, 211, 183, 0.18), transparent 24rem),
-    #f2fbfa;
+  background: var(--surface-subtle);
 }
 
 .project-card--phraselang:hover {
@@ -956,10 +953,7 @@ h3 {
 
 .project-card--zotero.project-card--featured {
   border-color: #b8e4dd;
-  background:
-    radial-gradient(circle at 102% -8%, rgba(14, 147, 132, 0.14), transparent 27rem),
-    radial-gradient(circle at 0% 112%, rgba(21, 94, 239, 0.05), transparent 30rem),
-    linear-gradient(135deg, #ffffff 0%, #f5fbfa 48%, #edf9f7 100%);
+  background: var(--surface-subtle);
   box-shadow: var(--shadow-md);
 }
 
@@ -971,10 +965,7 @@ h3 {
 .project-card--arc.project-card--featured {
   --card-accent: var(--accent);
   border-color: #b2ccff;
-  background:
-    radial-gradient(circle at 102% -6%, rgba(21, 94, 239, 0.15), transparent 27rem),
-    radial-gradient(circle at 0% 110%, rgba(14, 147, 132, 0.07), transparent 30rem),
-    linear-gradient(135deg, #ffffff 0%, #f7f9ff 46%, #eef4ff 100%);
+  background: var(--surface-subtle);
   color: var(--ink);
   box-shadow: var(--shadow-md);
 }
@@ -982,9 +973,8 @@ h3 {
 .project-card--arc::before {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(21, 94, 239, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(21, 94, 239, 0.035) 1px, transparent 1px);
+  display: none;
+  background-image: none;
   background-size: 38px 38px;
   content: "";
   pointer-events: none;
