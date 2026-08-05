@@ -1065,8 +1065,7 @@ h3 {
   font-weight: 600;
 }
 
-.project-card--zotero .project-card__index,
-.project-card--phraselang .project-card__index {
+.project-card--zotero .project-card__index {
   border-color: #99f6e0;
   background: #f0fdf9;
   color: #107569;
